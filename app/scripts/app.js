@@ -9,13 +9,16 @@
  */
 angular
   .module('sbAdminApp', [
-    'oc.lazyLoad',
-    'ui.router',
-    'ui.bootstrap',
-    'angular-loading-bar',
+        'oc.lazyLoad',
+        'ui.router',
+        'ui.bootstrap',
+        'angular-loading-bar',
+        'ngAnimate',
+        'toastr',
+
   ])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
-    
+
     $ocLazyLoadProvider.config({
       debug:false,
       events:true,
@@ -103,7 +106,16 @@ angular
     })
       .state('login',{
         templateUrl:'views/pages/login.html',
-        url:'/login'
+        url:'/login',
+            controller: 'LoginCtrl',
+            //resolve: {
+            //    loadMyFile:function($ocLazyLoad) {
+            //        return $ocLazyLoad.load({
+            //                name:'sbAdminApp',
+            //                files:['scripts/controllers/login.js']
+            //            })
+            //    }
+            //}
     })
       .state('dashboard.chart',{
         templateUrl:'views/chart.html',

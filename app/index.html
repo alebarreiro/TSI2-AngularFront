@@ -39,8 +39,18 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="js/sb-admin-2.js"></script>
-    <script src="scripts/services/hola.js"></script>
     <!-- endbuild -->
+
+
+    <!--toastr-->
+    <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+
+    <!--Controllers -->
+    <script src="scripts/controllers/login.js"></script>
+
 
 
 
@@ -51,6 +61,24 @@
        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
+
+       //Facebook API
+       window.fbAsyncInit = function() {
+         FB.init({
+           appId      : '154989634847136',
+           xfbml      : true,
+           version    : 'v2.4'
+         });
+       };
+
+       (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+
     </script>
     <!-- Custom CSS -->
 
