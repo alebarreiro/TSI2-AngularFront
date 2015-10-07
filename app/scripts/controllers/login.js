@@ -5,12 +5,12 @@
 
 /**
  * @ngdoc function
- * @name sbAdminApp.controller:LoginCtrl
+ * @name sapoApp.controller:LoginCtrl
  * @description
  * # LoginCtrl
- * Controller of the sbAdminApp'
+ * Controller of the sapoApp'
  */
-angular.module('sbAdminApp').controller('LoginCtrl',
+angular.module('sapoApp').controller('LoginCtrl',
     ['$scope', '$location', 'toastr',
         function ($scope, $location, toastr) {
 

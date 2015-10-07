@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name sbAdminApp.hola
+ * @name sapoApp.hola
  * @description
  * # hola
- * Service in the sbAdminApp.
+ * Service in the sapoApp.
  */
-angular.module('sbAdminApp')
+angular.module('sapoApp')
   .service('hola', function () {
     // AngularJS will instantiate a singleton by calling "new" on this function
   });
