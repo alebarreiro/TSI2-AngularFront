@@ -6,9 +6,7 @@ angular.module('sapoApp')
 
     this.init = function() {
       this.almacenes = almacenes;
-      console.log(almacenes);
     };
 
     this.init();
-
   }]);

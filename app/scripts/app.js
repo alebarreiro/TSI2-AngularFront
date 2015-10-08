@@ -15,6 +15,11 @@ angular
         'angular-loading-bar',
         'ngAnimate',
         'toastr',
+        'ngCookies',
+        'ngResource',
+        'ngRoute',
+        'ngSanitize',
+        'ngTouch',
 
   ])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
@@ -117,6 +122,19 @@ angular
             //    }
             //}
     })
+      .state('dashboard.almacenes', {
+        templateUrl: '../views/pages/listarAlmacenes.html',
+        url: '/almacenes',
+        controller: 'ListarAlmacenesCtrl',
+        controllerAs: 'listarAlmacenesCtrl',
+        resolve: {
+          almacenes: ['almacenService', function(almacenService) {
+            return almacenService.getAlmacenes().then(function(listaAlmacenes) {
+              return listaAlmacenes;
+            });
+          }]
+          }
+        })
       .state('dashboard.chart',{
         templateUrl:'views/chart.html',
         url:'/chart',
