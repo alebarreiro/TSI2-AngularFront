@@ -25,7 +25,7 @@ angular.module('sapoApp').controller('LoginCtrl',
                             var accessToken = FB.getAuthResponse().accessToken;
                             console.log(accessToken);
                             //authFact.setAccessToken(accessToken);
-                            $location.path('dashboard.home');
+                            $location.path('/dashboard/home');
                         });
                     } else {
                         toastr.error('User cancelled login or did not fully authorize.');

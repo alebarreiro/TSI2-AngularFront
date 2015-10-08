@@ -24,7 +24,7 @@ angular
       events:true,
     });
 
-    $urlRouterProvider.otherwise('/dashboard/home');
+    $urlRouterProvider.otherwise('/login');
 
     $stateProvider
       .state('dashboard', {
@@ -100,9 +100,9 @@ angular
         templateUrl:'views/form.html',
         url:'/form'
     })
-      .state('dashboard.blank',{
-        templateUrl:'views/pages/blank.html',
-        url:'/blank'
+      .state('dashboard.crearAlmacen',{
+        templateUrl:'../views/pages/crearAlmacen.html',
+        url:'/crearAlmacen'
     })
       .state('login',{
         templateUrl:'views/pages/login.html',
