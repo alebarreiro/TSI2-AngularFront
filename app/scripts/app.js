@@ -107,20 +107,14 @@ angular
     })
       .state('dashboard.crearAlmacen',{
         templateUrl:'../views/pages/crearAlmacen.html',
+        controller: 'CrearAlmacenesCtrl',
+        controllerAs: 'crearAlmacenesCtrl',
         url:'/crearAlmacen'
     })
       .state('login',{
         templateUrl:'views/pages/login.html',
         url:'/login',
-            controller: 'LoginCtrl',
-            //resolve: {
-            //    loadMyFile:function($ocLazyLoad) {
-            //        return $ocLazyLoad.load({
-            //                name:'sapoApp',
-            //                files:['scripts/controllers/login.js']
-            //            })
-            //    }
-            //}
+        controller: 'LoginCtrl',
     })
       .state('dashboard.almacenes', {
         templateUrl: '../views/pages/listarAlmacenes.html',

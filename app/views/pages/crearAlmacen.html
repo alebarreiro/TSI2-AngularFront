@@ -4,6 +4,11 @@
 			<h1 class="page-header">Crear nueva Almacen virtual!</h1>
 		</div>
 		<!-- /.col-lg-12 -->
+
+		<form ng-submit="crearAlmacen()" ng-controller="CrearAlmacenesCtrl">
+			Nombre: <input ng-model="almacen.nombre">
+			<button>Crear!</button>
+		</form>
 	</div>
 	<!-- /.row -->
 </div>
