@@ -2,32 +2,18 @@
  * Created by alejandrobarreiro on 11/10/15.
  */
 angular.module('sapoApp')
-  .controller('ListarTemplatesCtrl', [ '$scope', function ($scope) {
+  .controller('ListarTemplatesCtrl', [ '$scope', 'templates', 'TemplateHandler', function ($scope, templates, TemplateHandler) {
 
     this.init = function() {
-      this.templates = [
-        {
-          id: 1,
-          nombre: 'Barra loca',
-          descripcion: 'Crea tu almacen con todos tus tragos'
-        },
-        {
-          id: 2,
-          nombre: 'Heladera',
-          descripcion: 'Crea tu almacen con todos tus articulos de heladera'
-        },
-        {
-          id: 3,
-          nombre: 'Garage',
-          descripcion: 'Almacen con todos los articulos de tu garage'
-        }
-      ];
+      this.templateHandler =  new TemplateHandler();
+
+
+      this.templateHandler.setTemplates(templates);
+      console.log("HOLAAAA ");
+      this.templates = templates;
+      console.log(templates);
 
     };
-
-    //$scope.seleccionarTemplate = function(idTemplate) {
-    //  console.log("Seleccionaste: " + idTemplate);
-    //};
 
     this.init();
   }]);

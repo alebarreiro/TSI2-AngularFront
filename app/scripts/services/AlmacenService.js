@@ -17,7 +17,6 @@ angular.module('sapoApp')
     };
 
     this.getAlmacenes = function() {
-      console.log("in get almacenes");
       var deferred = $q.defer();
       Almacen.getAlmacenes({}, {}, function (almacenes) {
         console.log(almacenes);

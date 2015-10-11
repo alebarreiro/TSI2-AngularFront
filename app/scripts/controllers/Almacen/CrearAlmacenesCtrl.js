@@ -18,7 +18,7 @@ angular.module('sapoApp')
 
     $scope.seleccionarTemplate = function(idTemplate) {
       console.log("Seleccionaste: " + idTemplate);
-      $scope.$parent.almacen.templateElegido = idTemplate;
+      $scope.almacen.templateElegido = idTemplate;
     };
 
     $scope.crearTienda = function() {

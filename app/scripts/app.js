@@ -122,7 +122,14 @@ angular
         templateUrl:'../views/pages/almacen/form-crear-almacen-templates.html',
         controller: 'ListarTemplatesCtrl',
         controllerAs: 'listarTemplatesCtrl',
-        url:'/templates'
+        url:'/templates',
+        resolve: {
+          templates: ['templateService', function(templateService) {
+            return templateService.getTemplates().then(function(listaTemplates) {
+              return listaTemplates;
+            });
+          }]
+        }
       })
       .state('dashboard.crearAlmacen.editarTemplate',{
         templateUrl:'../views/pages/almacen/form-crear-almacen-editar-template.html',
@@ -130,20 +137,8 @@ angular
         controller: 'EditarTemplateCtrl',
         controllerAs: 'editarTemplateCtrl',
         resolve: {
-          template: ['$stateParams', function($stateParams) {
-            return {
-              id: $stateParams.templateId,
-              nombre: 'nombre',
-              descripcion: 'desc',
-              categorias: [
-                {
-                  nombre: 'cat1'
-                },
-                {
-                  nombre: 'cat2'
-                }
-              ]
-            }
+          templateId: ['$stateParams', function($stateParams) {
+            return $stateParams.templateId;
           }]
         }
       })
