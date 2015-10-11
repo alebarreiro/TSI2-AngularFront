@@ -1,0 +1,22 @@
+/* numbered buttons */
+#status-buttons {
+
+}
+
+#status-buttons a {
+
+}
+
+#status-buttons a:hover {
+
+}
+
+/* we will style the span as the circled number */
+#status-buttons span {
+
+}
+
+/* active buttons turn light green-blue*/
+#status-buttons a.active span {
+
+}

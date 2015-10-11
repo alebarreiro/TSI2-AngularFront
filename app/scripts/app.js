@@ -105,12 +105,32 @@ angular
         templateUrl:'views/form.html',
         url:'/form'
     })
+    /**
+     * FORMULARIO PARA CREAR UNA NUEVA ALMACEN
+     */
       .state('dashboard.crearAlmacen',{
-        templateUrl:'../views/pages/crearAlmacen.html',
+        templateUrl:'../views/pages/almacen/form-crear-almacen-main.html',
         controller: 'CrearAlmacenesCtrl',
         controllerAs: 'crearAlmacenesCtrl',
         url:'/crearAlmacen'
-    })
+      })
+      .state('dashboard.crearAlmacen.datos',{
+        templateUrl:'../views/pages/almacen/form-crear-almacen-datos.html',
+        url:'/datos'
+      })
+      .state('dashboard.crearAlmacen.templates',{
+        templateUrl:'../views/pages/almacen/form-crear-almacen-templates.html',
+        url:'/templates'
+      })
+      .state('dashboard.crearAlmacen.editarTemplate',{
+        templateUrl:'../views/pages/almacen/form-crear-almacen-editar-template.html',
+        url:'/editarTemplate'
+      })
+      .state('dashboard.crearAlmacen.productos',{
+        templateUrl:'../views/pages/almacen/form-crear-almacen-productos.html',
+        url:'/productos'
+      })
+
       .state('login',{
         templateUrl:'views/pages/login.html',
         url:'/login',
