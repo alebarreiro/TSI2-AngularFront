@@ -5,20 +5,30 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
+
+            <div class="form-group">
+                <label>Nombre: {{nombre}}</label>
+                <input class="form-control" ng-model="editarTemplateCtrl.template.nombre">
+            </div>
+            <div class="form-group">
+                <label>Descripción</label>
+                <textarea class="form-control" rows="3" ng-model="editarTemplateCtrl.template.descripcion">
+                </textarea>
+            </div>
+
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>Categoría</th>
+                        <th>Nombre</th>
                         <th>Descripción</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <!--<tr ng-repeat="almacen in listarAlmacenesCtrl.almacenes">-->
-                        <!--<td> {{ almacen.nombre }}</td>-->
-                        <!--<td> {{ almacen.descripcion }} </td>-->
-                        <!--<td> {{ almacen.url }}</td>-->
-                    <!--</tr>-->
+                    <tr ng-repeat="categoria in editarTemplateCtrl.template.categorias">
+                        <td> {{ categoria.nombre }}</td>
+                        <td> {{ categoria.descripcion }} </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

@@ -126,7 +126,26 @@ angular
       })
       .state('dashboard.crearAlmacen.editarTemplate',{
         templateUrl:'../views/pages/almacen/form-crear-almacen-editar-template.html',
-        url:'/editarTemplate'
+        url:'/editarTemplate/:templateId',
+        controller: 'EditarTemplateCtrl',
+        controllerAs: 'editarTemplateCtrl',
+        resolve: {
+          template: ['$stateParams', function($stateParams) {
+            return {
+              id: $stateParams.templateId,
+              nombre: 'nombre',
+              descripcion: 'desc',
+              categorias: [
+                {
+                  nombre: 'cat1'
+                },
+                {
+                  nombre: 'cat2'
+                }
+              ]
+            }
+          }]
+        }
       })
       .state('dashboard.crearAlmacen.productos',{
         templateUrl:'../views/pages/almacen/form-crear-almacen-productos.html',
@@ -137,7 +156,7 @@ angular
         templateUrl:'views/pages/login.html',
         url:'/login',
         controller: 'LoginCtrl',
-    })
+      })
       .state('dashboard.almacenes', {
         templateUrl: '../views/pages/listarAlmacenes.html',
         url: '/almacenes',

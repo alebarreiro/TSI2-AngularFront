@@ -18,7 +18,7 @@
                     <tr ng-repeat="template in listarTemplatesCtrl.templates">
                         <td> {{ template.nombre }}</td>
                         <td> {{ template.descripcion }} </td>
-                        <td> <a class="btn btn-sm btn-primary" ng-click="seleccionarTemplate(template.id)">Seleccionar</a> </td>
+                        <td> <a class="btn btn-sm btn-primary" ng-click="seleccionarTemplate(template.id)" ui-sref="dashboard.crearAlmacen.editarTemplate({templateId: template.id})">Seleccionar</a> </td>
                     </tr>
                     </tbody>
                 </table>

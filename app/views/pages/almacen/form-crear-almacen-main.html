@@ -10,27 +10,27 @@
             <div class="col-xs-12">
                 <ul class="nav nav-pills nav-justified thumbnail">
                     <li ui-sref-active="active">
-                        <a ui-sref=".datos" ui-sref-active="active">
+                        <a ui-sref=".datos">
                             <h4 class="list-group-item-heading">Paso 1</h4>
 
                             <p class="list-group-item-text">Datos de tu tienda</p>
                         </a>
                     </li>
-                    <li>
+                    <li ui-sref-active="active">
                         <a ui-sref=".templates">
                             <h4 class="list-group-item-heading">Paso 2</h4>
 
                             <p class="list-group-item-text">Elige un template</p>
                         </a>
-                    </li>
-                    <li ng-disabled="noTemplateSelected">
+                    </li >
+                    <li ui-sref-active="active" ng-disabled="noTemplateSelected">
                         <a ui-sref=".editarTemplate" >
                             <h4 class="list-group-item-heading">Paso 3</h4>
 
                             <p class="list-group-item-text">Edita tu template</p>
                         </a>
                     </li>
-                    <li ng-disabled="noTemplateSelected">
+                    <li ui-sref-active="active" ng-disabled="noTemplateSelected">
                         <a ui-sref=".productos">
                             <h4 class="list-group-item-heading">Paso 4</h4>
 
