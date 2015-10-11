@@ -4,6 +4,9 @@
 angular.module('sapoApp')
   .controller('CrearAlmacenesCtrl', [ '$scope', function ($scope) {
 
+    $scope.almacen = {};
+    $scope.noTemplateSelected = true;
+
     this.init = function() {
 
     };
@@ -12,6 +15,15 @@ angular.module('sapoApp')
 
       console.log($scope.almacen.nombre);
     };
+
+    $scope.seleccionarTemplate = function(idTemplate) {
+      console.log("Seleccionaste: " + idTemplate);
+      $scope.$parent.almacen.templateElegido = idTemplate;
+    };
+
+    $scope.crearTienda = function() {
+      console.log($scope.almacen);
+    },
 
     this.init();
   }]);

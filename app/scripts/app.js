@@ -120,6 +120,8 @@ angular
       })
       .state('dashboard.crearAlmacen.templates',{
         templateUrl:'../views/pages/almacen/form-crear-almacen-templates.html',
+        controller: 'ListarTemplatesCtrl',
+        controllerAs: 'listarTemplatesCtrl',
         url:'/templates'
       })
       .state('dashboard.crearAlmacen.editarTemplate',{

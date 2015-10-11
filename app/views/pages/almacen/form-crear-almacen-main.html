@@ -9,7 +9,7 @@
             <!-- add the active class if the state matches our ui-sref -->
             <div class="col-xs-12">
                 <ul class="nav nav-pills nav-justified thumbnail">
-                    <li>
+                    <li ui-sref-active="active">
                         <a ui-sref=".datos" ui-sref-active="active">
                             <h4 class="list-group-item-heading">Paso 1</h4>
 
@@ -23,14 +23,14 @@
                             <p class="list-group-item-text">Elige un template</p>
                         </a>
                     </li>
-                    <li>
-                        <a ui-sref=".editarTemplate">
+                    <li ng-disabled="noTemplateSelected">
+                        <a ui-sref=".editarTemplate" >
                             <h4 class="list-group-item-heading">Paso 3</h4>
 
                             <p class="list-group-item-text">Edita tu template</p>
                         </a>
                     </li>
-                    <li>
+                    <li ng-disabled="noTemplateSelected">
                         <a ui-sref=".productos">
                             <h4 class="list-group-item-heading">Paso 4</h4>
 
@@ -49,6 +49,10 @@
                 <div id="form-views" ui-view></div>
             </form>
         </div>
+
+        <pre style="margin-top: 20px">
+            {{ almacen }}
+        </pre>
 
     </div>
 </div>

@@ -1,10 +1,22 @@
 <div class="container-fluid">
-	<div class="row">
+    <div class="row">
 
-		<form ng-submit="crearAlmacen()" ng-controller="CrearAlmacenesCtrl">
-			Nombre: <input ng-model="almacen.nombre">
-			<button>Crear!</button>
-		</form>
-	</div>
-	<!-- /.row -->
+        <form ng-submit="crearAlmacen()" ng-controller="CrearAlmacenesCtrl">
+
+            <div class="form-group">
+                <label>Nombre</label>
+                <input class="form-control" ng-model="almacen.nombre">
+
+                <p class="help-block">Ingresa el nombre de tu tienda.</p>
+            </div>
+            <div class="form-group">
+                <label>Descripción</label>
+                <textarea class="form-control" rows="3" ng-model="almacen.descripcion">
+                </textarea>
+            </div>
+
+            <button type="button" class="btn btn-outline btn-primary btn-lg btn-block">Siguiente</button>
+        </form>
+    </div>
+    <!-- /.row -->
 </div>
