@@ -43,25 +43,40 @@ angular.module('sapoApp')
     this.initCats();
 
     this.agregarCategoria = function (idCategoria) {
-      console.log("quiere agregar " + idCategoria);
+      var index = $scope.$parent.almacen.categorias.indexOf(idCategoria);
+      if (index > -1) {
+        toastr.info('Ya agregaste dicha categoría');
+      } else {
+        $scope.$parent.almacen.categorias.push(idCategoria);
+        this.updateTablaCategoriasSeleccionadas(idCategoria, true);
+      }
     };
 
     this.eliminarCategoria = function (idCategoria) {
       var index = $scope.$parent.almacen.categorias.indexOf(idCategoria);
       if (index > -1) {
         $scope.$parent.almacen.categorias.splice(index, 1);
-        this.updateViewCategorias(idCategoria, 'id');
+        this.updateTablaCategoriasSeleccionadas(idCategoria, false);
       };
     };
 
-    this.updateViewCategorias = function(idCategoria, property) {
-      var array = this.template.categorias;
-      $.each(array, function(index, result) {
-        if(result[property] == idCategoria) {
-          array.splice(index, 1);
-        }
-      });
-      this.template.categorias = array;
+    this.updateTablaCategoriasSeleccionadas = function(idCategoria, esNueva) {
+      var cats = this.template.categorias;
+      var allCats = this.allCategorias;
+      if (esNueva) {
+        var nuevaCat = $.grep(allCats, function(n, i){
+          return(n.id == idCategoria)
+        })[0];
+        this.template.categorias.push(nuevaCat);
+      } else {
+        var array = this.template.categorias;
+        $.each(array, function(index, result) {
+          if(result.id == idCategoria) {
+            array.splice(index, 1);
+          }
+        });
+        this.template.categorias = array;
+      }
     }
 
   }]);
