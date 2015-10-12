@@ -22,15 +22,21 @@ angular.module('sapoApp')
     };
 
     TemplateHandler.prototype.getTemplate = function(id) {
-      var template;
-      TemplateHandler.prototype.getTemplates().forEach(function (t) {
-        console.log(t)
-        if (t && t.id == id) {
-          template = t;
-          return;
-        }
-      });
-      return template;
+      var template,
+        templates = TemplateHandler.prototype.getTemplates();
+
+      if (templates) {
+        TemplateHandler.prototype.getTemplates().forEach(function (t) {
+          console.log(t)
+          if (t && t.id == id) {
+            template = t;
+            return;
+          }
+        });
+        return template;
+      } else {
+        return undefined;
+      }
     };
 
     return TemplateHandler;

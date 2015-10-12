@@ -6,32 +6,61 @@
         <!-- /.panel-heading -->
         <div class="panel-body">
 
-            <div class="form-group">
-                <label>Nombre: {{nombre}}</label>
-                <input class="form-control" ng-model="editarTemplateCtrl.template.nombre" disabled>
-            </div>
-            <div class="form-group">
-                <label>Descripción</label>
-                <textarea class="form-control" rows="3" ng-model="editarTemplateCtrl.template.descripcion" disabled>
-                </textarea>
+            <div class="panel panel-primary">
+                <div class="panel-heading"> Categorías de tu almacen </div>
+                <div class="panel-body">
+                    <p class="help-block">Puedes editar tus categorías, eliminando alguna de las actuales o agregando una nueva!</p>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="categoria in editarTemplateCtrl.template.categorias">
+                                <td> {{ categoria.nombre }}</td>
+                                <td> {{ categoria.descripcion }} </td>
+                                <td>
+                                    <a class="btn btn-sm btn-danger" ng-click="editarTemplateCtrl.eliminarCategoria(categoria.id)">Eliminar</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="categoria in editarTemplateCtrl.template.categorias">
-                        <td> {{ categoria.nombre }}</td>
-                        <td> {{ categoria.descripcion }} </td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="panel panel-info">
+                <div class="panel-heading"> Más categorías </div>
+                <div class="panel-body">
+                    <p class="help-block">Selecciona una categoría para agregarla a tu almacén!</p>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="categoria in editarTemplateCtrl.allCategorias">
+                                <td> {{ categoria.nombre }}</td>
+                                <td> {{ categoria.descripcion }} </td>
+                                <td>
+                                    <a class="btn btn-sm btn-success" ng-click="editarTemplateCtrl.agregarCategoria(categoria.id)">Agregar</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
+
+
             <!-- /.table-responsive -->
         </div>
         <!-- /.panel-body -->

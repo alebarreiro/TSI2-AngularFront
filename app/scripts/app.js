@@ -139,6 +139,11 @@ angular
         resolve: {
           templateId: ['$stateParams', function($stateParams) {
             return $stateParams.templateId;
+          }],
+          categorias: ['categoriaService', function(categoriaService) {
+            return categoriaService.getCategorias().then(function(categorias){
+              return categorias;
+            })
           }]
         }
       })
