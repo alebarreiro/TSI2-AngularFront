@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
 
-        <form ng-submit="crearAlmacen()" ng-controller="CrearAlmacenesCtrl">
+        <form ng-controller="CrearAlmacenesCtrl">
 
             <div class="form-group">
                 <label>Nombre</label>
@@ -21,7 +21,7 @@
                 </textarea>
             </div>
 
-            <button type="button" style="margin: 20px 0px 20px 0px" class="btn btn-outline btn-primary btn-lg btn-block">Confirmar datos</button>
+            <button type="button" ng-click="crearAlmacen()" style="margin: 20px 0px 20px 0px" class="btn btn-outline btn-primary btn-lg btn-block">Confirmar datos</button>
 
         </form>
     </div>

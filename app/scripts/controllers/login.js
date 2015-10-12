@@ -11,11 +11,11 @@
  * Controller of the sapoApp'
  */
 angular.module('sapoApp').controller('LoginCtrl',
-    ['$scope', '$location', 'toastr', 'AuthService',
-        function ($scope, $location, toastr, AuthService) {
+    ['$scope', '$location', 'toastr', 'authService',
+        function ($scope, $location, toastr, authService) {
 
             $scope.FBlogin = function () {
-                AuthService.doFacebookLogin();
+                authService.doFacebookLogin();
             };
 
         }]);

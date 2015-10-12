@@ -33,6 +33,10 @@ angular.module('sapoApp')
       return UsuarioHandler.prototype.currentUser.token;
     };
 
+    UsuarioHandler.prototype.getUserId = function () {
+      return UsuarioHandler.prototype.currentUser.id;
+    };
+
 
 
     return UsuarioHandler;
