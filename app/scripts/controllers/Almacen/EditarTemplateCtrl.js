@@ -23,7 +23,6 @@ angular.module('sapoApp')
         if (error) $location.path('/dashboard/crearAlmacen/templates')
 
         this.allCategorias = categorias;
-        console.log("CATEGORIAS!!");
         console.log(categorias);
       };
 

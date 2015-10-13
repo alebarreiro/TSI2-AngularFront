@@ -164,7 +164,7 @@ angular
         controllerAs: 'listarAlmacenesCtrl',
         resolve: {
           almacenes: ['almacenService', function(almacenService) {
-            return almacenService.getAlmacenes().then(function(listaAlmacenes) {
+            return almacenService.getMisAlmacenes().then(function(listaAlmacenes) {
               return listaAlmacenes;
             });
           }]

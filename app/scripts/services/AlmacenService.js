@@ -27,6 +27,19 @@ angular.module('sapoApp')
       return deferred.promise;
     };
 
+    this.getMisAlmacenes = function () {
+      var user = authService.getLoggedUser();
+
+      var deferred = $q.defer();
+      Usuario.getMisAlmacenes({userid: user.id}, {}, function (almacenes) {
+        console.log(almacenes);
+        deferred.resolve(almacenes);
+      }, function (error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
+
     this.crearNuevaAlmacen = function (almacen) {
       //Esta logica se va a ir cuando se haga lo del token
       var user = authService.getLoggedUser();

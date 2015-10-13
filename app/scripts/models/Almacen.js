@@ -11,5 +11,6 @@ angular.module('sapoApp')
       getAlmacen        : { method: 'get',  params: { resource: 'almacenes' },                            isArray: false },
       getAlmacenes      : { method: 'get',  params: { resource: 'almacenes' },                            isArray: true },
       agregarCategorias : { method: 'post', params: { resource: 'almacenes', op: 'agregarcategorias' },   isArray: true },
+      agregarProductos  : { method: 'post', params: { resource: 'almacenes', op: 'agregarproductos'  },   isArray: true },
     })
   }]);
