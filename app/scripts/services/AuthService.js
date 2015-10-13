@@ -2,7 +2,7 @@
  * Created by alejandrobarreiro on 8/10/15.
  */
 angular.module('sapoApp')
-  .service('authService', ['$q', 'Usuario', '$location', 'toastr', 'REST_API',  '$cookieStore', 'CURRENT_LOGGED_IN_USER',
+  .service('authService', ['$q', 'Usuario', '$location', 'toastr', 'REST_API', '$cookieStore', 'CURRENT_LOGGED_IN_USER',
     function ($q, Usuario, $location, toastr, REST_API, $cookieStore, CURRENT_LOGGED_IN_USER) {
 
       this.init = function () {
@@ -12,44 +12,54 @@ angular.module('sapoApp')
 
       this.doFacebookLogin = function () {
         var that = this;
-        FB.login(function (response) {
-          if (response.authResponse) {
-            
-            FB.api('/me', {fields: ['first_name', 'last_name', 'email']}, function (response) {
-              toastr.success('Bienvenido ' + response.first_name + "!");
-              var accessToken = FB.getAuthResponse().accessToken;
-              console.log(accessToken);
-              var currentUser = {
-                id: response.email,
-                nombre: response.first_name,
-                apellido: response.last_name,
-                email: response.email,
-                facebook: true,
-                token: accessToken
-              };
-              //var userHler = new UsuarioHandler();
-              //userHler.setCurrentUser(currentUser);
-              //userHler.setToken(accessToken);
-              if (that.isLoggedIn()) {
-                $location.path('/dashboard/home');
-              } else {
-                that.setLoggedInUser(currentUser);
-                that.registrarUsuarioFB(response.first_name, response.last_name, response.email)
-                  .then(function (u) {
-                    toastr.success('Usuario registrado!');
-                    console.log(u);
-                    $location.path('/dashboard/home');
-                  })
-                  .catch(function (e) {
-                    toastr.info("El usuario ya estaba registrado");
-                    console.log(e);
-                    $location.path('/dashboard/home');
-                  });
-              }
+
+
+        FB.getLoginStatus(function(response) {
+          if (response.status === 'connected') {
+            // the user is logged in and has authenticated your
+            // app, and response.authResponse supplies
+            // the user's ID, a valid access token, a signed
+            // request, and the time the access token
+            // and signed request each expire
+
+            //var uid = response.authResponse.userID;
+            //var accessToken = response.authResponse.accessToken;
+            that.getPerfilFB(function(user){
+              that.setLoggedInUser(user);
+              toastr.success('Bienvenido ' + user.nombre + "!");
+              $location.path('/dashboard/home');
             });
           } else {
-            toastr.error('El usuario cancelo el login o no fue autorizado.');
+            // the user isn't logged in to Facebook.
+            console.log("Loggeando a facebook");
+            FB.login(function (response) {
+              if (response.authResponse) {
+                that.getPerfilFB(function(user){
+                  that.setLoggedInUser(user);
+                  toastr.success('Bienvenido ' + user.nombre + "!");
+                  $location.path('/dashboard/home');
+                });
+              } else {
+                toastr.error('El usuario cancelo el login o no fue autorizado.');
+              }
+            });
           }
+        });
+      };
+
+      this.getPerfilFB = function (callback) {
+        FB.api('/me', {fields: ['first_name', 'last_name', 'email']}, function (response) {
+          var accessToken = FB.getAuthResponse().accessToken;
+          console.log(accessToken);
+          var currentUser = {
+            id: response.email,
+            nombre: response.first_name,
+            apellido: response.last_name,
+            email: response.email,
+            facebook: true,
+            token: accessToken
+          };
+          callback && callback(currentUser);
         });
       };
 
@@ -61,10 +71,15 @@ angular.module('sapoApp')
        * @param email
        * @returns {*}
        */
-      this.registrarUsuarioFB = function (nombre, apellido, email) {
+      this.registrarUsuarioFB = function (nombre, apellido, email, accessToken) {
 
         var deferred = $q.defer();
-        Usuario.registrarUsuario({}, {id: email, nombre: nombre, apellido: apellido}, function (user) {
+        Usuario.registrarUsuario({}, {
+          id: email,
+          nombre: nombre,
+          apellido: apellido,
+          token: accessToken
+        }, function (user) {
           deferred.resolve(user);
         }, function (error) {
           deferred.reject(error);
@@ -89,7 +104,7 @@ angular.module('sapoApp')
       /**
        * Remueve el usuario que inicio sesión
        */
-      this.removeLoggedInUser = function() {
+      this.removeLoggedInUser = function () {
 
         $cookieStore.remove(CURRENT_LOGGED_IN_USER);
       };

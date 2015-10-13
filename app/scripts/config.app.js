@@ -15,6 +15,7 @@ angular.module('sapoApp')
     return {
       request: function (config) {
         config.headers['Ocp-Apim-Subscription-Key'] = REST_API.OCP_KEY;
+        config.headers['Content-Type'] = 'application/json';
         return config;
       },
     };
