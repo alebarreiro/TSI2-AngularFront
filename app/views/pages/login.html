@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-8 col-md-offset-2">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Please Sign In</h3>
@@ -9,10 +9,10 @@
                     <form role="form">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                <input ng-model="user.id" class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                <input ng-model="user.pass" class="form-control" placeholder="Password" name="password" type="password" value="">
                             </div>
                             <div class="checkbox">
                                 <label>
@@ -20,14 +20,14 @@
                                 </label>
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <a class="btn btn-lg btn-success btn-block">Login</a>
+                            <a class="btn btn-block btn-success" ng-click="login()">Login</a>
 
                             <div class="signup-or-separator">
                                 <h6 class="text">or</h6>
                                 <hr>
                             </div>
                             <button class="btn btn-block btn-facebook" ng-click="FBlogin()">
-                                <i class="fa fa-facebook-square"></i> Login con facebook
+                                <i class="fa fa-facebook-square"></i> Login with facebook
                             </button>
 
                         </fieldset>

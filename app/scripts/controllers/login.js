@@ -18,4 +18,9 @@ angular.module('sapoApp').controller('LoginCtrl',
                 authService.doFacebookLogin();
             };
 
+            $scope.login = function () {
+                console.log($scope.user.id);
+                authService.tradicionalLogin($scope.user.id);
+            };
+
         }]);

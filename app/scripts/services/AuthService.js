@@ -118,6 +118,16 @@ angular.module('sapoApp')
         return $cookieStore.get(CURRENT_LOGGED_IN_USER);
       };
 
+      this.tradicionalLogin = function(id) {
+        var user = {
+          id: id
+        }
+        this.setLoggedInUser(user);
+        toastr.success('Bienvenido ' + id + "!");
+        $location.path('/dashboard/home');
+
+      };
+
       this.init();
 
     }]);
