@@ -35,6 +35,7 @@ angular
       .state('dashboard', {
         url:'/dashboard',
         templateUrl: 'views/dashboard/main.html',
+        authenticated: true,
         resolve: {
             loadMyDirectives:function($ocLazyLoad){
                 return $ocLazyLoad.load(
@@ -84,6 +85,7 @@ angular
     })
       .state('dashboard.home',{
         url:'/home',
+        authenticated: true,
         controller: 'MainCtrl',
         templateUrl:'views/dashboard/home.html',
         resolve: {
