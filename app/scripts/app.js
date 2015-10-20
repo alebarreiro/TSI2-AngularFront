@@ -192,34 +192,17 @@ angular
           }
         }
     })
-      .state('dashboard.table',{
-        templateUrl:'views/table.html',
-        url:'/table'
-    })
-      .state('dashboard.panels-wells',{
-          templateUrl:'views/ui-elements/panels-wells.html',
-          url:'/panels-wells'
+      .state('almacen/:url', {
+        templateUrl: '../views/almacen/home.html',
+        url: '/almacen/:url',
+        controller: 'MostrarAlmacenCtrl',
+        controllerAs: 'mostrarAlmacenCtrl',
+        resolve: {
+          almacenId: ['$stateParams', function($stateParams) {
+            return $stateParams.url;
+          }],
+        }
       })
-      .state('dashboard.buttons',{
-        templateUrl:'views/ui-elements/buttons.html',
-        url:'/buttons'
-    })
-      .state('dashboard.notifications',{
-        templateUrl:'views/ui-elements/notifications.html',
-        url:'/notifications'
-    })
-      .state('dashboard.typography',{
-       templateUrl:'views/ui-elements/typography.html',
-       url:'/typography'
-   })
-      .state('dashboard.icons',{
-       templateUrl:'views/ui-elements/icons.html',
-       url:'/icons'
-   })
-      .state('dashboard.grid',{
-       templateUrl:'views/ui-elements/grid.html',
-       url:'/grid'
-   })
   }]);
 
     

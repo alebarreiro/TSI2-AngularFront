@@ -70,7 +70,7 @@ angular.module('sapoApp')
 
     this.validarAlmacen = function(almacen) {
 
-      return almacen.nombre && almacen.nombre.length && almacen.url && almacen.url.length;
+      return almacen.nombre && almacen.nombre.length && almacen.id && almacen.id.length;
     }
 
   }]);
