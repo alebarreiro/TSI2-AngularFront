@@ -198,8 +198,10 @@ angular
         controller: 'MostrarAlmacenCtrl',
         controllerAs: 'mostrarAlmacenCtrl',
         resolve: {
-          almacenId: ['$stateParams', function($stateParams) {
-            return $stateParams.url;
+          almacen: ['almacenService', '$stateParams', function(almacenService, $stateParams) {
+            return almacenService.getAlmacen($stateParams.url).then(function(almacen){
+              return almacen;
+            });
           }],
         }
       })

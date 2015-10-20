@@ -1,10 +1,11 @@
 angular.module('sapoApp')
-  .controller('MostrarAlmacenCtrl', ['almacenId', '$scope', 'almacenService', 'toastr',
-    function (almacenId, $scope, almacenService, toastr) {
+  .controller('MostrarAlmacenCtrl', ['almacen', '$scope', 'almacenService', 'toastr',
+    function (almacen, $scope, almacenService, toastr) {
 
     this.init = function () {
-      console.log(almacenId);
-      $scope.almacenId = almacenId;
+      console.log(almacen);
+      $scope.almacenId = almacen.id;
+      $scope.almacen = almacen;
     };
 
     this.init();
