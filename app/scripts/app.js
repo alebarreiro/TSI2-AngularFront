@@ -151,7 +151,9 @@ angular
       })
       .state('dashboard.crearAlmacen.productos',{
         templateUrl:'../views/pages/almacen/form-crear-almacen-productos.html',
-        url:'/productos'
+        url:'/productos',
+        controller: 'ListarProductosCtrl',
+        controllerAs: 'listarProductosCtrl',
       })
 
       .state('login',{
