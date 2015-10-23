@@ -20,7 +20,6 @@ angular.module('sapoApp')
     this.getCategorias = function() {
       var deferred = $q.defer();
       Categoria.getCategorias({}, {}, function (categorias) {
-
         deferred.resolve(categorias);
       }, function (error) {
         deferred.reject(error);

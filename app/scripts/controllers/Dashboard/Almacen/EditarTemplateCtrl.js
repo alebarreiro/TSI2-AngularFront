@@ -2,8 +2,9 @@
  * Created by alejandrobarreiro on 11/10/15.
  */
 angular.module('sapoApp')
-  .controller('EditarTemplateCtrl', ['templateId', '$scope', 'TemplateHandler', 'toastr', '$location', 'categorias', 'almacenService',
-    function (templateId, $scope, TemplateHandler, toastr, $location, categorias, almacenService) {
+  .controller('EditarTemplateCtrl', ['templateId', '$scope', 'TemplateHandler', 'toastr', '$location', 'categorias',
+    'almacenService', 'CategoriaHandler',
+    function (templateId, $scope, TemplateHandler, toastr, $location, categorias, almacenService, CategoriaHandler) {
 
 
       this.init = function () {
@@ -23,6 +24,10 @@ angular.module('sapoApp')
         if (error) $location.path('/dashboard/crearAlmacen/templates')
 
         this.allCategorias = categorias;
+
+        this.categoriaHandler = new CategoriaHandler();
+        this.categoriaHandler.setCategorias(categorias);
+
         console.log(categorias);
       };
 
