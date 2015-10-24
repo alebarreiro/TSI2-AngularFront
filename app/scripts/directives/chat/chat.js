@@ -8,11 +8,20 @@
  */
 angular.module('sapoApp')
 	.directive('chat',function(){
-		return {
+		var directive = {
         templateUrl:'scripts/directives/chat/chat.html',
-        restrict: 'E',
+        restrict: 'EA',
         replace: true,
-    	}
+				scope: {
+					//messages: '=',
+					username: '=',
+					date: '=',
+					text: '=',
+					mandarMensaje: '&'
+				},
+				controller: 'ChatCtrl',
+				controllerAs: 'chatCtrl'
+    	};
+
+		return directive;
 	});
-
-
