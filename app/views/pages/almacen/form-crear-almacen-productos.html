@@ -16,12 +16,38 @@
             </div>
 
             <div class="col-md-8">
-                Seleccionaste {{catId}}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Acciones</th>
+                            <th>Stock</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="producto in productos">
+                            <td> {{ producto.nombre }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-success" ng-click="agregarStockProducto(producto.catProd, producto.id)">
+                                    Agregar
+                                </a>
+                                <a class="btn btn-sm btn-danger" ng-click="sacarStockProducto(producto.catProd, producto.id)">
+                                    Eliminar
+                                </a>
+                            </td>
+                            <td> {{ producto.stock }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </div>
 
-        <button type="button" ng-click="crearTienda()" class="btn btn-outline btn-primary btn-lg btn-block">Confirmar tienda</button>
+        <button type="button" ng-click="crearTienda()" class="btn btn-outline btn-primary btn-lg btn-block">Confirmar
+            tienda
+        </button>
         <!-- /.panel-body -->
     </div>
     <!-- /.panel -->
