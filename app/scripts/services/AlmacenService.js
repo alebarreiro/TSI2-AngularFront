@@ -69,6 +69,18 @@ angular.module('sapoApp')
       return deferred.promise;
     };
 
+    this.cargarProductosAlmacen = function (almacenId, productos) {
+
+      var deferred = $q.defer();
+      Almacen.agregarProductos({id: almacenId}, productos, function (almacenResult) {
+        console.log(almacenResult);
+        deferred.resolve(almacenResult);
+      }, function (error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
+
     this.validarAlmacen = function(almacen) {
 
       return almacen.nombre && almacen.nombre.length && almacen.id && almacen.id.length;

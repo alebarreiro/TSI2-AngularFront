@@ -2,21 +2,20 @@
  * Created by alejandrobarreiro on 23/10/15.
  */
 angular.module('sapoApp')
-  .controller('ListarProductosCtrl', ['$scope', 'CategoriaHandler', 'categoriaService', 'lodash',
-    function ($scope, CategoriaHandler, categoriaService, lodash) {
+  .controller('ListarProductosCtrl',
+  ['$scope', 'CategoriaHandler', 'categoriaService', 'lodash', 'almacenService',
+    function ($scope, CategoriaHandler, categoriaService, lodash, almacenService) {
 
-      var arrayProductos = [];
+      var arrayProductos = [],
+        idCatsElegidas;
 
       this.init = function () {
-
-        var that = this;
 
         arrayProductos = [];
         var catHandler = new CategoriaHandler();
         $scope.categorias = [];
-        var idCatsElegidas = $scope.$parent.almacen.categorias;
+        idCatsElegidas = $scope.$parent.almacen.categorias;
         idCatsElegidas.forEach(function (c) {
-          console.log('iterando ' + c);
           var cat = catHandler.getCategoria(c);
           if (cat) {
             $scope.categorias.push(cat);
@@ -28,8 +27,6 @@ angular.module('sapoApp')
       $scope.listarProductos = function (id) {
 
         if (arrayProductos[id]) {
-          console.log('prods cacheados');
-          console.log(arrayProductos[id]);
           $scope.productos = arrayProductos[id];
         } else {
           categoriaService.getProductosCategoria(id).then(function (productos) {
@@ -40,13 +37,11 @@ angular.module('sapoApp')
               p.catProd = id;
               productosConStock.push(p);
             });
-            console.log(productosConStock);
             $scope.productos = productosConStock;
             arrayProductos[id] = productosConStock;
           });
         }
         $scope.catId = id;
-
       };
 
       $scope.agregarStockProducto = function (catProd, idProducto) {
@@ -69,6 +64,34 @@ angular.module('sapoApp')
         }
 
         $scope.productos = arrayProductos[catProd];
+      };
+
+
+      $scope.confirmarProductos = function () {
+
+        var productosResult = [];
+        idCatsElegidas.forEach(function (c) {
+          if (arrayProductos[c] && arrayProductos[c].length) {
+            arrayProductos[c].forEach(function (p) {
+              if (p.stock > 0) {
+                productosResult.push({
+                  productoID: p.id,
+                  cantidad: p.stock
+                })
+              }
+            })
+          }
+        });
+
+        var idAlmacen = $scope.$parent.almacen.id;
+        almacenService.cargarProductosAlmacen(idAlmacen, productosResult)
+          .then(function(a) {
+            console.log(a);
+            toastr.success('Productos del almacen confirmados!');
+           })
+          .catch(function () {
+            toastr.error('Hubo un error al dar de alta los productos.')
+          });
       };
 
       this.init();
