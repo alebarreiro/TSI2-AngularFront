@@ -2,8 +2,8 @@
  * Created by alejandrobarreiro on 23/10/15.
  */
 angular.module('sapoApp')
-  .controller('ListarProductosCtrl', ['$scope', 'CategoriaHandler', 'categoriaService',
-    function ($scope, CategoriaHandler, categoriaService) {
+  .controller('ListarProductosCtrl', ['$scope', 'CategoriaHandler', 'categoriaService', 'lodash',
+    function ($scope, CategoriaHandler, categoriaService, lodash) {
 
       var arrayProductos = [];
 
@@ -26,8 +26,7 @@ angular.module('sapoApp')
       };
 
       $scope.listarProductos = function (id) {
-        var that = this;
-        console.log("holaa listar PRoductos");
+
         if (arrayProductos[id]) {
           console.log('prods cacheados');
           console.log(arrayProductos[id]);
@@ -51,12 +50,25 @@ angular.module('sapoApp')
       };
 
       $scope.agregarStockProducto = function (catProd, idProducto) {
-        console.log(arrayProductos[catProd]);
+
+       var index = lodash.findIndex(arrayProductos[catProd], function(prod) {
+          return prod.id == idProducto;
+        });
+        arrayProductos[catProd][index].stock ++;
+
+        $scope.productos = arrayProductos[catProd];
       };
 
       $scope.sacarStockProducto = function (catProd, idProducto) {
-        console.log(arrayProductos[catProd]);
-        //this.arrayProductos[idProducto].stock = (this.arrayProductos[idProducto] && this.arrayProductos[idProducto].stock > 0) ?  this.arrayProductos[idProducto].stock-- : 0;
+
+        var index = lodash.findIndex(arrayProductos[catProd], function(prod) {
+          return prod.id == idProducto;
+        });
+        if (arrayProductos[catProd][index].stock > 0) {
+          arrayProductos[catProd][index].stock --;
+        }
+
+        $scope.productos = arrayProductos[catProd];
       };
 
       this.init();

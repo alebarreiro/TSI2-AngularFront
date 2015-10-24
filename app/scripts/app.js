@@ -20,6 +20,7 @@ angular
         'ngRoute',
         'ngSanitize',
         'ngTouch',
+        'ngLodash'
 
   ])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
