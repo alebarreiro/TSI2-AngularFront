@@ -2,10 +2,13 @@
  * Created by alejandrobarreiro on 24/10/15.
  */
 angular.module('sapoApp')
-  .controller('ChatCtrl', [ '$scope', 'toastr',
-    function ($scope, toastr) {
+  .controller('ChatCtrl', [ '$scope', 'toastr', 'authService',
+    function ($scope, toastr, authService) {
 
-      wsUrl = 'ws:sapo-backendrs.rhcloud.com:8000/openshiftproject/chat/Ale';
+      var loggedUser = authService.getLoggedUser();
+      console.log(loggedUser);
+
+      wsUrl = 'ws:sapo-backendrs.rhcloud.com:8000/openshiftproject/chat/' + loggedUser.id;
 
       console.log('WebSockets Url : ' + wsUrl);
       ws = new WebSocket(wsUrl);
@@ -20,15 +23,30 @@ angular.module('sapoApp')
       };
 
       ws.onmessage = function(event){
-        console.log(event.data);
-        $scope.chatCtrl.messages.push({
-          username: 'Remote',
-          text: event.data,
-          date: Date()
-        });
+
+        if (event.data) {
+          var parseMsg = parseChatMessage(event.data);
+
+            $scope.chatCtrl.messages.push({
+              username: parseMsg.nick,
+              text: parseMsg.text,
+              date: Date()
+            });
+
+        }
+
         $scope.$apply();
       };
 
+      parseChatMessage = function (msg) {
+        var index = msg.indexOf(":"),
+          user = msg.substr(0, index),
+          text = msg.substr(index+1, msg.length);
+        return {
+          nick : user,
+          text : text
+        }
+      };
 
       this.init = function () {
         this.messages = [];
@@ -38,16 +56,9 @@ angular.module('sapoApp')
       this.init();
 
       this.mandarMensaje = function () {
-        console.log("quiere mandar mensaje");
-        console.log($scope);
-        var text = $scope.chatCtrl.writingMessage,
-          msg = {
-          username: 'Yo',
-          text: text,
-          date: Date()
-        };
+
+        var text = $scope.chatCtrl.writingMessage;
         $scope.chatCtrl.writingMessage = '';
-        $scope.chatCtrl.messages.push(msg);
-        ws.send(text);
+        ws.send(loggedUser.id + ":" +text);
       }
     }]);
