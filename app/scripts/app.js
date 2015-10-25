@@ -112,17 +112,17 @@ angular
      * FORMULARIO PARA CREAR UNA NUEVA ALMACEN
      */
       .state('dashboard.crearAlmacen',{
-        templateUrl:'../views/pages/almacen/form-crear-almacen-main.html',
+        templateUrl:'../views/dashboard/pages/almacen/form-crear-almacen-main.html',
         controller: 'CrearAlmacenesCtrl',
         controllerAs: 'crearAlmacenesCtrl',
         url:'/crearAlmacen'
       })
       .state('dashboard.crearAlmacen.datos',{
-        templateUrl:'../views/pages/almacen/form-crear-almacen-datos.html',
+        templateUrl:'../views/dashboard/pages/almacen/form-crear-almacen-datos.html',
         url:'/datos'
       })
       .state('dashboard.crearAlmacen.templates',{
-        templateUrl:'../views/pages/almacen/form-crear-almacen-templates.html',
+        templateUrl:'../views/dashboard/pages/almacen/form-crear-almacen-templates.html',
         controller: 'ListarTemplatesCtrl',
         controllerAs: 'listarTemplatesCtrl',
         url:'/templates',
@@ -135,7 +135,7 @@ angular
         }
       })
       .state('dashboard.crearAlmacen.editarTemplate',{
-        templateUrl:'../views/pages/almacen/form-crear-almacen-editar-template.html',
+        templateUrl:'../views/dashboard/pages/almacen/form-crear-almacen-editar-template.html',
         url:'/editarTemplate/:templateId',
         controller: 'EditarTemplateCtrl',
         controllerAs: 'editarTemplateCtrl',
@@ -151,19 +151,19 @@ angular
         }
       })
       .state('dashboard.crearAlmacen.productos',{
-        templateUrl:'../views/pages/almacen/form-crear-almacen-productos.html',
+        templateUrl:'../views/dashboard/pages/almacen/form-crear-almacen-productos.html',
         url:'/productos',
         controller: 'ListarProductosCtrl',
         controllerAs: 'listarProductosCtrl',
       })
 
       .state('login',{
-        templateUrl:'views/pages/login.html',
+        templateUrl:'../views/dashboard/pages/login.html',
         url:'/login',
         controller: 'LoginCtrl',
       })
       .state('dashboard.almacenes', {
-        templateUrl: '../views/pages/listarAlmacenes.html',
+        templateUrl: '../views/dashboard/pages/listarAlmacenes.html',
         url: '/almacenes',
         controller: 'ListarAlmacenesCtrl',
         controllerAs: 'listarAlmacenesCtrl',
