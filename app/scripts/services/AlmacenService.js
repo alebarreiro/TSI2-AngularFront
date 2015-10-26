@@ -81,6 +81,19 @@ angular.module('sapoApp')
       return deferred.promise;
     };
 
+    this.agregarColaborador = function (almacenId, userId) {
+
+      var deferred = $q.defer();
+      Almacen.agregarColaborador({id: almacenId, userid: userId}, function (result) {
+        deferred.resolve(result);
+      }, function (error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
+
+
+
     this.validarAlmacen = function(almacen) {
 
       return almacen.nombre && almacen.nombre.length && almacen.id && almacen.id.length;
