@@ -2,11 +2,12 @@
  * Created by alejandrobarreiro on 8/10/15.
  */
 angular.module('sapoApp')
-  .service('authService', ['$q', 'Usuario', '$location', 'toastr', 'REST_API', '$cookieStore', 'CURRENT_LOGGED_IN_USER',
-    function ($q, Usuario, $location, toastr, REST_API, $cookieStore, CURRENT_LOGGED_IN_USER) {
+  .service('authService',
+  ['$q', 'Usuario', '$location', 'toastr', 'REST_API', '$cookieStore', 'CURRENT_LOGGED_IN_USER', 'AUTH_EVENTS', '$rootScope', '$state',
+    function ($q, Usuario, $location, toastr, REST_API, $cookieStore, CURRENT_LOGGED_IN_USER, AUTH_EVENTS, $rootScope, $state) {
 
       this.init = function () {
-
+        this.handleAuthEvents();
         //var loggedUser = this.getLoggedInUser();
       };
 
@@ -125,6 +126,44 @@ angular.module('sapoApp')
         this.setLoggedInUser(user);
         toastr.success('Bienvenido ' + id + "!");
         $location.path('/dashboard/home');
+
+      };
+
+      /**
+       * Retorna true si el usuario esta autorizado a ir al siguiente estado.
+       * @param nextState - Proximo estado del router
+       * @returns {boolean}
+       */
+      this.isAuthorizedInState = function(nextState) {
+        var res = false;
+        console.log(nextState);
+        if (nextState && nextState.authenticated) {
+          if (!this.isLoggedIn()) {
+            console.log('NO ESTA LOGGED IN');
+            res = false;
+          } else if (this.isLoggedIn() && nextState.authorization) {
+            console.log('PROXIMO ESTADO CON AUTORIZACION');
+            res = false;
+          } else {
+            res = true;
+          }
+        }
+        return res;
+      };
+
+      this.handleAuthEvents = function() {
+
+        $rootScope.$on(AUTH_EVENTS.notAuthorized, function() {
+          toastr.error('Sin autorización.');
+          $state.go('dashboard.home');
+        }.bind(this));
+
+        $rootScope.$on(AUTH_EVENTS.notAuthenticated, function() {
+          toastr.error('Sin autenticación.');
+          console.log('ATRAPADO NOT AUTHENTICATED');
+          this.removeLoggedInUser();
+          $state.go('login');
+        }.bind(this));
 
       };
 

@@ -218,6 +218,8 @@ angular
         url: '/almacen/:url',
         controller: 'MostrarAlmacenCtrl',
         controllerAs: 'mostrarAlmacenCtrl',
+        authorization: true,
+        authenticated: true,
         resolve: {
           almacen: ['almacenService', '$stateParams', function(almacenService, $stateParams) {
             return almacenService.getAlmacen($stateParams.url).then(function(almacen){
