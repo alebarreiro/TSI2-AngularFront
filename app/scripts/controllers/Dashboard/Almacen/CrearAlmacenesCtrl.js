@@ -17,7 +17,6 @@ angular.module('sapoApp')
     };
 
     $scope.crearAlmacen = function () {
-      console.log($scope.almacen);
 
       var almacen = $scope.almacen;
 
