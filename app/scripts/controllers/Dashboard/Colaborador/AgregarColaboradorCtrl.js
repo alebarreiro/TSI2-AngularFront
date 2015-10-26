@@ -2,7 +2,7 @@
  * Created by alejandrobarreiro on 25/10/15.
  */
 angular.module('sapoApp')
-  .controller('AgregarColaboradorCtrl', ['$scope', 'usuarioService', 'toastr', function ($scope, usuarioService, toastr) {
+  .controller('AgregarColaboradorCtrl', ['$scope', 'usuarioService', 'toastr', 'AlmacenHandler', function ($scope, usuarioService, toastr, AlmacenHandler) {
 
     $scope.searchterm = "";
     $scope.usuarios = {};

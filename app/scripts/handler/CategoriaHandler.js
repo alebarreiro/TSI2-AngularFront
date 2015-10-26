@@ -14,8 +14,6 @@ angular.module('sapoApp')
     CategoriaHandler.prototype.init = function () {};
 
     CategoriaHandler.prototype.setCategorias = function (categorias) {
-      console.log('guardando categorias');
-      console.log(categorias);
       CategoriaHandler.prototype.categorias = categorias;
     };
 
