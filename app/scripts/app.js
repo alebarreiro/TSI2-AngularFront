@@ -108,6 +108,13 @@ angular
         templateUrl:'views/form.html',
         url:'/form'
     })
+      .state('dashboard.agregarColaborador',{
+        templateUrl:'../views/dashboard/pages/almacen/form-agregarColaborador.html',
+        url:'/agregarColaborador',
+        controller: 'AgregarColaboradorCtrl',
+        controllerAs: 'agregarColaboradorCtrl',
+      })
+
     /**
      * FORMULARIO PARA CREAR UNA NUEVA ALMACEN
      */
@@ -157,6 +164,7 @@ angular
         controllerAs: 'listarProductosCtrl',
       })
 
+
       .state('login',{
         templateUrl:'../views/dashboard/pages/login.html',
         url:'/login',
@@ -195,6 +203,8 @@ angular
           }
         }
     })
+
+
       .state('almacen/:url', {
         templateUrl: '../views/almacen/home.html',
         url: '/almacen/:url',
