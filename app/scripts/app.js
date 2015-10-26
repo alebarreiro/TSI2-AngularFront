@@ -113,6 +113,14 @@ angular
         url:'/agregarColaborador',
         controller: 'AgregarColaboradorCtrl',
         controllerAs: 'agregarColaboradorCtrl',
+        resolve: {
+          almacenes: ['AlmacenHandler', function(AlmacenHandler) {
+            var almacenHandler = new AlmacenHandler();
+            return almacenHandler.getAlmacenes().then(function(listaAlmacenes) {
+              return listaAlmacenes;
+            });
+          }]
+        }
       })
 
     /**
