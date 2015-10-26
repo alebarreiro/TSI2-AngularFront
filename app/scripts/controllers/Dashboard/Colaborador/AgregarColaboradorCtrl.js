@@ -27,6 +27,10 @@ angular.module('sapoApp')
       }
     });
 
+    $scope.seleccionarUsuario = function (userId) {
+
+    };
+
     $scope.agregarColaborador = function () {
 
     };
