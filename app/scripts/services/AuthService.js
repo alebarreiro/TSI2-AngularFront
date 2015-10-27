@@ -11,10 +11,10 @@ angular.module('sapoApp')
         //var loggedUser = this.getLoggedInUser();
       };
 
+
       this.doFacebookLogin = function () {
+
         var that = this;
-
-
         FB.getLoginStatus(function(response) {
           if (response.status === 'connected') {
             // the user is logged in and has authenticated your
@@ -62,6 +62,12 @@ angular.module('sapoApp')
           };
           callback && callback(currentUser);
         });
+      };
+
+      this.doFacebookLogout = function (callback) {
+        //FB.logout(function(response) {
+        //  callback && callback(response);
+        //});
       };
 
       /**
@@ -177,6 +183,11 @@ angular.module('sapoApp')
 
         $rootScope.$on(AUTH_EVENTS.notAuthenticated, function() {
           toastr.error('Autenticación requerida, por favor inicie sesión.');
+          this.removeLoggedInUser();
+          $state.go('login');
+        }.bind(this));
+
+        $rootScope.$on(AUTH_EVENTS.signout, function() {
           this.removeLoggedInUser();
           $state.go('login');
         }.bind(this));
