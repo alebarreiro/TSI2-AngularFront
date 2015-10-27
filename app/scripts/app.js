@@ -36,7 +36,9 @@ angular
       .state('dashboard', {
         url:'/dashboard',
         templateUrl: 'views/dashboard/main.html',
-        authenticated: true,
+        data: {
+          authenticated: true,
+        },
         resolve: {
             loadMyDirectives:function($ocLazyLoad){
                 return $ocLazyLoad.load(
@@ -86,7 +88,6 @@ angular
     })
       .state('dashboard.home',{
         url:'/home',
-        authenticated: true,
         controller: 'MainCtrl',
         templateUrl:'views/dashboard/home.html',
         resolve: {
@@ -113,7 +114,6 @@ angular
         url:'/agregarColaborador',
         controller: 'AgregarColaboradorCtrl',
         controllerAs: 'agregarColaboradorCtrl',
-        authenticated: true,
         resolve: {
           almacenes: ['AlmacenHandler', function(AlmacenHandler) {
             var almacenHandler = new AlmacenHandler();
@@ -131,7 +131,6 @@ angular
         templateUrl:'../views/dashboard/pages/almacen/form-crear-almacen-main.html',
         controller: 'CrearAlmacenesCtrl',
         controllerAs: 'crearAlmacenesCtrl',
-        authenticated: true,
         url:'/crearAlmacen'
       })
       .state('dashboard.crearAlmacen.datos',{
@@ -142,7 +141,6 @@ angular
         templateUrl:'../views/dashboard/pages/almacen/form-crear-almacen-templates.html',
         controller: 'ListarTemplatesCtrl',
         controllerAs: 'listarTemplatesCtrl',
-        authenticated: true,
         url:'/templates',
         resolve: {
           templates: ['templateService', function(templateService) {
@@ -157,7 +155,6 @@ angular
         url:'/editarTemplate/:templateId',
         controller: 'EditarTemplateCtrl',
         controllerAs: 'editarTemplateCtrl',
-        authenticated: true,
         resolve: {
           templateId: ['$stateParams', function($stateParams) {
             return $stateParams.templateId;
@@ -174,7 +171,6 @@ angular
         url:'/productos',
         controller: 'ListarProductosCtrl',
         controllerAs: 'listarProductosCtrl',
-        authenticated: true,
       })
 
 
@@ -188,7 +184,6 @@ angular
         url: '/almacenes',
         controller: 'ListarAlmacenesCtrl',
         controllerAs: 'listarAlmacenesCtrl',
-        authenticated: true,
         resolve: {
           almacenes: ['almacenService', function(almacenService) {
             return almacenService.getMisAlmacenes().then(function(listaAlmacenes) {
@@ -201,7 +196,6 @@ angular
         templateUrl:'views/chart.html',
         url:'/chart',
         controller:'ChartCtrl',
-        authenticated: true,
         resolve: {
           loadMyFile:function($ocLazyLoad) {
             return $ocLazyLoad.load({
@@ -223,7 +217,6 @@ angular
         url: '/perfil',
         controller: 'PerfilCtrl',
         controllerAs: 'perfilCtrl',
-        authenticated: true,
       })
 
 
@@ -232,8 +225,10 @@ angular
         url: '/almacen/:url',
         controller: 'MostrarAlmacenCtrl',
         controllerAs: 'mostrarAlmacenCtrl',
-        authorization: true,
-        authenticated: true,
+        data : {
+          authorization: true,
+          authenticated: true,
+        },
         resolve: {
           almacen: ['almacenService', '$stateParams', '$rootScope', 'AUTH_EVENTS', 'authService',
             function(almacenService, $stateParams, $rootScope, AUTH_EVENTS, authService) {

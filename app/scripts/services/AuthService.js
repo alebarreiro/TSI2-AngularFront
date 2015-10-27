@@ -168,7 +168,7 @@ angular.module('sapoApp')
        */
       this.isAuthenticatedInState = function(nextState) {
 
-        if (nextState && nextState.authenticated && !this.isLoggedIn()) {
+        if (nextState && nextState.data && nextState.data.authenticated && !this.isLoggedIn()) {
           return false;
         } else {
           return true;
