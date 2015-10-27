@@ -192,6 +192,13 @@ angular.module('sapoApp')
         url: '/perfil',
         controller: 'PerfilCtrl',
         controllerAs: 'perfilCtrl',
+        resolve: {
+          cuentas: ['cuentaService', function (cuentaService) {
+            return cuentaService.getCuentas().then(function (listaCuentas){
+              return listaCuentas;
+            })
+          }]
+        }
       })
 
     /***********************************************************************************************
