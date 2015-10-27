@@ -171,13 +171,12 @@ angular.module('sapoApp')
       this.handleAuthEvents = function() {
 
         $rootScope.$on(AUTH_EVENTS.notAuthorized, function() {
-          toastr.error('Sin autorización.');
+          toastr.error('No estas autorizado para ver esta almacén.');
           $state.go('dashboard.home');
         }.bind(this));
 
         $rootScope.$on(AUTH_EVENTS.notAuthenticated, function() {
-          toastr.error('Sin autenticación.');
-          console.log('ATRAPADO NOT AUTHENTICATED');
+          toastr.error('Autenticación requerida, por favor inicie sesión.');
           this.removeLoggedInUser();
           $state.go('login');
         }.bind(this));
