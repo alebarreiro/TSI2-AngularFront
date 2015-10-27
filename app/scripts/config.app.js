@@ -33,16 +33,11 @@ angular.module('sapoApp')
 
         if (nextState.name !== 'login') {
           // Si el proximo estado no es el login, vemos si necesita autenticación y/o autorización
-          if (!authService.isAuthorizedInState(nextState)) {
-            console.log('NO TIENE PERMITIDO SEGUIR');
+          if (!authService.isAuthenticatedInState(nextState)) {
             // No vamos al proximo estado
             event.preventDefault();
             //Los eventos se atrapan en authService
-            if (authService.isLoggedIn()) {
-              $rootScope.$emit(AUTH_EVENTS.notAuthorized, nextState);
-            } else {
-              $rootScope.$emit(AUTH_EVENTS.notAuthenticated);
-            }
+            $rootScope.$emit(AUTH_EVENTS.notAuthenticated);
           }
         }
       });

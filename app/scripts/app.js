@@ -113,6 +113,7 @@ angular
         url:'/agregarColaborador',
         controller: 'AgregarColaboradorCtrl',
         controllerAs: 'agregarColaboradorCtrl',
+        authenticated: true,
         resolve: {
           almacenes: ['AlmacenHandler', function(AlmacenHandler) {
             var almacenHandler = new AlmacenHandler();
@@ -130,6 +131,7 @@ angular
         templateUrl:'../views/dashboard/pages/almacen/form-crear-almacen-main.html',
         controller: 'CrearAlmacenesCtrl',
         controllerAs: 'crearAlmacenesCtrl',
+        authenticated: true,
         url:'/crearAlmacen'
       })
       .state('dashboard.crearAlmacen.datos',{
@@ -140,6 +142,7 @@ angular
         templateUrl:'../views/dashboard/pages/almacen/form-crear-almacen-templates.html',
         controller: 'ListarTemplatesCtrl',
         controllerAs: 'listarTemplatesCtrl',
+        authenticated: true,
         url:'/templates',
         resolve: {
           templates: ['templateService', function(templateService) {
@@ -154,6 +157,7 @@ angular
         url:'/editarTemplate/:templateId',
         controller: 'EditarTemplateCtrl',
         controllerAs: 'editarTemplateCtrl',
+        authenticated: true,
         resolve: {
           templateId: ['$stateParams', function($stateParams) {
             return $stateParams.templateId;
@@ -170,6 +174,7 @@ angular
         url:'/productos',
         controller: 'ListarProductosCtrl',
         controllerAs: 'listarProductosCtrl',
+        authenticated: true,
       })
 
 
@@ -183,6 +188,7 @@ angular
         url: '/almacenes',
         controller: 'ListarAlmacenesCtrl',
         controllerAs: 'listarAlmacenesCtrl',
+        authenticated: true,
         resolve: {
           almacenes: ['almacenService', function(almacenService) {
             return almacenService.getMisAlmacenes().then(function(listaAlmacenes) {
@@ -195,6 +201,7 @@ angular
         templateUrl:'views/chart.html',
         url:'/chart',
         controller:'ChartCtrl',
+        authenticated: true,
         resolve: {
           loadMyFile:function($ocLazyLoad) {
             return $ocLazyLoad.load({
@@ -221,9 +228,14 @@ angular
         authorization: true,
         authenticated: true,
         resolve: {
-          almacen: ['almacenService', '$stateParams', function(almacenService, $stateParams) {
+          almacen: ['almacenService', '$stateParams', '$rootScope', 'AUTH_EVENTS', 'authService',
+            function(almacenService, $stateParams, $rootScope, AUTH_EVENTS, authService) {
             return almacenService.getAlmacen($stateParams.url).then(function(almacen){
-              return almacen;
+              if (authService.isAuthorizedInState(almacen)) {
+                return almacen;
+              } else {
+                $rootScope.$emit(AUTH_EVENTS.notAuthenticated);
+              }
             });
           }],
         }

@@ -3,8 +3,8 @@
  */
 angular.module('sapoApp')
   .service('authService',
-  ['$q', 'Usuario', '$location', 'toastr', 'REST_API', '$cookieStore', 'CURRENT_LOGGED_IN_USER', 'AUTH_EVENTS', '$rootScope', '$state',
-    function ($q, Usuario, $location, toastr, REST_API, $cookieStore, CURRENT_LOGGED_IN_USER, AUTH_EVENTS, $rootScope, $state) {
+  ['$q', 'Usuario', '$location', 'toastr', 'REST_API', '$cookieStore', 'CURRENT_LOGGED_IN_USER', 'AUTH_EVENTS', '$rootScope', '$state', 'lodash',
+    function ($q, Usuario, $location, toastr, REST_API, $cookieStore, CURRENT_LOGGED_IN_USER, AUTH_EVENTS, $rootScope, $state, lodash) {
 
       this.init = function () {
         this.handleAuthEvents();
@@ -130,25 +130,42 @@ angular.module('sapoApp')
       };
 
       /**
+       * Retorna true si el usuario esta autorizado para ver el almacen
+       * @param almacen
+       * @returns {boolean}
+       */
+      this.isAuthorizedInState = function (almacen) {
+
+        console.log('AUTENTICANDO AL USUARIO DEL ALMACEN...');
+        console.log(almacen);
+        var loggedUser = this.getLoggedUser().id;
+        if (almacen.usuario !== loggedUser) {
+          if (almacen.privada) {
+            //vemos si es colaborador
+            var index = lodash.findIndex(almacen.colaboradores, function(colab){
+              return colab.id === loggedUser;
+            });
+            return index !== -1;
+          } else {
+            return true;
+          }
+        } else {
+          return true;
+        }
+      };
+
+      /**
        * Retorna true si el usuario esta autorizado a ir al siguiente estado.
        * @param nextState - Proximo estado del router
        * @returns {boolean}
        */
-      this.isAuthorizedInState = function(nextState) {
-        var res = false;
-        console.log(nextState);
-        if (nextState && nextState.authenticated) {
-          if (!this.isLoggedIn()) {
-            console.log('NO ESTA LOGGED IN');
-            res = false;
-          } else if (this.isLoggedIn() && nextState.authorization) {
-            console.log('PROXIMO ESTADO CON AUTORIZACION');
-            res = false;
-          } else {
-            res = true;
-          }
+      this.isAuthenticatedInState = function(nextState) {
+
+        if (nextState && nextState.authenticated && !this.isLoggedIn()) {
+          return false;
+        } else {
+          return true;
         }
-        return res;
       };
 
       this.handleAuthEvents = function() {
