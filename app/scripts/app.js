@@ -217,7 +217,14 @@ angular
             })
           }
         }
-    })
+      })
+      .state('dashboard.perfil', {
+        templateUrl: '../views/dashboard/pages/usuario/perfil.html',
+        url: '/perfil',
+        controller: 'PerfilCtrl',
+        controllerAs: 'perfilCtrl',
+        authenticated: true,
+      })
 
 
       .state('almacen/:url', {

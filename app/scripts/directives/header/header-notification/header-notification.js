@@ -12,8 +12,8 @@ angular.module('sapoApp')
         templateUrl:'scripts/directives/header/header-notification/header-notification.html',
         restrict: 'E',
         replace: true,
-				controller: 'HeaderController',
-				controllerAs: 'headerController'
+				controller: 'HeaderCtrl',
+				controllerAs: 'headerCtrl'
     	}
 	});
 
