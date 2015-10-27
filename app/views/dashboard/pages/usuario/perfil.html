@@ -4,7 +4,9 @@
             <h1 class="page-header"> Mi perfil </h1>
         </div>
         <form>
-
+            <div class="form-group">
+                <img class="profile-picture" ng-src="{{usuario.picture || 'http://placehold.it/100x100'}}">
+            </div>
             <div class="form-group">
                 <label>Nombre</label>
                 <input class="form-control" ng-disabled="true" ng-model="usuario.nombre">
