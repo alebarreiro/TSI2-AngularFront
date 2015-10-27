@@ -92,7 +92,16 @@ angular.module('sapoApp')
       return deferred.promise;
     };
 
+    this.actualizarAlmacen = function (almacenId, data) {
 
+      var deferred = $q.defer();
+      Almacen.actualizarAlmacen({id: almacenId}, data, function (result) {
+        deferred.resolve(result);
+      }, function (error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
 
     this.validarAlmacen = function(almacen) {
 
