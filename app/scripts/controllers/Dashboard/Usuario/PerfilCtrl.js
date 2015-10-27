@@ -2,8 +2,12 @@
  * Created by alejandrobarreiro on 26/10/15.
  */
 angular.module('sapoApp')
-  .controller('PerfilCtrl', [ 'authService', function( authService) {
-    this.init = function() {};
+  .controller('PerfilCtrl', [ 'authService', '$scope', function(authService, $scope) {
+    this.init = function() {
+      var user = authService.getLoggedUser();
+
+      $scope.usuario = user;
+    };
 
     this.init();
   }]);
