@@ -18,13 +18,21 @@
                                 <th>Nombre</th>
                                 <th>Descripción</th>
                                 <th>URL</th>
+                                <th>Plan</th>
+                                <th>Accion</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="almacen in listarAlmacenesCtrl.almacenes">
+                            <tr ng-repeat="almacen in almacenes">
                                 <td> {{ almacen.nombre }}</td>
                                 <td> {{ almacen.descripcion }} </td>
                                 <td> {{ almacen.id }}</td>
+                                <td ng-if="almacen.privado == true"> Privado </td>
+                                <td ng-if="almacen.privado == false"> Público </td>
+                                <td >
+                                    <a ng-if="almacen.privado == false" class="btn btn-sm btn-primary" ng-click="hacerPrivadaAlmacen(almacen.id)"> Hacer privada! </a>
+                                    <a ng-if="almacen.privado == true" class="btn btn-sm btn-warning" ng-click="hacerPublicaAlmacen(almacen.id)"> Hacer pública </a>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
