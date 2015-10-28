@@ -221,7 +221,7 @@ angular.module('sapoApp')
                 if (authService.isAuthorizedInState(almacen)) {
                   return almacen;
                 } else {
-                  $rootScope.$emit(AUTH_EVENTS.notAuthenticated);
+                  $rootScope.$emit(AUTH_EVENTS.notAuthorized);
                 }
               });
             }],

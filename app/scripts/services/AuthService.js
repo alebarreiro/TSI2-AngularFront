@@ -143,11 +143,9 @@ angular.module('sapoApp')
        */
       this.isAuthorizedInState = function (almacen) {
 
-        console.log('AUTENTICANDO AL USUARIO DEL ALMACEN...');
-        console.log(almacen);
         var loggedUser = this.getLoggedUser().id;
         if (almacen.usuario !== loggedUser) {
-          if (almacen.privada) {
+          if (almacen.privado) {
             //vemos si es colaborador
             var index = lodash.findIndex(almacen.colaboradores, function(colab){
               return colab.id === loggedUser;
