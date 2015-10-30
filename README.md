@@ -17,7 +17,7 @@ $ sudo apt-get install npm
 $ sudo npm install -g grunt-cli
 $ sudo npm install -g bower
 ```
-####. Ejecutar siguientes comandos
+####3. Ejecutar siguientes comandos
 
 ```sh
 $ cd `project-directory`
@@ -30,7 +30,7 @@ $ rvm use 2.1.1
 $ bower install`
 ```
 
-####3. Build & Development
+####4. Build & Development
 
 - a shortcut for `grunt serve`
 ```sh
