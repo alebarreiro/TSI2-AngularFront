@@ -17,7 +17,7 @@ $ sudo apt-get install npm
 $ sudo npm install -g grunt-cli
 $ sudo npm install -g bower
 ```
-####3. Ejecutar siguientes comandos
+####. Ejecutar siguientes comandos
 
 ```sh
 $ cd `project-directory`
