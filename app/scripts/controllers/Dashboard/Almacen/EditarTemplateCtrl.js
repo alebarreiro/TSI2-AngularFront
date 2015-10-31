@@ -56,6 +56,18 @@ angular.module('sapoApp')
         }
       };
 
+      //Crea una categoria específica.
+      this.crearCategoria = function (nombreCategoria) {
+        var index = $scope.$parent.almacen.categorias.indexOf(nombreCategoria);
+        if (index > -1) {
+          toastr.info('Ya agregaste dicha categoría');
+        } else {
+          $scope.$parent.almacen.categorias.push(nombreCategoria);
+          this.updateTablaCategoriasSeleccionadas(nombreCategoria, true);
+        }
+      };
+      //Primera prueba de chino
+
       this.eliminarCategoria = function (idCategoria) {
         var index = $scope.$parent.almacen.categorias.indexOf(idCategoria);
         if (index > -1) {
