@@ -67,6 +67,7 @@ angular.module('sapoApp')
                 console.log(a);
                 toastr.success('Categorias del almacen confirmadas');
                 that.allCategorias.push(a);
+                $scope.$parent.almacen.categorias.push(a.id);
                 console.log(that.allCategorias);
                 that.updateTablaCategoriasSeleccionadas(a.id, true);
             })
