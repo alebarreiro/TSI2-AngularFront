@@ -13,6 +13,6 @@ angular.module('sapoApp')
       agregarCategorias   : { method: 'post', params: { resource: 'almacenes', op: 'agregarcategorias' },   isArray: true },
       agregarProductos    : { method: 'post', params: { resource: 'almacenes', op: 'agregarproductos'  },   isArray: true },
       agregarColaborador  : { method: 'post', params: { resource: 'almacenes', op: 'colaboradores'     },   isArray: false },
-      actualizarAlmacen   : { method: 'put',  params: { resource: 'almacenes' },                            isArray: false },
+      actualizarAlmacen   : { method: 'put',  params: { resource: 'almacenes' },                            isArray: false }
     })
   }]);

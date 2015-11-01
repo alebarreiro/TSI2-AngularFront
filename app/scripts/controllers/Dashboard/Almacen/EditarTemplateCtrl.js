@@ -3,8 +3,8 @@
  */
 angular.module('sapoApp')
   .controller('EditarTemplateCtrl', ['templateId', '$scope', 'TemplateHandler', 'toastr', '$location', 'categorias',
-    'almacenService', 'CategoriaHandler',
-    function (templateId, $scope, TemplateHandler, toastr, $location, categorias, almacenService, CategoriaHandler) {
+    'almacenService', 'CategoriaHandler', 'categoriaService',
+    function (templateId, $scope, TemplateHandler, toastr, $location, categorias, almacenService, CategoriaHandler, categoriaService) {
 
 
       this.init = function () {
@@ -56,17 +56,22 @@ angular.module('sapoApp')
         }
       };
 
+
       //Crea una categoria específica.
-      this.crearCategoria = function (nombreCategoria) {
-        var index = $scope.$parent.almacen.categorias.indexOf(nombreCategoria);
-        if (index > -1) {
-          toastr.info('Ya agregaste dicha categoría');
-        } else {
-          $scope.$parent.almacen.categorias.push(nombreCategoria);
-          this.updateTablaCategoriasSeleccionadas(nombreCategoria, true);
-        }
+      this.crearCategoria = function (nombreCategoria, descCategoria) {
+        toastr.success('Nombre categoria: ' + nombreCategoria + ', descripción: ' + descCategoria);
+        var that = this;
+        //Invoca al service para hacer el POST de la categoria.
+        this.categoria = almacenService.crearCategoriaAlmacen(nombreCategoria, descCategoria)
+            .then(function(a) {
+                console.log(a);
+                toastr.success('Categorias del almacen confirmadas');
+                that.updateTablaCategoriasSeleccionadas(a.id, true);
+            })
+            .catch(function () {
+                toastr.error('Hubo un error al dar de alta las categorias.')
+        });
       };
-      //Primera prueba de chino
 
       this.eliminarCategoria = function (idCategoria) {
         var index = $scope.$parent.almacen.categorias.indexOf(idCategoria);

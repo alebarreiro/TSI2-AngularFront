@@ -2,7 +2,7 @@
  * Created by alejandrobarreiro on 8/10/15.
  */
 angular.module('sapoApp')
-  .service('almacenService', ['$q', 'Almacen', 'Usuario', 'authService', function ($q, Almacen, Usuario, authService) {
+  .service('almacenService', ['$q', 'Almacen', 'Usuario', 'authService', 'Categoria', function ($q, Almacen, Usuario, authService, Categoria) {
 
     this.init = function () {};
 
@@ -69,6 +69,23 @@ angular.module('sapoApp')
       return deferred.promise;
     };
 
+    //Crea la categoria especifica
+    this.crearCategoriaAlmacen = function (nombreCategoria, descCategoria) {
+
+        var deferred = $q.defer();
+        Categoria.createCategoria({}, {
+            nombre: nombreCategoria,
+            descripcion: descCategoria,
+            isgenerico: false
+        }, function (categoria) {
+            deferred.resolve(categoria.id);
+        }, function (error) {
+            deferred.reject(error);
+        });
+        return deferred.promise;
+    };
+
+
     this.cargarProductosAlmacen = function (almacenId, productos) {
 
       var deferred = $q.defer();
@@ -107,5 +124,4 @@ angular.module('sapoApp')
 
       return almacen.nombre && almacen.nombre.length && almacen.id && almacen.id.length;
     }
-
   }]);
