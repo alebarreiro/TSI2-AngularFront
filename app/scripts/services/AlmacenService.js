@@ -78,7 +78,7 @@ angular.module('sapoApp')
             descripcion: descCategoria,
             isgenerico: false
         }, function (categoria) {
-            deferred.resolve(categoria.id);
+            deferred.resolve(categoria);
         }, function (error) {
             deferred.reject(error);
         });

@@ -9,7 +9,6 @@ angular.module('sapoApp')
 
 
       this.templateHandler.setTemplates(templates);
-      console.log("HOLAAAA ");
       this.templates = templates;
       console.log(templates);
 
