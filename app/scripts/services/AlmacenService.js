@@ -123,5 +123,17 @@ angular.module('sapoApp')
     this.validarAlmacen = function(almacen) {
 
       return almacen.nombre && almacen.nombre.length && almacen.id && almacen.id.length;
+    };
+
+    this.actualizarStockAlmacen = function (almacenId, productoId, stock) {
+        var deferred = $q.defer();
+        Almacen.actualizarStockAlmacen({id: almacenId, prodid: productoId, cant: stock},
+            {},
+            function (result) {
+                deferred.resolve(result);
+            }, function (error) {
+                deferred.reject(error);
+        });
+        return deferred.promise;
     }
   }]);
