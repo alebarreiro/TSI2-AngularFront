@@ -99,10 +99,10 @@
                             </td>
                             <td>
                                 {{ producto.cantidad }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a class="btn btn-sm btn-success" ng-click="agregarStockProducto(producto.id)">
+                                <a class="btn btn-sm btn-success" ng-click="aumentarStockProducto(producto.productoID)">
                                     +
                                 </a>
-                                <a class="btn btn-sm btn-danger" ng-click="sacarStockProducto(producto.catProd, producto.id)">
+                                <a class="btn btn-sm btn-danger" ng-click="reducirStockProducto(producto.productoID)">
                                     -
                                 </a>
                             </td>
