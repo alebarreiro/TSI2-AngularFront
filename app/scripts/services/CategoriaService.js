@@ -2,7 +2,7 @@
  * Created by alejandrobarreiro on 11/10/15.
  */
 angular.module('sapoApp')
-  .service('categoriaService', ['$q', 'Categoria', function ($q, Categoria) {
+  .service('categoriaService', ['$q', 'Categoria', 'Producto', function ($q, Categoria, Producto) {
 
     this.init = function () {
     };
@@ -32,6 +32,22 @@ angular.module('sapoApp')
       Categoria.getProductosCategoria({id: id}, {}, function (productos) {
 
         deferred.resolve(productos);
+      }, function (error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
+
+
+    this.createProducto = function(nombreProducto, descProducto, idCategoria) {
+      var deferred = $q.defer();
+      Producto.createProducto({}, {
+        nombre: nombreProducto,
+        descripcion: descProducto,
+        categoria: idCategoria,
+        isgenerico: false
+      }, function (producto) {
+        deferred.resolve(producto);
       }, function (error) {
         deferred.reject(error);
       });

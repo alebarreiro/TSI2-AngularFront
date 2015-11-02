@@ -45,6 +45,27 @@
 
         </div>
 
+        <div class="panel panel-info">
+            <div class="panel-heading"> Nuevo producto </div>
+            <div class="panel-body">
+                <p class="help-block">Crea un nuevo producto para tu almacén.</p>
+                <tbody>
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input class="form-control" ng-model="producto.nombre">
+                </div>
+                <div class="form-group">
+                    <label>Descripción</label>
+                        <textarea class="form-control" rows="3" ng-model="producto.descripcion">
+                        </textarea>
+                </div>
+                <td>
+                    <a class="btn btn-sm btn-success" ng-click="listarProductosCtrl.crearProducto(producto.nombre, producto.descripcion)">Agregar</a>
+                </td>
+                </tbody>
+            </div>
+        </div>
+
         <button style="margin: 10px" type="button" ng-click="confirmarProductos()" class="btn btn-outline btn-primary btn-lg btn-block">
             Confirmar productos
         </button>

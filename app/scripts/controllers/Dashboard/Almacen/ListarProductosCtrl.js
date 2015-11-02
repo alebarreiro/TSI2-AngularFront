@@ -3,8 +3,8 @@
  */
 angular.module('sapoApp')
   .controller('ListarProductosCtrl',
-  ['$scope', 'CategoriaHandler', 'categoriaService', 'lodash', 'almacenService',
-    function ($scope, CategoriaHandler, categoriaService, lodash, almacenService) {
+  ['$scope', 'CategoriaHandler', 'categoriaService', 'lodash', 'almacenService', 'toastr',
+    function ($scope, CategoriaHandler, categoriaService, lodash, almacenService, toastr) {
 
       var arrayProductos = [],
         idCatsElegidas;
@@ -24,7 +24,26 @@ angular.module('sapoApp')
         });
       };
 
+        //Crea un producto específico.
+        this.crearProducto = function (nombreProducto, descProducto) {
+            toastr.success($scope.idCategoria + 'Nombre producto: ' + nombreProducto + ', descripción: ' + descProducto + ' categoria: ');
+            var that = this;
+
+            //Invoca al service para hacer el POST de la categoria.
+            this.categoria = categoriaService.createProducto(nombreProducto, descProducto, $scope.idCategoria)
+            .then(function(a) {
+                console.log(a);
+                toastr.success('Producto creado.');
+                $scope.productos.push(a);
+
+            })
+            .catch(function () {
+                toastr.error('Hubo un error al dar de alta las categorias.')
+            });
+        };
+
       $scope.listarProductos = function (id) {
+          $scope.idCategoria = id;
 
         if (arrayProductos[id]) {
           $scope.productos = arrayProductos[id];

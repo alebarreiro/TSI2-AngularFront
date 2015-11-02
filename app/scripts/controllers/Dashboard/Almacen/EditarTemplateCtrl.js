@@ -59,7 +59,6 @@ angular.module('sapoApp')
 
       //Crea una categoria específica.
       this.crearCategoria = function (nombreCategoria, descCategoria) {
-        toastr.success('Nombre categoria: ' + nombreCategoria + ', descripción: ' + descCategoria);
         var that = this;
         //Invoca al service para hacer el POST de la categoria.
         this.categoria = almacenService.crearCategoriaAlmacen(nombreCategoria, descCategoria)
