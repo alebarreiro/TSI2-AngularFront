@@ -26,14 +26,13 @@ angular.module('sapoApp')
 
         //Crea un producto específico.
         this.crearProducto = function (nombreProducto, descProducto) {
-            toastr.success($scope.idCategoria + 'Nombre producto: ' + nombreProducto + ', descripción: ' + descProducto + ' categoria: ');
             var that = this;
-
             //Invoca al service para hacer el POST de la categoria.
             this.categoria = categoriaService.createProducto(nombreProducto, descProducto, $scope.idCategoria)
             .then(function(a) {
                 console.log(a);
-                toastr.success('Producto creado.');
+                toastr.success('Producto ' + nombreProducto + ' creado.');
+                a.stock = 0;
                 $scope.productos.push(a);
 
             })
@@ -64,7 +63,6 @@ angular.module('sapoApp')
       };
 
       $scope.agregarStockProducto = function (catProd, idProducto) {
-
        var index = lodash.findIndex(arrayProductos[catProd], function(prod) {
           return prod.id == idProducto;
         });

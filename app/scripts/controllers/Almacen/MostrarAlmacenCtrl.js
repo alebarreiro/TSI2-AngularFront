@@ -9,6 +9,7 @@ angular.module('sapoApp')
         $scope.productos = almacen.stockproductos;
         $scope.categorias = almacen.categorias;
         $scope.colaboradores = almacen.colaboradores;
+
     };
 
     this.init();
