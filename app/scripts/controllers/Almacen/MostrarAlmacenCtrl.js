@@ -102,6 +102,18 @@ angular.module('sapoApp')
             .catch(function () {
                 toastr.error('Hubo un error al contactar a Mercado Libre.')
             });
+    };
+
+    this.seleccionarCategoria = function(idCategoria) {
+        webscrapService.searchCategoriasML(idCategoria)
+            .then(function(a) {
+                toastr.success('Mercado Libre está activo');
+                console.log(a);
+            })
+            .catch(function () {
+                toastr.error('Hubo un error al contactar a Mercado Libre.')
+            });
+
     }
 
 

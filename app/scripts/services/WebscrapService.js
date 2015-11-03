@@ -18,4 +18,19 @@ angular.module('sapoApp')
             return deferred.promise;
         };
 
+        this.searchCategoriasML = function(idCategoria) {
+            var deferred = $q.defer();
+            console.log('Buscando en la categoria ' + idCategoria + ' de mercadolibre');
+            Webscrap.searchCategoria({}, {
+                category: idCategoria,
+                limit: 10,
+                offset: 1
+            }, function (result) {
+                deferred.resolve(result);
+            }, function (error) {
+                deferred.reject(error);
+            });
+            return deferred.promise;
+        };
+
     }]);
