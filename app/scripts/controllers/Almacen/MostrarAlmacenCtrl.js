@@ -10,6 +10,7 @@ angular.module('sapoApp')
         $scope.categorias = almacen.categorias;
         $scope.colaboradores = almacen.colaboradores;
         $scope.mercadolibre = [];
+        $scope.catMercadoLibre = [];
     };
 
     this.init();
@@ -105,10 +106,14 @@ angular.module('sapoApp')
     };
 
     this.seleccionarCategoria = function(idCategoria) {
+        var catML = $scope.catMercadoLibre;
         webscrapService.searchCategoriasML(idCategoria)
             .then(function(a) {
                 toastr.success('Mercado Libre está activo');
                 console.log(a);
+                a.results.forEach(function (c) {
+                    catML.push(c);
+                })
             })
             .catch(function () {
                 toastr.error('Hubo un error al contactar a Mercado Libre.')
