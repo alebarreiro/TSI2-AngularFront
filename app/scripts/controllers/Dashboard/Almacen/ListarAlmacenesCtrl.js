@@ -39,5 +39,9 @@ angular.module('sapoApp')
         });
     };
 
+      $scope.entrarAlmacen = function(idAlmacen) {
+        //IMPLEMENTAR LA LÓGICA
+      };
+
     this.init();
   }]);

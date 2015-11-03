@@ -111,5 +111,7 @@ angular.module('sapoApp')
           });
       };
 
+
+
       this.init();
     }]);
