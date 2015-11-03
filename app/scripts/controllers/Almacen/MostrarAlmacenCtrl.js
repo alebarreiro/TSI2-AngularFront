@@ -1,6 +1,6 @@
 angular.module('sapoApp')
-  .controller('MostrarAlmacenCtrl', ['almacen', '$scope', 'almacenService', 'toastr', 'lodash', 'ProductoHandler', 'CategoriaHandler',
-    function (almacen, $scope, almacenService, toastr, lodash, ProductoHandler, CategoriaHandler) {
+  .controller('MostrarAlmacenCtrl', ['almacen', '$scope', 'almacenService', 'toastr', 'lodash', 'ProductoHandler', 'CategoriaHandler', 'categoriaService',
+    function (almacen, $scope, almacenService, toastr, lodash, ProductoHandler, CategoriaHandler, categoriaService) {
 
     this.init = function () {
         console.log(almacen);
@@ -43,5 +43,23 @@ angular.module('sapoApp')
                 toastr.error('Hubo un error al modificar el stock.')
             });
     }
+
+    //Crea un producto específico.
+    this.crearProducto = function (nombreProducto, descProducto, idCategoria) {
+        console.log("nombreProducto: " + nombreProducto + " descProducto " + descProducto);
+        var that = this;
+        //Invoca al service para hacer el POST de la categoria.
+        this.categoria = categoriaService.createProducto(nombreProducto, descProducto, idCategoria)
+            .then(function(a) {
+                console.log(a);
+                toastr.success('Producto ' + nombreProducto + ' creado.');
+                a.cantidad = 0;
+                $scope.productos.push(a);
+
+            })
+            .catch(function () {
+                toastr.error('Hubo un error al dar de alta el producto.')
+            });
+    };
 
   }]);
