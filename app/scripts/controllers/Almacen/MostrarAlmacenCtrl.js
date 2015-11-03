@@ -56,12 +56,26 @@ angular.module('sapoApp')
                 toastr.success('Producto ' + nombreProducto + ' creado.');
                 a.cantidad = 0;
                 $scope.productos.push(a);
-
+                var param = [{"productoID": a.id, "cantidad": a.cantidad}];
+                that.cargarProducto(param);
             })
             .catch(function () {
                 toastr.error('Hubo un error al dar de alta el producto.')
             });
     };
+
+    this.cargarProducto = function(productos) {
+        console.log(productos);
+        almacenService.cargarProductosAlmacen($scope.almacenId, productos)
+            .then(function(a) {
+                console.log(a);
+                toastr.success('Producto cargado correctamente');
+            })
+            .catch(function () {
+                toastr.error('Hubo un error al cargar el producto.');
+            });
+    }
+
 
     //Crea una categoria específica.
     this.crearCategoria = function (nombreCategoria, descCategoria) {
@@ -76,10 +90,11 @@ angular.module('sapoApp')
                 that.cargarCategoria(id, [a.id]);
             })
             .catch(function () {
-                toastr.error('Hubo un error al dar de alta las categorias.')
+                toastr.error('Hubo un error al dar de alta las categorias.');
             });
     };
 
+    //Carga la categoria en el almacén.
     this.cargarCategoria = function(idAlmacen, categoria) {
         almacenService.cargarCategoriasAlmacen(idAlmacen, categoria)
             .then(function(a) {
@@ -87,7 +102,7 @@ angular.module('sapoApp')
                 toastr.success('Categorias del almacen confirmadas');
             })
             .catch(function () {
-                toastr.error('Hubo un error al dar de alta las categorias.')
+                toastr.error('Hubo un error al dar de alta las categorias.');
             });
     }
 
@@ -101,7 +116,7 @@ angular.module('sapoApp')
                 });
             })
             .catch(function () {
-                toastr.error('Hubo un error al contactar a Mercado Libre.')
+                toastr.error('Hubo un error al contactar a Mercado Libre.');
             });
     };
 
@@ -116,9 +131,8 @@ angular.module('sapoApp')
                 })
             })
             .catch(function () {
-                toastr.error('Hubo un error al contactar a Mercado Libre.')
+                toastr.error('Hubo un error al contactar a Mercado Libre.');
             });
-
     }
 
         this.importarProducto = function(idProducto) {
@@ -128,9 +142,8 @@ angular.module('sapoApp')
                     console.log(a);
                 })
                 .catch(function () {
-                    toastr.error('Hubo un error al contactar a Mercado Libre.')
+                    toastr.error('Hubo un error al contactar a Mercado Libre.');
                 });
-
         }
 
 
