@@ -30,9 +30,9 @@
                                 <td ng-if="almacen.privado == true"> Privado </td>
                                 <td ng-if="almacen.privado == false"> Público </td>
                                 <td >
-                                    <a ng-if="almacen.privado == false" class="btn btn-sm btn-primary" ng-click="hacerPrivadaAlmacen(almacen.id)"> Hacer privada </a>
-                                    <a ng-if="almacen.privado == true" class="btn btn-sm btn-warning" ng-click="hacerPublicaAlmacen(almacen.id)"> Hacer pública </a>
-                                    <a class="btn btn-sm btn-success" ng-click="entrarAlmacen(almacen.id)"> Entrar </a>
+                                    <a ng-if="almacen.privado == false" class="btn btn-sm btn-primary" ng-click="hacerPrivadaAlmacen(almacen)"> Hacer privada </a>
+                                    <a ng-if="almacen.privado == true" class="btn btn-sm btn-warning" ng-click="hacerPublicaAlmacen(almacen)"> Hacer pública </a>
+                                    <a class="btn btn-sm btn-success" ui-sref="almacen({ url: almacen.id})"> Entrar </a>
                                 </td>
 
                             </tr>

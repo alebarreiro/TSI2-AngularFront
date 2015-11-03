@@ -9,13 +9,16 @@ angular.module('sapoApp')
       $scope.almacenes = almacenes;
     };
 
-    $scope.hacerPrivadaAlmacen = function (almacenId) {
+    $scope.hacerPrivadaAlmacen = function (almacen) {
 
       var data = {
-        privado: true
+        nombre: almacen.nombre,
+        id: almacen.id,
+        descripcion: almacen.descripcion,
+        privado: true,
       };
 
-      almacenService.actualizarAlmacen(almacenId, data)
+      almacenService.actualizarAlmacen(almacen.id, data)
         .then(function(){
           toastr.success("Almacen actualizada con exito!");
         })
@@ -24,13 +27,16 @@ angular.module('sapoApp')
         });
     };
 
-    $scope.hacerPublicaAlmacen = function (almacenId) {
+    $scope.hacerPublicaAlmacen = function (almacen) {
 
       var data = {
+        nombre: almacen.nombre,
+        id: almacen.id,
+        descripcion: almacen.descripcion,
         privado: false
       };
 
-      almacenService.actualizarAlmacen(almacenId, data)
+      almacenService.actualizarAlmacen(almacen.id, data)
         .then(function(){
           toastr.success("Almacen actualizada con exito!");
         })
@@ -38,10 +44,6 @@ angular.module('sapoApp')
           toastr.warning("No es posible completar tu solicitud.");
         });
     };
-
-      $scope.entrarAlmacen = function(idAlmacen) {
-        //IMPLEMENTAR LA LÓGICA
-      };
 
     this.init();
   }]);

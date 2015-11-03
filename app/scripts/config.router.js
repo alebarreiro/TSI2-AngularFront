@@ -205,7 +205,7 @@ angular.module('sapoApp')
      *                                        ALMACENES                                            *
      ***********************************************************************************************/
 
-      .state('almacen/:url', {
+      .state('almacen', {
         templateUrl: '../views/almacen/home.html',
         url: '/almacen/:url',
         controller: 'MostrarAlmacenCtrl',
