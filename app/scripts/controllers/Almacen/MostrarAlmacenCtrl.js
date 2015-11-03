@@ -9,7 +9,7 @@ angular.module('sapoApp')
         $scope.productos = almacen.stockproductos;
         $scope.categorias = almacen.categorias;
         $scope.colaboradores = almacen.colaboradores;
-
+        $scope.mercadolibre = [];
     };
 
     this.init();
@@ -91,13 +91,16 @@ angular.module('sapoApp')
     }
 
     this.buscarCategorias = function() {
+        var ml = $scope.mercadolibre;
         webscrapService.getCategoriasML()
             .then(function(a) {
-                console.log(a);
-                toastr.success('Categorias del almacen confirmadas');
+                toastr.success('Mercado Libre está activo');
+                a.forEach(function (c) {
+                    ml.push(c);
+                });
             })
             .catch(function () {
-                toastr.error('Hubo un error al dar de alta las categorias.')
+                toastr.error('Hubo un error al contactar a Mercado Libre.')
             });
     }
 
