@@ -1,6 +1,6 @@
 angular.module('sapoApp')
-  .controller('MostrarAlmacenCtrl', ['almacen', '$scope', 'almacenService', 'toastr', 'lodash', 'ProductoHandler', 'CategoriaHandler', 'categoriaService',
-    function (almacen, $scope, almacenService, toastr, lodash, ProductoHandler, CategoriaHandler, categoriaService) {
+  .controller('MostrarAlmacenCtrl', ['almacen', '$scope', 'almacenService', 'toastr', 'lodash', 'ProductoHandler', 'CategoriaHandler', 'categoriaService', 'webscrapService',
+    function (almacen, $scope, almacenService, toastr, lodash, ProductoHandler, CategoriaHandler, categoriaService, webscrapService) {
 
     this.init = function () {
         console.log(almacen);
@@ -20,7 +20,7 @@ angular.module('sapoApp')
           return prod.productoID == idProducto;
       });
 
-    $scope.productos[index].cantidad++
+    $scope.productos[index].cantidad++;
     };
 
     $scope.reducirStockProducto = function (idProducto) {
@@ -81,6 +81,17 @@ angular.module('sapoApp')
 
     this.cargarCategoria = function(idAlmacen, categoria) {
         almacenService.cargarCategoriasAlmacen(idAlmacen, categoria)
+            .then(function(a) {
+                console.log(a);
+                toastr.success('Categorias del almacen confirmadas');
+            })
+            .catch(function () {
+                toastr.error('Hubo un error al dar de alta las categorias.')
+            });
+    }
+
+    this.buscarCategorias = function() {
+        webscrapService.getCategoriasML()
             .then(function(a) {
                 console.log(a);
                 toastr.success('Categorias del almacen confirmadas');
