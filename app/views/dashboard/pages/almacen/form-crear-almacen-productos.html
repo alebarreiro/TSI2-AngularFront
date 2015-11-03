@@ -30,10 +30,13 @@
                             <td> {{ producto.nombre }}</td>
                             <td>
                                 <a class="btn btn-sm btn-success" ng-click="agregarStockProducto(producto.categoria, producto.id)">
-                                    Agregar
+                                    <p class="fa fa-plus" />
                                 </a>
                                 <a class="btn btn-sm btn-danger" ng-click="sacarStockProducto(producto.categoria, producto.id)">
-                                    Eliminar
+                                    <p class="fa fa-minus" />
+                                </a>
+                                <a class="btn btn-sm btn-info" ng-click="actualizarStockProducto(producto.id, producto.stock, producto.nombre)">
+                                    <p class="fa fa-refresh" />
                                 </a>
                             </td>
                             <td> {{ producto.stock }}</td>

@@ -64,12 +64,11 @@ angular.module('sapoApp')
             });
     };
 
+    //Carga una lista de productos en el almacén.
     this.cargarProducto = function(productos) {
-        console.log(productos);
         almacenService.cargarProductosAlmacen($scope.almacenId, productos)
             .then(function(a) {
                 console.log(a);
-                toastr.success('Producto cargado correctamente');
             })
             .catch(function () {
                 toastr.error('Hubo un error al cargar el producto.');

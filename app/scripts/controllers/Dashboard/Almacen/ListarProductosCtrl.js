@@ -83,6 +83,19 @@ angular.module('sapoApp')
         $scope.productos = arrayProductos[catProd];
       };
 
+        $scope.actualizarStockProducto = function (idProducto, stock, nombre) {
+            console.log($scope.$parent.almacen);
+            almacenService.actualizarStockAlmacen($scope.$parent.almacen.id, idProducto, stock)
+                .then(function(a) {
+                    console.log(a);
+                    toastr.success('Stock de ' + nombre + ' actualizado');
+                })
+                .catch(function () {
+                    toastr.error('Hubo un error al modificar el stock.')
+                });
+        }
+
+
 
       $scope.confirmarProductos = function () {
 
@@ -90,12 +103,10 @@ angular.module('sapoApp')
         idCatsElegidas.forEach(function (c) {
           if (arrayProductos[c] && arrayProductos[c].length) {
             arrayProductos[c].forEach(function (p) {
-              if (p.stock > 0) {
                 productosResult.push({
                   productoID: p.id,
                   cantidad: p.stock
                 })
-              }
             })
           }
         });
