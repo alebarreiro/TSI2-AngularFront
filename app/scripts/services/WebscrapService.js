@@ -33,4 +33,16 @@ angular.module('sapoApp')
             return deferred.promise;
         };
 
+        this.addProductosML = function(idProducto) {
+            var deferred = $q.defer();
+            console.log('Agregando el producto ' + idProducto + ' de mercadolibre');
+            var prod = [{"id": idProducto, "generico": false, "categoria": 12 }];
+            Webscrap.addProductos({}, prod, function (result) {
+                deferred.resolve(result);
+            }, function (error) {
+                deferred.reject(error);
+            });
+            return deferred.promise;
+        };
+
     }]);

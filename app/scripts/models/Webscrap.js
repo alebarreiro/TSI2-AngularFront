@@ -13,6 +13,6 @@ angular.module('sapoApp')
             //Dada una categoría realiza una búsqueda de productos.
             searchCategoria         : { method: 'post', params: { resource: 'mercadolibre', module: 'search'},        isArray: false},
             //Agrega productos a la tienda, en este proceso se agrega a la base central de SAPO PostgreSQL y mongodb con los detalles del producto.
-            addProductos            : { method: 'post', params: { resource: 'mercadolibre', module: 'addproductos'},        isArray: true}
+            addProductos            : { method: 'post', params: { resource: 'mercadolibre', module: 'addproductos'},  isArray: true}
         })
     }]);

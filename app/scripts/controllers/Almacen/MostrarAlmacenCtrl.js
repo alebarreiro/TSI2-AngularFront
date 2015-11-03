@@ -121,6 +121,18 @@ angular.module('sapoApp')
 
     }
 
+        this.importarProducto = function(idProducto) {
+            webscrapService.addProductosML(idProducto)
+                .then(function(a) {
+                    toastr.success('Mercado Libre está activo');
+                    console.log(a);
+                })
+                .catch(function () {
+                    toastr.error('Hubo un error al contactar a Mercado Libre.')
+                });
+
+        }
+
 
 
 
