@@ -136,4 +136,32 @@ angular.module('sapoApp')
         });
         return deferred.promise;
     }
+
+    this.obtenerComentarios = function (idAlmacen) {
+        var deferred = $q.defer();
+        Almacen.getComentarios({id: idAlmacen},
+            {},
+            function (result) {
+                deferred.resolve(result);
+            }, function (error) {
+                deferred.reject(error);
+            });
+        return deferred.promise;
+    }
+
+    this.agregarComentario = function(idAlmacen, usuario, comentario) {
+        var deferred = $q.defer();
+        console.log(comentario.comentario);
+        Almacen.agregarComentario({id: idAlmacen},
+            {
+                usuario: usuario,
+                comentario: comentario.comentario
+            },
+            function (result) {
+                deferred.resolve(result);
+            }, function (error) {
+                deferred.reject(error);
+            });
+        return deferred.promise;
+    }
   }]);

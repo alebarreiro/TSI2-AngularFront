@@ -13,9 +13,22 @@ angular.module('sapoApp')
         $scope.catMercadoLibre = [];
         $scope.usuarioSeleccionado = "";
         $scope.searchterm = "";
+
+        //SE OBTIENE LOS COMENTARIOS.
+        //SE INICIALIZA ACÁ PORQUE NO SE COMO INVOCAR UNA FUNCIÓN DESDE THIS.INIT
+        almacenService.obtenerComentarios($scope.almacenId)
+            .then(function (result) {
+                console.log(result);
+                $scope.comentarios = result;
+            })
+            .catch(function () {
+                toastr.error('Hubo un error al dar de alta el colaborador.')
+            })
     };
 
     this.init();
+
+    // *** FUNCIONES DE PRODUCTOS *** //
 
     $scope.aumentarStockProducto = function (idProducto) {
 
@@ -77,6 +90,7 @@ angular.module('sapoApp')
             });
     }
 
+    // *** FUNCIONES DE CATEGORIAS *** //
 
     //Crea una categoria específica.
     this.crearCategoria = function (nombreCategoria, descCategoria) {
@@ -106,6 +120,8 @@ angular.module('sapoApp')
                 toastr.error('Hubo un error al dar de alta las categorias.');
             });
     }
+
+    // *** FUNCIONES DE WEBSCRAPPING DE MERCADO LIBRE *** //
 
     this.buscarCategorias = function() {
         var ml = $scope.mercadolibre;
@@ -147,6 +163,9 @@ angular.module('sapoApp')
             });
     }
 
+
+    // *** FUNCIONES DE COLABORADORES *** //
+
     this.agregarColaborador = function () {
         if (!usuarioSeleccionado)
             toastr.warning("Por favor, seleccione un usuario");
@@ -180,7 +199,31 @@ angular.module('sapoApp')
         usuarioSeleccionado = userId;
     };
 
+    // *** FUNCIONES DE COMENTARIOS *** //
 
+    $scope.obtenerComentarios = function() {
+        almacenService.obtenerComentarios($scope.almacenId)
+            .then(function (result) {
+                console.log(result);
+                toastr.success('Colaborador agregado!');
+            })
+            .catch(function () {
+                toastr.error('Hubo un error al dar de alta el colaborador.')
+            })
+    }
 
+    this.crearComentario = function(comentario) {
+        console.log($scope.almacen.usuario);
+        almacenService.agregarComentario($scope.almacenId, $scope.almacen.usuario, comentario)
+            .then(function (result) {
+                console.log(result);
+                $scope.comentarios.push(result);
+                toastr.success('¡Comentario agregado!');
+            })
+            .catch(function () {
+                toastr.error('Hubo un error al dar de alta el colaborador.')
+            })
+
+    }
 
   }]);

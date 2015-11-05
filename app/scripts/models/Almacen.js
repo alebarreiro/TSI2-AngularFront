@@ -14,6 +14,8 @@ angular.module('sapoApp')
       agregarProductos        : { method: 'post', params: { resource: 'almacenes', op: 'agregarproductos'  },   isArray: true  },
       agregarColaborador      : { method: 'post', params: { resource: 'almacenes', op: 'colaboradores'     },   isArray: false },
       actualizarAlmacen       : { method: 'put',  params: { resource: 'almacenes' },                            isArray: false },
-      actualizarStockAlmacen  : { method: 'put',  params: { resource: 'almacenes', op: 'stock'             },   isArray: false }
+      actualizarStockAlmacen  : { method: 'put',  params: { resource: 'almacenes', op: 'stock'             },   isArray: false },
+      getComentarios          : { method: 'get',  params: { resource: 'almacenes', op: 'comentarios'       },   isArray: true  },
+      agregarComentario       : { method: 'post', params: { resource: 'almacenes', op: 'comentarios'       },   isArray: false }
     })
   }]);
