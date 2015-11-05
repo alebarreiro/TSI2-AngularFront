@@ -1,6 +1,6 @@
 angular.module('sapoApp')
-  .controller('MostrarAlmacenCtrl', ['almacen', '$scope', 'almacenService', 'toastr', 'lodash', 'ProductoHandler', 'CategoriaHandler', 'categoriaService', 'webscrapService',
-    function (almacen, $scope, almacenService, toastr, lodash, ProductoHandler, CategoriaHandler, categoriaService, webscrapService) {
+  .controller('MostrarAlmacenCtrl', ['almacen', '$scope', 'almacenService', 'toastr', 'lodash', 'ProductoHandler', 'CategoriaHandler', 'categoriaService', 'webscrapService', 'usuarioService',
+    function (almacen, $scope, almacenService, toastr, lodash, ProductoHandler, CategoriaHandler, categoriaService, webscrapService, usuarioService) {
 
     this.init = function () {
         console.log(almacen);
@@ -11,6 +11,8 @@ angular.module('sapoApp')
         $scope.colaboradores = almacen.colaboradores;
         $scope.mercadolibre = [];
         $scope.catMercadoLibre = [];
+        $scope.usuarioSeleccionado = "";
+        $scope.searchterm = "";
     };
 
     this.init();
@@ -21,7 +23,7 @@ angular.module('sapoApp')
           return prod.productoID == idProducto;
       });
 
-    $scope.productos[index].cantidad++;
+        $scope.productos[index].cantidad++;
     };
 
     $scope.reducirStockProducto = function (idProducto) {
@@ -134,16 +136,49 @@ angular.module('sapoApp')
             });
     }
 
-        this.importarProducto = function(idProducto) {
-            webscrapService.addProductosML(idProducto)
-                .then(function(a) {
-                    toastr.success('Mercado Libre está activo');
-                    console.log(a);
+    this.importarProducto = function(idProducto) {
+        webscrapService.addProductosML(idProducto)
+            .then(function(a) {
+                toastr.success('Mercado Libre está activo');
+                console.log(a);
+            })
+            .catch(function () {
+                toastr.error('Hubo un error al contactar a Mercado Libre.');
+            });
+    }
+
+    this.agregarColaborador = function () {
+        if (!usuarioSeleccionado)
+            toastr.warning("Por favor, seleccione un usuario");
+        else {
+            almacenService.agregarColaborador($scope.almacenId, usuarioSeleccionado)
+                .then(function (result) {
+                    console.log(result);
+                    toastr.success('Colaborador agregado!');
                 })
                 .catch(function () {
-                    toastr.error('Hubo un error al contactar a Mercado Libre.');
-                });
+                    toastr.error('Hubo un error al dar de alta el colaborador.')
+                })
         }
+    };
+
+    $scope.$watch('searchterm', function() {
+        var searchTerm = $scope.searchterm;
+        if (searchTerm && searchTerm.length) {
+            usuarioService.buscarUsuario(searchTerm)
+                .then(function (searchResult) {
+                    $scope.usuarios = searchResult;
+                })
+                .catch(function () {
+                    toastr.error('Hubo un error al realizar la busqueda.')
+                })
+        }
+    });
+
+    $scope.seleccionarUsuario = function (userId) {
+        $scope.usuarioSeleccionado = "Usuario seleccionado: " + userId;
+        usuarioSeleccionado = userId;
+    };
 
 
 
