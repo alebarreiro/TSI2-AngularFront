@@ -151,7 +151,6 @@ angular.module('sapoApp')
 
     this.agregarComentario = function(idAlmacen, usuario, comentario) {
         var deferred = $q.defer();
-        console.log(comentario.comentario);
         Almacen.agregarComentario({id: idAlmacen},
             {
                 usuario: usuario,

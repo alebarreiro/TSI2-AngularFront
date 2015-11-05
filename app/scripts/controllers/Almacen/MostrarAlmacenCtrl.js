@@ -1,6 +1,6 @@
 angular.module('sapoApp')
-  .controller('MostrarAlmacenCtrl', ['almacen', '$scope', 'almacenService', 'toastr', 'lodash', 'ProductoHandler', 'CategoriaHandler', 'categoriaService', 'webscrapService', 'usuarioService',
-    function (almacen, $scope, almacenService, toastr, lodash, ProductoHandler, CategoriaHandler, categoriaService, webscrapService, usuarioService) {
+  .controller('MostrarAlmacenCtrl', ['almacen', '$scope', 'almacenService', 'toastr', 'lodash', 'ProductoHandler', 'CategoriaHandler', 'categoriaService', 'webscrapService', 'usuarioService', 'authService',
+    function (almacen, $scope, almacenService, toastr, lodash, ProductoHandler, CategoriaHandler, categoriaService, webscrapService, usuarioService, authService) {
 
     this.init = function () {
         console.log(almacen);
@@ -213,8 +213,7 @@ angular.module('sapoApp')
     }
 
     this.crearComentario = function(comentario) {
-        console.log($scope.almacen.usuario);
-        almacenService.agregarComentario($scope.almacenId, $scope.almacen.usuario, comentario)
+        almacenService.agregarComentario($scope.almacenId, authService.getLoggedUser().id, comentario)
             .then(function (result) {
                 console.log(result);
                 $scope.comentarios.push(result);
