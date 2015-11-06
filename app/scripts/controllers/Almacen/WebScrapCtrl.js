@@ -3,8 +3,8 @@
  */
 
 angular.module('sapoApp')
-    .controller('WebScrapCtrl', ['almacen', '$scope', 'almacenService', 'toastr', 'lodash',
-        function (almacen, $scope, almacenService, toastr, lodash) {
+    .controller('WebScrapCtrl', ['almacen', '$scope', 'webscrapService', 'toastr', 'lodash',
+        function (almacen, $scope, webscrapService, toastr, lodash) {
 
     this.init = function () {
         console.log(almacen);

@@ -238,15 +238,33 @@ angular.module('sapoApp')
         url: '/:url/webscrap',
         controller: 'WebScrapCtrl',
         controllerAs: 'webScrapCtrl',
-
+          resolve: {
+            almacen: ['almacenService', '$stateParams', '$rootScope', 'AUTH_EVENTS', 'authService',
+              function (almacenService, $stateParams, $rootScope, AUTH_EVENTS, authService) {
+                return almacenService.getAlmacen($stateParams.url)
+                  .then(function (almacen) {
+                    if (authService.isAuthorizedInState(almacen)) {
+                      return almacen;
+                    } else {
+                      $rootScope.$emit(AUTH_EVENTS.notAuthorized);
+                    }
+                });
+              }],
+          }
       })
 
       .state('almacen.carrito', {
-        templateUrl: '../views/almacen/carrito.html',
+        templateUrl: '../views/almacen/pages/carrito.html',
         url: '/:url/carrito',
         controller: 'CarritoCtrl',
-        controllerAs: 'carritoCtrl',
+        controllerAs: 'carritoCtrl'
+      })
 
+      .state('almacen.colaboradores', {
+        templateUrl: '../views/almacen/pages/colaboradores.html',
+        url: '/:url/colaboradores',
+        controller: 'ColaboradoresCtrl',
+        controllerAs: 'colaboradoresCtrl'
       })
 
 
