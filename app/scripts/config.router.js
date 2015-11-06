@@ -238,6 +238,7 @@ angular.module('sapoApp')
         url: '/:url/webscrap',
         controller: 'WebScrapCtrl',
         controllerAs: 'webScrapCtrl',
+<<<<<<< HEAD
         resolve: {
           almacen: ['almacenService', '$stateParams', '$rootScope', 'AUTH_EVENTS', 'authService',
             function (almacenService, $stateParams, $rootScope, AUTH_EVENTS, authService) {
@@ -250,6 +251,23 @@ angular.module('sapoApp')
                   }
               });
             }],
+=======
+          resolve: {
+            almacen: ['almacenService', '$stateParams', '$rootScope', 'AUTH_EVENTS', 'authService', 'AlmacenHandler',
+              function (almacenService, $stateParams, $rootScope, AUTH_EVENTS, authService, AlmacenHandler) {
+                var almacenHandler = new AlmacenHandler();
+                return almacenHandler.getAlmacen($stateParams.url)
+                  .then(function (almacen) {
+                    //Aca se podria hacer algo lindo como crear un nuevo metodo en el authService
+                    //Que permita editar este tipo de cosas solo al dueno del almacen
+                    if (authService.isAuthorizedInState(almacen)) {
+                      return almacen;
+                    } else {
+                      $rootScope.$emit(AUTH_EVENTS.notAuthorized);
+                    }
+                });
+              }],
+>>>>>>> cac5cef7334486e6b0b4dd21803e52f96359aebc
           }
       })
 
