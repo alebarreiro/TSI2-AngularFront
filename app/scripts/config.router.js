@@ -227,4 +227,17 @@ angular.module('sapoApp')
             }],
         }
       })
+
+      .state('almacen.webscrap', {
+        templateUrl: '../views/almacen/pages/webscrap.html',
+        url: '/almacen/:url/webscrap',
+        controller: 'WebScrapCtrl',
+        controllerAs: 'webScrapCtrl',
+        data: {
+          authorization: true,
+          authenticated: true,
+        }
+      })
+
+
   }]);

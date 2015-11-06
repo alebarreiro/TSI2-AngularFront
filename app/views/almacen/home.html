@@ -240,52 +240,7 @@
                 </div>
             </div>
 
-            <div class="panel-body">
-                <h2>Webscrapping</h2>
-
-                <div class="dataTable_wrapper">
-                    <table class="table table-striped table-bordered table-hover" id="dataTable-webscrapping">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Acciones</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="categoria in mercadolibre">
-                            <td> {{ categoria.id }}</td>
-                            <td> {{ categoria.name }} </td>
-                            <td> <a class="btn btn-sm btn-primary" ng-click="mostrarAlmacenCtrl.seleccionarCategoria(categoria.id)">Seleccionar</a> </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <a class="btn btn-sm btn-success" ng-click="mostrarAlmacenCtrl.buscarCategorias()">Buscar categorias</a>
-            </div>
-            <div class="panel-body">
-                <h2>Productos de Mercado Libre</h2>
-
-                <div class="dataTable_wrapper">
-                    <table class="table table-striped table-bordered table-hover">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Acciones</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="producto in catMercadoLibre">
-                            <td> {{ producto.id }}</td>
-                            <td> {{ producto.title }} </td>
-                            <td> <a class="btn btn-sm btn-primary" ng-click="mostrarAlmacenCtrl.importarProducto(producto.id)">Importar</a> </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            
 
             <!-- COMENTARIOS A NIVEL DE ALMACÉN -->
             <h2>Comentarios</h2>
