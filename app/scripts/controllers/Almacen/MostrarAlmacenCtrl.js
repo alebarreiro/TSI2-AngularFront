@@ -50,9 +50,10 @@ angular.module('sapoApp')
                     console.log(result);
                     $scope.comentarios.push(result);
                     toastr.success('¡Comentario agregado!');
+                    $scope.comentario.comentario = "";
                 })
                 .catch(function () {
-                    toastr.error('Hubo un error al dar de alta el colaborador.')
+                    toastr.error('Hubo un error al dar de alta el comentario.')
                 })
         }
     }

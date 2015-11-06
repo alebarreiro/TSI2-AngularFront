@@ -42,7 +42,7 @@
                         <div class="panel-heading">
                             <i class="fa fa-clock-o fa-fw"></i> Últimos comentarios
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body" style="max-height: 400px;  overflow-y: scroll;">
                             <ul class="timeline">
                                 <li ng-class-odd="'timeline-inverted'" ng-class-even="'timeline'"
                                     ng-repeat="comentario in comentarios.slice().reverse()">
@@ -59,6 +59,18 @@
                                 </li>
                             </ul>
                         </div>
+                        <div class="panel-footer">
+                            <div class="input-group">
+                                <input id="btn-input" type="text"
+                                       class="form-control input-sm ng-pristine ng-untouched ng-valid"
+                                       placeholder="Escribir comentario..." ng-model="comentario.comentario">
+                            <span class="input-group-btn">
+                                <button class="btn btn-warning btn-sm" id="" ng-click="mostrarAlmacenCtrl.crearComentario(comentario)">
+                                    Agregar
+                                </button>
+                            </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -67,23 +79,6 @@
                     <chat></chat>
                 </div>
 
-                <div class="col-lg-8">
-                    <div class="panel panel-info">
-                        <div class="panel-heading"> Nuevo comentario</div>
-                        <div class="panel-body">
-                            <tbody>
-                            <div class="form-group">
-                                <label>Comentario</label>
-                        <textarea class="form-control" rows="3" ng-model="comentario.comentario">
-                        </textarea>
-                            </div>
-                            <td>
-                                <a class="btn btn-sm btn-success" ng-click="mostrarAlmacenCtrl.crearComentario(comentario)">Agregar</a>
-                            </td>
-                            </tbody>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </div>
