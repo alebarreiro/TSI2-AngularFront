@@ -1,0 +1,24 @@
+<div class="panel-body">
+    <h2>Todas las categorias</h2>
+    <div class="dataTable_wrapper">
+        <table class="table table-striped table-bordered table-hover" id="dataTable-categorias">
+            <thead>
+            <tr>
+                <th>Nombre </th>
+                <th>Descripcion </th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="categoria in categorias">
+                <td> {{ categoria.nombre }}</td>
+                <td> {{ categoria.descripcion }} </td>
+                <td> <a class="btn btn-sm btn-primary" ng-click="webScrapPaso1Ctrl.poblarCategoria(categoria.id)" ui-sref="almacen.webscrap.paso2({url: almacen.id})">Seleccionar</a> </td>
+            </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+

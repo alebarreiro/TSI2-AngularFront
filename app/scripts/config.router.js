@@ -234,7 +234,7 @@ angular.module('sapoApp')
       })
 
       .state('almacen.webscrap', {
-        templateUrl: '../views/almacen/pages/webscrap.html',
+        templateUrl: '../views/almacen/pages/webscrap/webscrap.html',
         url: '/:url/webscrap',
         controller: 'WebScrapCtrl',
         controllerAs: 'webScrapCtrl',
@@ -254,6 +254,24 @@ angular.module('sapoApp')
                 });
               }]
           }
+      })
+
+      .state('almacen.webscrap.paso1', {
+        templateUrl: '../views/almacen/pages/webscrap/webscrap-paso1.html',
+        controller: 'WebScrapPaso1Ctrl',
+        controllerAs: 'webScrapPaso1Ctrl'
+      })
+
+      .state('almacen.webscrap.paso2', {
+        templateUrl: '../views/almacen/pages/webscrap/webscrap-paso2.html',
+        controller: 'WebScrapPaso2Ctrl',
+        controllerAs: 'webScrapPaso2Ctrl'
+      })
+
+      .state('almacen.webscrap.paso3', {
+        templateUrl: '../views/almacen/pages/webscrap/webscrap-paso3.html',
+        controller: 'WebScrapPaso3Ctrl',
+        controllerAs: 'webScrapPaso3Ctrl'
       })
 
       .state('almacen.carrito', {
