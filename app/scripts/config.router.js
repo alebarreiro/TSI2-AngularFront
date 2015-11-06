@@ -206,14 +206,19 @@ angular.module('sapoApp')
      ***********************************************************************************************/
 
       .state('almacen', {
-        templateUrl: '../views/almacen/home.html',
-        url: '/almacen/:url',
-        controller: 'MostrarAlmacenCtrl',
-        controllerAs: 'mostrarAlmacenCtrl',
+        templateUrl: '../views/almacen/main.html',
+        url: '/almacen',
         data: {
           authorization: true,
           authenticated: true,
         },
+      })
+
+      .state('almacen.home', {
+        templateUrl: '../views/almacen/home.html',
+        url: '/:url',
+        controller: 'MostrarAlmacenCtrl',
+        controllerAs: 'mostrarAlmacenCtrl',
         resolve: {
           almacen: ['almacenService', '$stateParams', '$rootScope', 'AUTH_EVENTS', 'authService',
             function (almacenService, $stateParams, $rootScope, AUTH_EVENTS, authService) {
@@ -230,13 +235,18 @@ angular.module('sapoApp')
 
       .state('almacen.webscrap', {
         templateUrl: '../views/almacen/pages/webscrap.html',
-        url: '/almacen/:url/webscrap',
+        url: '/:url/webscrap',
         controller: 'WebScrapCtrl',
         controllerAs: 'webScrapCtrl',
-        data: {
-          authorization: true,
-          authenticated: true,
-        }
+
+      })
+
+      .state('almacen.carrito', {
+        templateUrl: '../views/almacen/carrito.html',
+        url: '/:url/carrito',
+        controller: 'CarritoCtrl',
+        controllerAs: 'carritoCtrl',
+
       })
 
 
