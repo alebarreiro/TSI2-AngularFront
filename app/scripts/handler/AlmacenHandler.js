@@ -33,5 +33,20 @@ angular.module('sapoApp')
       });
     };
 
+    AlmacenHandler.prototype.getAlmacen = function (id) {
+      //Cacheamos el almacen
+      return $q(function(resolve, reject) {
+        var promiseCache = AlmacenHandler.prototype.Almacen[id];
+        if (promiseCache) {
+          resolve(promiseCache);
+        } else {
+          resolve(almacenService.getAlmacen(id).then(function(almacen){
+            AlmacenHandler.prototype.Almacen[id] = almacen;
+            return almacen;
+          }));
+        }
+      });
+    };
+
     return AlmacenHandler;
   }]);
