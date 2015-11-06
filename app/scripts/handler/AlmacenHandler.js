@@ -14,20 +14,22 @@ angular.module('sapoApp')
 
     AlmacenHandler.prototype.Almacenes = [];
 
+    AlmacenHandler.prototype.Almacen = [];
+
     AlmacenHandler.prototype.init = function() {};
 
     AlmacenHandler.prototype.getAlmacenes = function () {
       //Aca tenemos un "invento" para cachear las promesas
       return $q(function(resolve, reject) {
         var promiseCache = AlmacenHandler.prototype.Almacenes;
-        //if (promiseCache.length) {
-        //  resolve(promiseCache);
-        //} else {
+        if (promiseCache.length) {
+          resolve(promiseCache);
+        } else {
           resolve(almacenService.getMisAlmacenes().then(function(almacenes){
             AlmacenHandler.prototype.Almacenes = almacenes;
             return almacenes;
           }));
-        //}
+        }
       });
     };
 
