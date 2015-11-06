@@ -1,25 +1,4 @@
-<div class="panel-body">
-    <h2>Todas las categorias</h2>
-    <div class="dataTable_wrapper">
-        <table class="table table-striped table-bordered table-hover" id="dataTable-categorias">
-            <thead>
-            <tr>
-                <th>Nombre </th>
-                <th>Descripcion </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="categoria in categorias">
-                <td> {{ categoria.nombre }}</td>
-                <td> {{ categoria.descripcion }} </td>
-            </tr>
-
-
-            </tbody>
-        </table>
-    </div>
-</div>
-
+<h2>Agregar nueva categoría</h2>
 <div class="panel panel-info" >
     <div class="panel-heading">
         Nueva categoría
@@ -40,5 +19,27 @@
             <a class="btn btn-sm btn-success" ng-click="categoriasAlmacenCtrl.crearCategoria(categoria.nombre, categoria.descripcion)">Agregar</a>
         </td>
         </tbody>
+    </div>
+</div>
+
+<div class="panel-body">
+    <h2>Todas las categorias</h2>
+    <div class="dataTable_wrapper">
+        <table class="table table-striped table-bordered table-hover" id="dataTable-categorias">
+            <thead>
+            <tr>
+                <th>Nombre </th>
+                <th>Descripcion </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="categoria in categorias">
+                <td> {{ categoria.nombre }}</td>
+                <td> {{ categoria.descripcion }} </td>
+            </tr>
+
+
+            </tbody>
+        </table>
     </div>
 </div>

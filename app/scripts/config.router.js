@@ -316,5 +316,25 @@ angular.module('sapoApp')
         }
       })
 
+      .state('almacen.productos', {
+        templateUrl: '../views/almacen/pages/productos.html',
+        url: '/:url/productos',
+        controller: 'ProductosAlmacenCtrl',
+        controllerAs: 'productosAlmacenCtrl',
+        resolve: {
+          almacen: ['almacenService', '$stateParams', '$rootScope', 'AUTH_EVENTS', 'authService',
+            function (almacenService, $stateParams, $rootScope, AUTH_EVENTS, authService) {
+              return almacenService.getAlmacen($stateParams.url)
+                  .then(function (almacen) {
+                    if (authService.isAuthorizedInState(almacen)) {
+                      return almacen;
+                    } else {
+                      $rootScope.$emit(AUTH_EVENTS.notAuthorized);
+                    }
+                  });
+            }]
+        }
+      })
+
 
   }]);
