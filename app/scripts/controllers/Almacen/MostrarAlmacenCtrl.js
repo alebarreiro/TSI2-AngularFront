@@ -28,115 +28,6 @@ angular.module('sapoApp')
 
     this.init();
 
-    // *** FUNCIONES DE PRODUCTOS *** //
-
-    $scope.aumentarStockProducto = function (idProducto) {
-
-      var index = lodash.findIndex($scope.productos, function(prod) {
-          return prod.productoID == idProducto;
-      });
-
-        $scope.productos[index].cantidad++;
-    };
-
-    $scope.reducirStockProducto = function (idProducto) {
-
-        var index = lodash.findIndex($scope.productos, function(prod) {
-            return prod.productoID == idProducto;
-        });
-        if ($scope.productos[index].cantidad > 0)
-            $scope.productos[index].cantidad--;
-    };
-
-    $scope.actualizarStockProducto = function (idProducto, stock, nombre) {
-
-        almacenService.actualizarStockAlmacen($scope.almacenId, idProducto, stock)
-            .then(function(a) {
-                console.log(a);
-                toastr.success('Stock de ' + nombre + ' actualizado');
-            })
-            .catch(function () {
-                toastr.error('Hubo un error al modificar el stock.')
-            });
-    }
-
-    //Crea un producto específico.
-    this.crearProducto = function (nombreProducto, descProducto, idCategoria) {
-        console.log("nombreProducto: " + nombreProducto + " descProducto " + descProducto);
-        var that = this;
-        //Invoca al service para hacer el POST de la categoria.
-        this.categoria = categoriaService.createProducto(nombreProducto, descProducto, idCategoria)
-            .then(function(a) {
-                console.log(a);
-                toastr.success('Producto ' + nombreProducto + ' creado.');
-                a.cantidad = 0;
-                $scope.productos.push(a);
-                var param = [{"productoID": a.id, "cantidad": a.cantidad}];
-                that.cargarProducto(param);
-            })
-            .catch(function () {
-                toastr.error('Hubo un error al dar de alta el producto.')
-            });
-    };
-
-    //Carga una lista de productos en el almacén.
-    this.cargarProducto = function(productos) {
-        almacenService.cargarProductosAlmacen($scope.almacenId, productos)
-            .then(function(a) {
-                console.log(a);
-            })
-            .catch(function () {
-                toastr.error('Hubo un error al cargar el producto.');
-            });
-    }
-
-
-
-    // *** FUNCIONES DE WEBSCRAPPING DE MERCADO LIBRE *** //
-
-    this.buscarCategorias = function() {
-        var ml = $scope.mercadolibre;
-        webscrapService.getCategoriasML()
-            .then(function(a) {
-                toastr.success('Mercado Libre está activo');
-                a.forEach(function (c) {
-                    ml.push(c);
-                });
-            })
-            .catch(function () {
-                toastr.error('Hubo un error al contactar a Mercado Libre.');
-            });
-    };
-
-    this.seleccionarCategoria = function(idCategoria) {
-        var catML = $scope.catMercadoLibre;
-        webscrapService.searchCategoriasML(idCategoria)
-            .then(function(a) {
-                toastr.success('Mercado Libre está activo');
-                console.log(a);
-                a.results.forEach(function (c) {
-                    catML.push(c);
-                })
-            })
-            .catch(function () {
-                toastr.error('Hubo un error al contactar a Mercado Libre.');
-            });
-    }
-
-    this.importarProducto = function(idProducto) {
-        webscrapService.addProductosML(idProducto)
-            .then(function(a) {
-                toastr.success('Mercado Libre está activo');
-                console.log(a);
-            })
-            .catch(function () {
-                toastr.error('Hubo un error al contactar a Mercado Libre.');
-            });
-    }
-
-
-    // *** FUNCIONES DE COMENTARIOS *** //
-
     $scope.obtenerComentarios = function() {
         almacenService.obtenerComentarios($scope.almacenId)
             .then(function (result) {
@@ -149,16 +40,21 @@ angular.module('sapoApp')
     }
 
     this.crearComentario = function(comentario) {
-        almacenService.agregarComentario($scope.almacenId, authService.getLoggedUser().id, comentario)
-            .then(function (result) {
-                console.log(result);
-                $scope.comentarios.push(result);
-                toastr.success('¡Comentario agregado!');
-            })
-            .catch(function () {
-                toastr.error('Hubo un error al dar de alta el colaborador.')
-            })
-
+        if (!comentario) {
+            toastr.error('Ingrese un comentario.');
+        } else if (comentario.length > 500) {
+            toastr.error('El comentario no puede superar los 500 caracteres.');
+        } else {
+            almacenService.agregarComentario($scope.almacenId, authService.getLoggedUser().id, comentario)
+                .then(function (result) {
+                    console.log(result);
+                    $scope.comentarios.push(result);
+                    toastr.success('¡Comentario agregado!');
+                })
+                .catch(function () {
+                    toastr.error('Hubo un error al dar de alta el colaborador.')
+                })
+        }
     }
 
   }]);

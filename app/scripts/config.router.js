@@ -275,7 +275,7 @@ angular.module('sapoApp')
       })
 
       .state('almacen.carrito', {
-        templateUrl: '../views/almacen/pages/carrito.html',
+        templateUrl: '../views/almacen/pages/carrito/carrito.html',
         url: '/:url/carrito',
         controller: 'CarritoCtrl',
         controllerAs: 'carritoCtrl',

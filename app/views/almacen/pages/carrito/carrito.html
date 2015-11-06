@@ -1,5 +1,46 @@
+<!-- form-crear-almacen-main.html -->
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="row text-center page-header">
+            <h2>Carrito de compras</h2>
+
+            <!-- the links to our nested states using relative paths -->
+            <!-- add the active class if the state matches our ui-sref -->
+            <div class="col-xs-12">
+                <ul class="nav nav-pills nav-justified thumbnail">
+                    <li ui-sref-active="active">
+                        <a ui-sref=".paso1">
+                            <h4 class="list-group-item-heading">Ver carrito</h4>
+
+
+                        </a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref=".paso2">
+                            <h4 class="list-group-item-heading">Agregar productos</h4>
+
+
+                        </a>
+                    </li >
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- use ng-submit to catch the form submission and use our Angular function -->
+            <form id="signup-form" ng-submit="processForm()">
+
+                <!-- our nested state views will be injected here -->
+                <div id="form-views" ui-view></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <div class="panel-body">
-    <h2>Carrito de compras</h2>
+
 
     <div class="dataTable_wrapper">
         <table class="table table-striped table-bordered table-hover" id="dataTable-carrito">
