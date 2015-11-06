@@ -238,18 +238,18 @@ angular.module('sapoApp')
         url: '/:url/webscrap',
         controller: 'WebScrapCtrl',
         controllerAs: 'webScrapCtrl',
-          resolve: {
-            almacen: ['almacenService', '$stateParams', '$rootScope', 'AUTH_EVENTS', 'authService',
-              function (almacenService, $stateParams, $rootScope, AUTH_EVENTS, authService) {
-                return almacenService.getAlmacen($stateParams.url)
-                  .then(function (almacen) {
-                    if (authService.isAuthorizedInState(almacen)) {
-                      return almacen;
-                    } else {
-                      $rootScope.$emit(AUTH_EVENTS.notAuthorized);
-                    }
-                });
-              }],
+        resolve: {
+          almacen: ['almacenService', '$stateParams', '$rootScope', 'AUTH_EVENTS', 'authService',
+            function (almacenService, $stateParams, $rootScope, AUTH_EVENTS, authService) {
+              return almacenService.getAlmacen($stateParams.url)
+                .then(function (almacen) {
+                  if (authService.isAuthorizedInState(almacen)) {
+                    return almacen;
+                  } else {
+                    $rootScope.$emit(AUTH_EVENTS.notAuthorized);
+                  }
+              });
+            }],
           }
       })
 
@@ -257,14 +257,60 @@ angular.module('sapoApp')
         templateUrl: '../views/almacen/pages/carrito.html',
         url: '/:url/carrito',
         controller: 'CarritoCtrl',
-        controllerAs: 'carritoCtrl'
+        controllerAs: 'carritoCtrl',
+        resolve: {
+          almacen: ['almacenService', '$stateParams', '$rootScope', 'AUTH_EVENTS', 'authService',
+            function (almacenService, $stateParams, $rootScope, AUTH_EVENTS, authService) {
+              return almacenService.getAlmacen($stateParams.url)
+                  .then(function (almacen) {
+                    if (authService.isAuthorizedInState(almacen)) {
+                      return almacen;
+                    } else {
+                      $rootScope.$emit(AUTH_EVENTS.notAuthorized);
+                    }
+                  });
+            }]
+        }
       })
 
       .state('almacen.colaboradores', {
         templateUrl: '../views/almacen/pages/colaboradores.html',
         url: '/:url/colaboradores',
         controller: 'ColaboradoresCtrl',
-        controllerAs: 'colaboradoresCtrl'
+        controllerAs: 'colaboradoresCtrl',
+        resolve: {
+          almacen: ['almacenService', '$stateParams', '$rootScope', 'AUTH_EVENTS', 'authService',
+            function (almacenService, $stateParams, $rootScope, AUTH_EVENTS, authService) {
+              return almacenService.getAlmacen($stateParams.url)
+                  .then(function (almacen) {
+                    if (authService.isAuthorizedInState(almacen)) {
+                      return almacen;
+                    } else {
+                      $rootScope.$emit(AUTH_EVENTS.notAuthorized);
+                    }
+                  });
+            }]
+        }
+      })
+
+      .state('almacen.categorias', {
+        templateUrl: '../views/almacen/pages/categorias.html',
+        url: '/:url/categorias',
+        controller: 'CategoriasAlmacenCtrl',
+        controllerAs: 'categoriasAlmacenCtrl',
+        resolve: {
+          almacen: ['almacenService', '$stateParams', '$rootScope', 'AUTH_EVENTS', 'authService',
+            function (almacenService, $stateParams, $rootScope, AUTH_EVENTS, authService) {
+              return almacenService.getAlmacen($stateParams.url)
+                  .then(function (almacen) {
+                    if (authService.isAuthorizedInState(almacen)) {
+                      return almacen;
+                    } else {
+                      $rootScope.$emit(AUTH_EVENTS.notAuthorized);
+                    }
+                  });
+            }]
+        }
       })
 
 

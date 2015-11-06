@@ -3,20 +3,17 @@
  */
 
 angular.module('sapoApp')
-    .controller('ColaboradoresCtrl', ['almacen', '$scope', 'almacenService', 'toastr', 'lodash',
-        function (almacen, $scope, almacenService, toastr, lodash) {
+    .controller('ColaboradoresCtrl', ['almacen', '$scope', 'almacenService', 'toastr', 'lodash', 'usuarioService',
+        function (almacen, $scope, almacenService, toastr, lodash, usuarioService) {
 
             this.init = function () {
                 console.log(almacen);
                 $scope.almacen = almacen;
-                $scope.mercadolibre = [];
-                $scope.catMercadoLibre = [];
+                $scope.colaboradores = almacen.colaboradores;
 
             };
 
             this.init();
-
-// *** FUNCIONES DE COLABORADORES *** //
 
             this.agregarColaborador = function () {
                 if (!usuarioSeleccionado)
@@ -46,7 +43,7 @@ angular.module('sapoApp')
                 }
             });
 
-            $scope.seleccionarUsuario = function (userId) {
+            this.seleccionarUsuario = function (userId) {
                 $scope.usuarioSeleccionado = "Usuario seleccionado: " + userId;
                 usuarioSeleccionado = userId;
             };

@@ -3,7 +3,6 @@
         <div class="col-lg-12">
             <h1 class="page-header"> Bienvenido al almacén {{almacen.nombre}} </h1>
 
-
             <div class="panel-body">
                 <h2>Datos del almacen</h2>
                 <div class="dataTable_wrapper">
@@ -34,50 +33,7 @@
 
 
 
-            <div class="panel-body">
-                <h2>Todas las categorias</h2>
-                <div class="dataTable_wrapper">
-                    <table class="table table-striped table-bordered table-hover" id="dataTable-categorias">
-                        <thead>
-                        <tr>
-                            <th>Nombre </th>
-                            <th>Descripcion </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="categoria in categorias">
-                            <td> {{ categoria.nombre }}</td>
-                            <td> {{ categoria.descripcion }} </td>
-                        </tr>
 
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="panel panel-info" >
-                <div class="panel-heading">
-                    Nueva categoría
-                </div>
-                <div class="panel-body" collapse="false" id="nueva-categoria">
-                    <p class="help-block">Crea una nueva categoría para tu almacén.</p>
-                    <tbody>
-                    <div class="form-group">
-                        <label>Nombre</label>
-                        <input class="form-control" ng-model="categoria.nombre">
-                    </div>
-                    <div class="form-group">
-                        <label>Descripción</label>
-                        <textarea class="form-control" rows="3" ng-model="categoria.descripcion">
-                        </textarea>
-                    </div>
-                    <td>
-                        <a class="btn btn-sm btn-success" ng-click="mostrarAlmacenCtrl.crearCategoria(categoria.nombre, categoria.descripcion)">Agregar</a>
-                    </td>
-                    </tbody>
-                </div>
-            </div>
 
             <div class="panel-body">
                 <h2>Todos los productos</h2>
