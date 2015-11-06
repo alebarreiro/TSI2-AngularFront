@@ -238,20 +238,6 @@ angular.module('sapoApp')
         url: '/:url/webscrap',
         controller: 'WebScrapCtrl',
         controllerAs: 'webScrapCtrl',
-<<<<<<< HEAD
-        resolve: {
-          almacen: ['almacenService', '$stateParams', '$rootScope', 'AUTH_EVENTS', 'authService',
-            function (almacenService, $stateParams, $rootScope, AUTH_EVENTS, authService) {
-              return almacenService.getAlmacen($stateParams.url)
-                .then(function (almacen) {
-                  if (authService.isAuthorizedInState(almacen)) {
-                    return almacen;
-                  } else {
-                    $rootScope.$emit(AUTH_EVENTS.notAuthorized);
-                  }
-              });
-            }],
-=======
           resolve: {
             almacen: ['almacenService', '$stateParams', '$rootScope', 'AUTH_EVENTS', 'authService', 'AlmacenHandler',
               function (almacenService, $stateParams, $rootScope, AUTH_EVENTS, authService, AlmacenHandler) {
@@ -266,8 +252,7 @@ angular.module('sapoApp')
                       $rootScope.$emit(AUTH_EVENTS.notAuthorized);
                     }
                 });
-              }],
->>>>>>> cac5cef7334486e6b0b4dd21803e52f96359aebc
+              }]
           }
       })
 
