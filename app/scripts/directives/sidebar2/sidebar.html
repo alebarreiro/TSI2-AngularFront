@@ -1,0 +1,22 @@
+<div class="navbar-default sidebar" style="margin-top: 0px"  role="navigation">
+    <h3 style="margin-bottom: 10px; text-align: center">{{almacenId}}</h3>
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav in" id="side-menu">
+
+            <li ui-sref-active="active">
+                <a ui-sref="almacen.home({url: almacenId})"><i class="fa fa-dashboard fa-fw"></i> Home </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="almacen.webscrap({url: almacenId})"><i class="fa fa-bar-chart-o fa-fw"></i> WebScrapping <span></span></a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="almacen.carrito({url: almacenId})"><i class="fa fa-bar-chart-o fa-fw"></i> Carrito <span></span></a>
+            </li>
+
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div> 
+
+
+
