@@ -5,16 +5,17 @@
 
             <div class="panel-body">
                 <h2>Datos del almacen</h2>
+
                 <div class="dataTable_wrapper">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                             <tbody>
                             <tr>
-                                <th>Nombre </th>
+                                <th>Nombre</th>
                                 <td>{{almacen.nombre}}</td>
                             </tr>
                             <tr>
-                                <th>Descripción </th>
+                                <th>Descripción</th>
                                 <td>{{almacen.descripcion}}</td>
                             </tr>
                             <tr>
@@ -31,49 +32,62 @@
                 </div>
             </div>
 
-            <!-- COMENTARIOS A NIVEL DE ALMACÉN -->
-            <h2>Comentarios</h2>
+            <div class="row">
+                <!-- COMENTARIOS A NIVEL DE ALMACÉN -->
 
-            <div class="panel panel-info">
-                <div class="panel-heading"> Nuevo comentario </div>
-                <div class="panel-body">
-                    <tbody>
-                    <div class="form-group">
-                        <label>Comentario</label>
+                <div class="col-lg-8">
+                    <h2>Comentarios</h2>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-clock-o fa-fw"></i> Últimos comentarios
+                        </div>
+                        <div class="panel-body">
+                            <ul class="timeline">
+                                <li ng-class-odd="'timeline-inverted'" ng-class-even="'timeline'"
+                                    ng-repeat="comentario in comentarios.slice().reverse()">
+                                    <div class="timeline-badge success"><i class="fa fa-envelope-o"></i>
+                                    </div>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4 class="timeline-title">{{comentario.usuario}}</h4>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p>{{comentario.comentario}}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <h2>Chat</h2>
+                    <chat></chat>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="panel panel-info">
+                        <div class="panel-heading"> Nuevo comentario</div>
+                        <div class="panel-body">
+                            <tbody>
+                            <div class="form-group">
+                                <label>Comentario</label>
                         <textarea class="form-control" rows="3" ng-model="comentario.comentario">
                         </textarea>
+                            </div>
+                            <td>
+                                <a class="btn btn-sm btn-success" ng-click="mostrarAlmacenCtrl.crearComentario(comentario)">Agregar</a>
+                            </td>
+                            </tbody>
+                        </div>
                     </div>
-                    <td>
-                        <a class="btn btn-sm btn-success" ng-click="mostrarAlmacenCtrl.crearComentario(comentario)">Agregar</a>
-                    </td>
-                    </tbody>
                 </div>
             </div>
 
-            <div class="col-lg-8">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-clock-o fa-fw"></i> Últimos comentarios
-                    </div>
-                    <div class="panel-body">
-                        <ul class="timeline">
-                            <li class="timeline-inverted" ng-repeat="comentario in comentarios.slice().reverse()">
-                                <div class="timeline-badge success"><i class="fa fa-envelope-o"></i>
-                                </div>
-                                <div class="timeline-panel">
-                                    <div class="timeline-heading">
-                                        <h4 class="timeline-title">{{comentario.usuario}}</h4>
-                                    </div>
-                                    <div class="timeline-body">
-                                        <p>{{comentario.comentario}}</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
+
     </div>
 </div>
 
