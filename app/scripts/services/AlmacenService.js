@@ -8,7 +8,7 @@ angular.module('sapoApp')
 
     this.getAlmacen = function(id) {
       var deferred = $q.defer();
-      console.log('buscando almacen con id' + id);
+      console.log('Buscando almacén con ID ' + id);
       Almacen.getAlmacen({ id: id }, {}, function (almacen) {
         deferred.resolve(almacen);
       }, function (error) {

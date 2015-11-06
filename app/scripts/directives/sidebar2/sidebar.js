@@ -21,7 +21,6 @@ angular.module('sapoApp')
         $scope.multiCollapseVar = 0;
 
         $scope.almacenId = $stateParams.url;
-        console.log($scope.almacenId);
         
         $scope.check = function(x){
           
