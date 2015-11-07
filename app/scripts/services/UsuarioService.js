@@ -60,6 +60,7 @@ angular.module('sapoApp')
     };
 
     this.obtenerReporteMovimientos = function () {
+      var user = authService.getLoggedUser();
       var deferred = $q.defer();
       Reporte.getReporteMovimientos({userid: user.id}, function (reporte) {
         console.log(reporte);

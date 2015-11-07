@@ -186,6 +186,11 @@ angular.module('sapoApp')
             return usuarioService.obtenerReporteValorizacion().then(function (reporte) {
               return reporte;
             });
+          }],
+          reporteMov: ['usuarioService', function (usuarioService) {
+            return usuarioService.obtenerReporteMovimientos().then(function (reporte) {
+              return reporte;
+            });
           }]
         }
       })
