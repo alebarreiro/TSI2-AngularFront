@@ -162,5 +162,17 @@ angular.module('sapoApp')
                 deferred.reject(error);
             });
         return deferred.promise;
+    };
+
+    this.borrarAlmacen = function (idAlmacen) {
+      var deferred = $q.defer();
+      Almacen.borrarAlmacen({id: idAlmacen},
+        {},
+        function (result) {
+          deferred.resolve(result);
+        }, function (error) {
+          deferred.reject(error);
+        });
+      return deferred.promise;
     }
   }]);

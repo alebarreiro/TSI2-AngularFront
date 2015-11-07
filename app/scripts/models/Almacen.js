@@ -16,6 +16,7 @@ angular.module('sapoApp')
       actualizarAlmacen       : { method: 'put',  params: { resource: 'almacenes' },                            isArray: false },
       actualizarStockAlmacen  : { method: 'put',  params: { resource: 'almacenes', op: 'stock'             },   isArray: false },
       getComentarios          : { method: 'get',  params: { resource: 'almacenes', op: 'comentarios'       },   isArray: true  },
-      agregarComentario       : { method: 'post', params: { resource: 'almacenes', op: 'comentarios'       },   isArray: false }
+      agregarComentario       : { method: 'post', params: { resource: 'almacenes', op: 'comentarios'       },   isArray: false },
+      borrarAlmacen           : { method: 'delete', params: { resource: 'almacenes' },                          isArray: false }
     })
   }]);

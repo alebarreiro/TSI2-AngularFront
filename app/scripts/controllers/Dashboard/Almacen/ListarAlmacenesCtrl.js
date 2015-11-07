@@ -45,5 +45,21 @@ angular.module('sapoApp')
         });
     };
 
+      $scope.eliminarAlmacen = function (almacen) {
+
+        if (confirm('Seguro que quiere eliminar el almacen seleccionado?')) {
+          almacenService.borrarAlmacen(almacen.id)
+            .then(function () {
+              return almacenService.getMisAlmacenes()
+            }).then(function (almacenes) {
+              $scope.almacenes = almacenes;
+              toastr.success("Almacen eliminada.");
+            }.bind(this)).catch(function () {
+              toastr.warning("No es posible completar tu solicitud.");
+            });
+        }
+        ;
+      };
+
     this.init();
   }]);
