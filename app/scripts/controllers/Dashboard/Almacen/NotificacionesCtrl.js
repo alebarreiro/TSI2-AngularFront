@@ -3,14 +3,15 @@
  */
 
 angular.module('sapoApp')
-  .controller('NotificacionesCtrl', ['$scope', 'almacenService', 'usuarioService', 'toastr', 'almacenes',
-    function ($scope, almacenService, usuarioService, toastr, almacenes) {
+  .controller('NotificacionesCtrl', ['$scope', 'almacenService', 'usuarioService', 'toastr', 'almacenes', 'AlmacenHandler',
+    function ($scope, almacenService, usuarioService, toastr, almacenes, AlmacenHandler) {
 
       $scope.usuarios = {};
       var almacenSeleccionada;
 
       this.init = function () {
         $scope.almacenes = almacenes;
+        $scope.productos = [];
       };
 
 
@@ -19,8 +20,20 @@ angular.module('sapoApp')
       };
 
       $scope.$watch('almacenId', function() {
-        console.log($scope.almacenId);
+       if ($scope.almacenId) {
+         almacenSeleccionada = $scope.almacenId.replace(/ /g,'');
+         var AlmacenHdlr= new AlmacenHandler();
+         AlmacenHdlr.getAlmacen(almacenSeleccionada).then(function(almacen){
+           $scope.productos = almacen.stockproductos;
+         })
+       }
       });
+
+      $scope.activarNotificacion = function (producto, stockMinimo) {
+        console.log(producto);
+        console.log(stockMinimo);
+      };
+
 
 
       this.init();

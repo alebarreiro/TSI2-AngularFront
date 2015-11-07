@@ -18,25 +18,34 @@
                         <thead>
                         <tr>
                             <th>Producto</th>
+                            <th>Stock actual</th>
+                            <th>Stock minimo</th>
                             <th>Acciones</th>
-                            <th>Stock</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="producto in productos">
-                            <td> {{ producto.nombre }}</td>
-                            <td>
-                                <a class="btn btn-sm btn-success" ng-click="agregarStockProducto(producto.categoria, producto.id)">
+                            <td> {{ producto.nombre }}  </td>
+                            <td> {{ producto.cantidad}} </td>
+                            <td ng-init="stockMinimo=0" >
+
+                                <a class="btn btn-sm btn-success" ng-click="stockMinimo = stockMinimo + 1">
                                     <p class="fa fa-plus" />
                                 </a>
-                                <a class="btn btn-sm btn-danger" ng-click="sacarStockProducto(producto.categoria, producto.id)">
+
+                                <span ng-model="stockMinimo">
+                                    {{stockMinimo}}
+                                </span>
+
+                                <a class="btn btn-sm btn-danger" ng-click="stockMinimo = stockMinimo - 1">
                                     <p class="fa fa-minus" />
                                 </a>
-                                <a class="btn btn-sm btn-info" ng-click="actualizarStockProducto(producto.id, producto.stock, producto.nombre)">
-                                    <p class="fa fa-refresh" />
+                            </td>
+                            <td>
+                                <a class="btn btn-sm btn-info" ng-click="activarNotificacion(producto, stockMinimo)">
+                                    Activar notificación
                                 </a>
                             </td>
-                            <td> {{ producto.stock }}</td>
                         </tr>
                         </tbody>
                     </table>
