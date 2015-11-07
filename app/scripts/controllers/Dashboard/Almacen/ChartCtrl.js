@@ -9,7 +9,7 @@ angular.module('sapoApp')
 
     this.init = function () {
 
-      var mejoresReporteVal = this.parseReporte(reporteVal);
+      var mejoresReporteVal = usuarioService.parseReporte(reporteVal);
       console.log(mejoresReporteVal)
 
 
@@ -23,40 +23,7 @@ angular.module('sapoApp')
       };
     };
 
-    this.parseReporte = function (reporte) {
-      var indices = [],
-        indicesRandom = [],
-        encontrados = 0,
-        series = [],
-        data = [];
-
-      for (var index = 0; index < reporte.data.length; index++) {
-        var datos = reporte.data[index];
-        if ((datos[0] > 0 || datos[1] > 0 || datos[2] > 0) && encontrados < 4) {
-          indices.push(index);
-          encontrados++;
-        } else {
-          indicesRandom.push(index);
-        }
-      }
-      var indexRandom = 0;
-      while (encontrados < 4 && indexRandom < indicesRandom.length) {
-        indices.push(indicesRandom[indexRandom]);
-        indexRandom++;
-        encontrados++;
-      }
-
-      for (var indice in indices) {
-        series.push(reporte.series[indices[indice]]);
-        data.push(reporte.data[indices[indice]]);
-      }
-
-      return {
-        series: series,
-        labels: reporte.labels,
-        data: data
-      }
-    };
+    
 
     this.init();
 

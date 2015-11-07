@@ -59,7 +59,7 @@ angular.module('sapoApp')
       return deferred.promise;
     }
 
-    this.parseReporteValorizacion = function (reporte) {
+    this.parseReporte = function (reporte) {
         var indices = [],
           indicesRandom = [],
           encontrados = 0,
@@ -89,7 +89,7 @@ angular.module('sapoApp')
 
         return {
           series: series,
-          lables: reporte.labels,
+          labels: reporte.labels,
           data: data
         }
     }
