@@ -30,8 +30,20 @@ angular.module('sapoApp')
       });
 
       $scope.activarNotificacion = function (producto, stockMinimo) {
-        console.log(producto);
-        console.log(stockMinimo);
+        var data = {
+          productoID: producto.productoID,
+          minimo: stockMinimo,
+          notifica: true
+        };
+        almacenService.activarNotificacionProducto(almacenSeleccionada, data)
+          .then(function(a) {
+            console.log(a);
+            toastr.success('Notificacion activada.');
+          })
+          .catch(function () {
+            toastr.error('Hubo un error al activar la notificacion.')
+          });
+
       };
 
 

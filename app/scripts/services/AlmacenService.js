@@ -174,5 +174,15 @@ angular.module('sapoApp')
           deferred.reject(error);
         });
       return deferred.promise;
-    }
+    };
+
+    this.activarNotificacionProducto = function (idAlmacen, data) {
+      var deferred = $q.defer();
+      Almacen.activarNotificacion({id: idAlmacen}, data, function (result) {
+          deferred.resolve(result);
+        }, function (error) {
+          deferred.reject(error);
+        });
+      return deferred.promise;
+    };
   }]);
