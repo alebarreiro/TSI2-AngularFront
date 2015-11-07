@@ -17,12 +17,20 @@ angular.module('sapoApp')
         },
         mejoresReporteMov = usuarioService.parseReporte(fixReporteMov);
 
+      var i = 0;
+      angular.forEach(mejoresReporteMov.data, function(d){
+        mejoresReporteMov.data[i] = d.reverse();
+        i++;
+      });
+      mejoresReporteMov.data.reverse();
+      mejoresReporteMov.labels.reverse();
+
       $scope.bar = {
         labels: mejoresReporteVal.labels,
         series: mejoresReporteVal.series,
         data: mejoresReporteVal.data,
       };
-
+      
       $scope.line = {
         labels: mejoresReporteMov.labels,
         series: mejoresReporteMov.series,
