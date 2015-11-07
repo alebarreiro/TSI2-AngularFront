@@ -34,6 +34,7 @@ angular.module('sapoApp')
             };
 
             this.actualizarStockProducto = function (idProducto, stock, nombre) {
+                console.log(idProducto);
 
                 almacenService.actualizarStockAlmacen($scope.almacen.id, idProducto, stock)
                     .then(function(a) {
@@ -66,7 +67,7 @@ angular.module('sapoApp')
 
             //Carga una lista de productos en el almacén.
             this.cargarProducto = function(productos) {
-                almacenService.cargarProductosAlmacen($scope.almacenId, productos)
+                almacenService.cargarProductosAlmacen($scope.almacen.id, productos)
                     .then(function(a) {
                         console.log(a);
                     })
