@@ -30,7 +30,7 @@ angular.module('sapoApp')
         series: mejoresReporteVal.series,
         data: mejoresReporteVal.data,
       };
-      
+
       $scope.line = {
         labels: mejoresReporteMov.labels,
         series: mejoresReporteMov.series,

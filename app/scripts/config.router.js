@@ -207,6 +207,20 @@ angular.module('sapoApp')
           }]
         }
       })
+      .state('dashboard.notificaciones', {
+        templateUrl: '../views/dashboard/pages/notificaciones.html',
+        url: '/notificaciones',
+        controller: 'NotificacionesCtrl',
+        controllerAs: 'notificacionesCtrl',
+        resolve: {
+          almacenes: ['AlmacenHandler', function (AlmacenHandler) {
+            var almacenHandler = new AlmacenHandler();
+            return almacenHandler.getAlmacenes().then(function (listaAlmacenes) {
+              return listaAlmacenes;
+            });
+          }]
+        }
+      })
 
     /***********************************************************************************************
      *                                        ALMACENES                                            *

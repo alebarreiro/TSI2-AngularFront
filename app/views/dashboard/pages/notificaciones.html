@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"> Notificaciones </h1>
+        </div>
+        <form>
+
+            <div class="form-group">
+                <label>Seleccione un almacen</label>
+                <select class="form-control" ng-model="almacenId" placeholder="Seleccione un almacen" required>
+                    <option ng-repeat="almacen in almacenes"> {{almacen.id}} </option>
+                </select>
+            </div>
+
+            <div class="col-md-8">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Acciones</th>
+                            <th>Stock</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="producto in productos">
+                            <td> {{ producto.nombre }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-success" ng-click="agregarStockProducto(producto.categoria, producto.id)">
+                                    <p class="fa fa-plus" />
+                                </a>
+                                <a class="btn btn-sm btn-danger" ng-click="sacarStockProducto(producto.categoria, producto.id)">
+                                    <p class="fa fa-minus" />
+                                </a>
+                                <a class="btn btn-sm btn-info" ng-click="actualizarStockProducto(producto.id, producto.stock, producto.nombre)">
+                                    <p class="fa fa-refresh" />
+                                </a>
+                            </td>
+                            <td> {{ producto.stock }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <!-- /.row -->
+</div>
