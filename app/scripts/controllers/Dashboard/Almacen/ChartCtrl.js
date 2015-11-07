@@ -17,13 +17,20 @@ angular.module('sapoApp')
         labels: mejoresReporteVal.labels,
         series: mejoresReporteVal.series,
         data: mejoresReporteVal.data,
-        onClick: function (points, evt) {
-          console.log(points, evt);
-        }
+      };
+
+      $scope.line = {
+        labels: ['Setiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        series: ['Almacen 1', 'Almacen 2', 'Almacen 3'],
+        data: [
+          [65, 59, 80, 81],
+          [28, 48, 40, 19],
+          [40, 20, 30, 45],
+        ],
       };
     };
 
-    
+
 
     this.init();
 

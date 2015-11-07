@@ -57,7 +57,18 @@ angular.module('sapoApp')
         deferred.reject(error);
       });
       return deferred.promise;
-    }
+    };
+
+    this.obtenerReporteMovimientos = function () {
+      var deferred = $q.defer();
+      Reporte.getReporteMovimientos({userid: user.id}, function (reporte) {
+        console.log(reporte);
+        deferred.resolve(reporte);
+      }, function (error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
 
     this.parseReporte = function (reporte) {
         var indices = [],
