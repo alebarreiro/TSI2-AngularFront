@@ -171,6 +171,7 @@ angular.module('sapoApp')
         templateUrl: 'views/chart.html',
         url: '/chart',
         controller: 'ChartCtrl',
+        controllerAs: 'chartCtrl',
         resolve: {
           loadMyFile: function ($ocLazyLoad) {
             return $ocLazyLoad.load({
@@ -179,12 +180,13 @@ angular.module('sapoApp')
                 'bower_components/angular-chart.js/dist/angular-chart.min.js',
                 'bower_components/angular-chart.js/dist/angular-chart.css'
               ]
-            }),
-              $ocLazyLoad.load({
-                name: 'sapoApp',
-                files: ['scripts/controllers/chartContoller.js']
-              })
-          }
+            })
+          },
+          reporteVal: ['usuarioService', function (usuarioService) {
+            return usuarioService.obtenerReporteValorizacion().then(function (reporte) {
+              return reporte;
+            });
+          }]
         }
       })
       .state('dashboard.perfil', {

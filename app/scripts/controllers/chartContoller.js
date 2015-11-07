@@ -1,37 +1,36 @@
-'use strict';
-/**
- * @ngdoc function
- * @name sapoApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the sapoApp
- */
-angular.module('sapoApp')
-  .controller('ChartCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
-    $scope.line = {
-	    labels: ['Setiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-	    series: ['Almacen 1', 'Almacen 2', 'Almacen 3'],
-	    data: [
-	      [65, 59, 80, 81, 56, 55, 40],
-	      [28, 48, 40, 19, 86, 27, 90],
-				[40, 20, 30, 45, 67, 60, 70],
-	    ],
-	    onClick: function (points, evt) {
-	      console.log(points, evt);
-	    }
-    };
 
-    $scope.bar = {
-			labels: ['Setiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-			series: ['Almacen 1', 'Almacen 2', 'Almacen 3'],
-
-		data: [
-		   [65, 59, 80, 81, 56, 55, 40],
-		   [28, 48, 40, 19, 86, 27, 90],
-			 [40, 20, 30, 45, 67, 60, 70],
-		]
-    	
-    };
+//angular.module('sapoApp')
+//  .controller('ChartCtrl', ['$scope', 'reporte',
+//		function ($scope, reporte) {
+//
+//			this.init = function() {
+//				$scope.reporte = reporte;
+//			};
+//
+//    $scope.line = {
+//	    labels: ['Setiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+//	    series: ['Almacen 1', 'Almacen 2', 'Almacen 3'],
+//	    data: [
+//	      [65, 59, 80, 81, 56, 55, 40],
+//	      [28, 48, 40, 19, 86, 27, 90],
+//				[40, 20, 30, 45, 67, 60, 70],
+//	    ],
+//	    onClick: function (points, evt) {
+//	      console.log(points, evt);
+//	    }
+//    };
+//
+//    $scope.bar = {
+//			labels: ['Setiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+//			series: ['Almacen 1', 'Almacen 2', 'Almacen 3'],
+//
+//		data: [
+//		   [65, 59, 80, 81, 56, 55, 40],
+//		   [28, 48, 40, 19, 86, 27, 90],
+//			 [40, 20, 30, 45, 67, 60, 70],
+//		]
+//
+//    };
 
     //$scope.donut = {
     //	labels: ["Download Sales", "In-Store Sales", "Mail-Order Sales"],
