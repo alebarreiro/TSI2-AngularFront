@@ -8,7 +8,8 @@ angular.module('sapoApp')
 
             this.init = function () {
                 $scope.almacen = almacen;
-                $scope.productos = almacen.stockproductos;
+                $scope.categorias = almacen.categorias;
+                $scope.productos = [];
             };
 
             this.init();
@@ -17,17 +18,17 @@ angular.module('sapoApp')
 
             this.aumentarStockProducto = function (idProducto) {
 
-                var index = lodash.findIndex($scope.productos, function(prod) {
-                    return prod.productoID == idProducto;
-                });
 
+                var index = lodash.findIndex($scope.productos, function(prod) {
+                    return prod.id == idProducto;
+                });
                 $scope.productos[index].cantidad++;
             };
 
             this.reducirStockProducto = function (idProducto) {
 
                 var index = lodash.findIndex($scope.productos, function(prod) {
-                    return prod.productoID == idProducto;
+                    return prod.id == idProducto;
                 });
                 if ($scope.productos[index].cantidad > 0)
                     $scope.productos[index].cantidad--;
@@ -47,13 +48,11 @@ angular.module('sapoApp')
             }
 
             //Crea un producto específico.
-            this.crearProducto = function (nombreProducto, descProducto, idCategoria) {
-                console.log("nombreProducto: " + nombreProducto + " descProducto " + descProducto);
+            this.crearProducto = function (nombreProducto, descProducto) {
                 var that = this;
                 //Invoca al service para hacer el POST de la categoria.
-                this.categoria = categoriaService.createProducto(nombreProducto, descProducto, idCategoria)
+                this.categoria = categoriaService.createProducto(nombreProducto, descProducto, $scope.idCategoria)
                     .then(function(a) {
-                        console.log(a);
                         toastr.success('Producto ' + nombreProducto + ' creado.');
                         a.cantidad = 0;
                         $scope.productos.push(a);
@@ -69,11 +68,24 @@ angular.module('sapoApp')
             this.cargarProducto = function(productos) {
                 almacenService.cargarProductosAlmacen($scope.almacen.id, productos)
                     .then(function(a) {
-                        console.log(a);
                     })
                     .catch(function () {
                         toastr.error('Hubo un error al cargar el producto.');
                     });
+            }
+
+            this.listarProductos = function(idCategoria) {
+                $scope.idCategoria = idCategoria;
+                categoriaService.getProductosCatAlmacen($scope.almacen.id,idCategoria)
+                    .then(function (productos) {
+                    $scope.productos = [];
+                    var productosConStock = $scope.productos;
+                    productos.forEach(function (p) {
+                        p.producto.cantidad = p.cantidad;
+                        productosConStock.push(p.producto);
+                    });
+                });
+
             }
 
         }]);

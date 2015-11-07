@@ -38,7 +38,6 @@ angular.module('sapoApp')
       return deferred.promise;
     };
 
-
     this.createProducto = function(nombreProducto, descProducto, idCategoria) {
       var deferred = $q.defer();
       Producto.createProducto({}, {
@@ -53,5 +52,18 @@ angular.module('sapoApp')
       });
       return deferred.promise;
     };
+
+    this.getProductosCatAlmacen = function(idAlmacen, idCategoria) {
+      var deferred = $q.defer();
+      Categoria.getProductosCatAlmacen({id: idAlmacen, cat: idCategoria}, {},
+        function (productos) {
+          console.log(productos);
+          deferred.resolve(productos);
+      }, function (error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+
+    }
 
   }]);
