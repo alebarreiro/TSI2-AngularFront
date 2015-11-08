@@ -1,18 +1,12 @@
 angular.module('sapoApp')
-  .controller('MostrarAlmacenCtrl', ['almacen', '$scope', 'almacenService', 'toastr', 'lodash', 'ProductoHandler', 'CategoriaHandler', 'categoriaService', 'webscrapService', 'usuarioService', 'authService',
-    function (almacen, $scope, almacenService, toastr, lodash, ProductoHandler, CategoriaHandler, categoriaService, webscrapService, usuarioService, authService) {
+  .controller('MostrarAlmacenCtrl', ['almacen', 'notificaciones', '$scope', 'almacenService', 'toastr', 'lodash', 'authService',
+    function (almacen, notificaciones, $scope, almacenService, toastr, lodash, authService) {
 
     this.init = function () {
         console.log(almacen);
         $scope.almacenId = almacen.id;
         $scope.almacen = almacen;
-        $scope.productos = almacen.stockproductos;
-        $scope.categorias = almacen.categorias;
-        $scope.colaboradores = almacen.colaboradores;
-        $scope.mercadolibre = [];
-        $scope.catMercadoLibre = [];
-        $scope.usuarioSeleccionado = "";
-        $scope.searchterm = "";
+        $scope.notificaciones = notificaciones;
 
         //SE OBTIENE LOS COMENTARIOS.
         //SE INICIALIZA ACÁ PORQUE NO SE COMO INVOCAR UNA FUNCIÓN DESDE THIS.INIT

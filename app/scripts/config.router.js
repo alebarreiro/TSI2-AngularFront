@@ -265,6 +265,13 @@ angular.module('sapoApp')
                 }
               });
             }],
+          notificaciones: ['notificacionesService', '$stateParams',
+            function (notificacionesService, $stateParams) {
+              return notificacionesService.getNotificacionesStock($stateParams.url).then(function (notificaciones) {
+                console.log(notificaciones);
+                return notificaciones;
+              });
+            }],
         }
       })
 

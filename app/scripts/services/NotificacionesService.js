@@ -19,7 +19,7 @@ angular.module('sapoApp')
 
     this.getNotificacionesLimiteCuenta = function () {
       var user = authService.getLoggedUser();
-      
+
       var deferred = $q.defer();
       Notificacion.getNotificacionesLimiteCuenta({userid: user.id}, {},
         function (result) {
