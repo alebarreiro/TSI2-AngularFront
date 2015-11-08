@@ -92,7 +92,14 @@ angular.module('sapoApp')
                 'scripts/directives/dashboard/stats/stats.js'
               ]
             })
-          }
+          },
+          notifLimitesCuenta: ['notificacionesService',
+            function (notificacionesService) {
+              return notificacionesService.getNotificacionesLimiteCuenta().then(function (notificaciones) {
+                console.log(notificaciones);
+                return notificaciones;
+              });
+            }],
         }
       })
       .state('dashboard.agregarColaborador', {

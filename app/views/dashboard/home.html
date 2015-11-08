@@ -23,7 +23,24 @@
                     <i class="fa fa-clock-o fa-fw"></i> Últimas noticias
                 </div>
                 <!-- /.panel-heading -->
-                <timeline></timeline>
+                <div class="panel-body" style="max-height: 400px;  overflow-y: scroll;">
+                    <ul class="timeline">
+                        <li ng-class-odd="'timeline-inverted'" ng-class-even="'timeline'"
+                            ng-repeat="notificacion in notifLimitesCuenta.slice().reverse()">
+                            <div class="timeline-badge"><i class="fa fa-comment"></i>
+                            </div>
+                            <div class="timeline-panel">
+                                <p>
+                                    <small class="text-muted"><i class="fa fa-clock-o"></i> Administrador via
+                                        notificacion
+                                    </small>
+                                <div class="timeline-body">
+                                    <p>{{notificacion.mensaje}}</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
                 <!-- /.panel-body -->
             </div>
             <!-- /.panel -->

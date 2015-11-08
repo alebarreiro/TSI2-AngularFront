@@ -7,5 +7,13 @@
  * Controller of the sapoApp
  */
 angular.module('sapoApp')
-  .controller('MainCtrl', function($scope,$position) {
-  });
+  .controller('MainCtrl', [ '$scope', 'notifLimitesCuenta',
+    function($scope, notifLimitesCuenta) {
+
+      this.init = function () {
+        $scope.notifLimitesCuenta = notifLimitesCuenta;
+
+      };
+
+      this.init();
+  }]);
