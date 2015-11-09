@@ -24,8 +24,13 @@ angular.module('sapoApp')
            notificacionesService.getNotificacionesUser(almacenSeleccionada).then(function (notificaciones) {
              console.log(notificaciones);
 
-              angular.forEach(notificaciones, function(notif){
-                angular.forEach(productosConNotif, function(prod){
+             angular.forEach(productosConNotif, function(prod) {
+               prod.notifica = false;
+               prod.minimo = 0;
+             });
+
+             angular.forEach(notificaciones, function(notif) {
+              angular.forEach(productosConNotif, function(prod) {
                   if (prod.productoID == notif.productoID) {
                     prod.notifica = true;
                     prod.minimo = notif.minimo;
@@ -44,11 +49,19 @@ angular.module('sapoApp')
           productoID: producto.productoID,
           minimo: stockMinimo,
           notifica: true
-        };
+          },
+          that = this;
         notificacionesService.activarNotificacionProducto(almacenSeleccionada, data)
           .then(function(a) {
             console.log(a);
             toastr.success('Notificacion activada.');
+            var productos = $scope.productos;
+            angular.forEach(productos, function(prod){
+              if (prod.productoID == producto.productoID) {
+                prod.notifica = true;
+              }
+            });
+            $scope.productos = productos;
           })
           .catch(function () {
             toastr.error('Hubo un error al activar la notificacion.')
@@ -59,15 +72,27 @@ angular.module('sapoApp')
 
         var data = {
           productoID: producto.productoID,
-        };
+          };
+
         notificacionesService.eliminarNotificacion(almacenSeleccionada, data)
           .then(function(a) {
             console.log(a);
             toastr.success('Notificacion desactivada.');
+            var productos = $scope.productos;
+            angular.forEach(productos, function(prod){
+              if (prod.productoID == producto.productoID) {
+                prod.notifica = false;
+              }
+            });
+            $scope.productos = productos;
           })
           .catch(function () {
             toastr.error('Hubo un error al activar la notificacion.')
           });
+
+      };
+
+      actualizarLista = function (notifica, idProd) {
 
       };
 
