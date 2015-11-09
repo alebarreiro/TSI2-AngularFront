@@ -13,6 +13,7 @@ angular.module('sapoApp')
       actualizarPerfil     : { method: 'put',  params: { resource: 'usuarios' },                                         isArray: false },
       registrarUsuario     : { method: 'post', params: { resource: 'usuarios', subresource: 'create'},                   isArray: false },
       agregarAlmacen       : { method: 'post', params: { resource: 'usuarios', submodule: 'almacenes', op: 'create' },   isArray: false },
-      buscarUsuario        : { method: 'get',  params: { resource: 'usuarios', subresource: 'search' },                                         isArray: true  },
+      buscarUsuario        : { method: 'get',  params: { resource: 'usuarios', subresource: 'search' },                  isArray: true  },
+      getAlmacenesColabora : { method: 'get',  params: { resource: 'usuarios', submodule: 'tiendascolabora'},            isArray: true  },
     })
   }]);
