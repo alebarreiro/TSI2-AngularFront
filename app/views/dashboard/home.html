@@ -47,13 +47,20 @@
         </div>
         <!-- /.col-lg-8 -->
         <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-bell fa-fw"></i> Tus notificaciones
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-bell fa-fw"></i> Tus notificaciones
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item" ng-repeat="notificacion in notificaciones">
+                                <i class="fa fa-warning fa-fw"></i> {{notificacion.mensaje}}
+                                <!--<span class="pull-right text-muted small"><em>10:57 AM</em></span>-->
+                            </a>
+
+                        </div>
+                    </div>
                 </div>
-                <!-- /.panel-heading -->
-                <notifications></notifications> 
-                <!-- /.panel-body -->
             </div>
             <!-- /.panel -->
 
