@@ -100,6 +100,13 @@ angular.module('sapoApp')
                 return notificaciones;
               });
             }],
+          notifStock: ['notificacionesService',
+            function (notificacionesService) {
+              return notificacionesService.getAllNotificacionesStock().then(function (notificaciones) {
+                console.log(notificaciones);
+                return notificaciones;
+              });
+            }],
         }
       })
       .state('dashboard.agregarColaborador', {

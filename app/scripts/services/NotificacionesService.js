@@ -2,7 +2,8 @@
  * Created by alejandrobarreiro on 8/10/15.
  */
 angular.module('sapoApp')
-  .service('notificacionesService', ['$q', 'Almacen', 'Usuario', 'authService', 'Notificacion', function ($q, Almacen, Usuario, authService, Notificacion) {
+  .service('notificacionesService', ['$q', 'Almacen', 'Usuario', 'authService', 'Notificacion', 'AlmacenHandler',
+    function ($q, Almacen, Usuario, authService, Notificacion, AlmacenHandler) {
 
     this.init = function () {};
 
@@ -17,6 +18,21 @@ angular.module('sapoApp')
           deferred.reject(error);
         });
       return deferred.promise;
+    };
+
+    this.getAllNotificacionesStock = function () {
+      var user = authService.getLoggedUser();
+
+      var almacenHandler = new AlmacenHandler();
+      return almacenHandler.getAlmacenes().then(function (listaAlmacenes) {
+        var promises = [];
+        angular.forEach(listaAlmacenes, function(almacen){
+          promises.push(Notificacion.getNotificacionesStock({id: almacen.id, userid: user.id}).$promise);
+        });
+
+        //Super join de promises
+        return $q.all(promises);
+      });
     };
 
     this.getNotificacionesLimiteCuenta = function () {

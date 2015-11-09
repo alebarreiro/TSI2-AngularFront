@@ -7,12 +7,13 @@
  * Controller of the sapoApp
  */
 angular.module('sapoApp')
-  .controller('MainCtrl', [ '$scope', 'notifLimitesCuenta',
-    function($scope, notifLimitesCuenta) {
+  .controller('MainCtrl', [ '$scope', 'notifLimitesCuenta', 'notifStock',
+    function($scope, notifLimitesCuenta, notifStock) {
 
       this.init = function () {
         $scope.notifLimitesCuenta = notifLimitesCuenta;
-
+        console.log('notif stock');
+        console.log(notifStock);
       };
 
       this.init();
