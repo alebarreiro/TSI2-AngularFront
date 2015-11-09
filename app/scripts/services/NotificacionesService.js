@@ -7,8 +7,10 @@ angular.module('sapoApp')
     this.init = function () {};
 
     this.getNotificacionesStock = function (idAlmacen) {
+      var user = authService.getLoggedUser();
+
       var deferred = $q.defer();
-      Notificacion.getNotificacionesStock({id: idAlmacen}, {},
+      Notificacion.getNotificacionesStock({id: idAlmacen, userid: user.id}, {},
         function (result) {
           deferred.resolve(result);
         }, function (error) {
