@@ -54,4 +54,16 @@ angular.module('sapoApp')
       return deferred.promise;
     };
 
+    this.eliminarNotificacion = function (idAlmacen, data) {
+      var deferred = $q.defer();
+      var user = authService.getLoggedUser();
+
+      console.log(data);
+      Almacen.eliminarNotificacion({id: idAlmacen, userid: user.id}, data, function (result) {
+        deferred.resolve(result);
+      }, function (error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
   }]);

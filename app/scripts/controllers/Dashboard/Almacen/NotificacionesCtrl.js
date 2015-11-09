@@ -27,7 +27,7 @@ angular.module('sapoApp')
               angular.forEach(notificaciones, function(notif){
                 angular.forEach(productosConNotif, function(prod){
                   if (prod.productoID == notif.productoID) {
-                    prod.notifica = notif.notifica;
+                    prod.notifica = true;
                     prod.minimo = notif.minimo;
                   }
                 })
@@ -56,20 +56,18 @@ angular.module('sapoApp')
       };
 
       $scope.desactivarNotificacion = function (producto, stockMinimo) {
-        console.log(stockMinimo);
-        //var data = {
-        //  productoID: producto.productoID,
-        //  minimo: stockMinimo,
-        //  notifica: true
-        //};
-        //notificacionesService.activarNotificacionProducto(almacenSeleccionada, data)
-        //  .then(function(a) {
-        //    console.log(a);
-        //    toastr.success('Notificacion activada.');
-        //  })
-        //  .catch(function () {
-        //    toastr.error('Hubo un error al activar la notificacion.')
-        //  });
+
+        var data = {
+          productoID: producto.productoID,
+        };
+        notificacionesService.eliminarNotificacion(almacenSeleccionada, data)
+          .then(function(a) {
+            console.log(a);
+            toastr.success('Notificacion desactivada.');
+          })
+          .catch(function () {
+            toastr.error('Hubo un error al activar la notificacion.')
+          });
 
       };
 

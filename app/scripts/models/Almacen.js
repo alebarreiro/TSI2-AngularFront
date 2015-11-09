@@ -20,5 +20,6 @@ angular.module('sapoApp')
       borrarAlmacen           : { method: 'delete', params: { resource: 'almacenes' },                                         isArray: false },
       activarNotificacion     : { method: 'post',   params: { resource: 'almacenes', op: 'notificaciones', subop: 'stock' },   isArray: false },
       getNotificacionesUser   : { method: 'get',    params: { resource: 'almacenes', op: 'notificaciones', subop: 'stock' },   isArray: true },
+      eliminarNotificacion    : { method: 'delete', params: { resource: 'almacenes', op: 'notificaciones', subop: 'stock' },   isArray: false },
     })
   }]);
