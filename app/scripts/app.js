@@ -20,7 +20,8 @@ angular
         'ngRoute',
         'ngSanitize',
         'ngTouch',
-        'ngLodash'
+        'ngLodash',
+        'ngCart'
 
   ]);
 
