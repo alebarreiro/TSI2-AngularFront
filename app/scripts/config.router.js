@@ -239,7 +239,7 @@ angular.module('sapoApp')
             return almacenHandler.getAlmacenes().then(function (listaAlmacenes) {
               return listaAlmacenes;
             });
-          }]
+          }],
         }
       })
 

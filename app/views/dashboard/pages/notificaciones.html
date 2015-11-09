@@ -29,23 +29,26 @@
                         <tr ng-repeat="producto in productos">
                             <td> {{ producto.nombre }}  </td>
                             <td> {{ producto.cantidad}} </td>
-                            <td ng-init="stockMinimo=0" >
+                            <td >
 
-                                <a class="btn btn-sm btn-success" ng-click="stockMinimo = stockMinimo + 1">
+                                <a class="btn btn-sm btn-success" ng-click="producto.minimo = producto.minimo + 1">
                                     <p class="fa fa-plus" />
                                 </a>
 
                                 <span ng-model="stockMinimo">
-                                    {{stockMinimo}}
+                                    {{producto.minimo}}
                                 </span>
 
-                                <a class="btn btn-sm btn-danger" ng-click="stockMinimo = stockMinimo - 1">
+                                <a class="btn btn-sm btn-danger" ng-click="producto.minimo = producto.minimo - 1">
                                     <p class="fa fa-minus" />
                                 </a>
                             </td>
                             <td>
-                                <a class="btn btn-sm btn-info" ng-click="activarNotificacion(producto, stockMinimo)">
+                                <a ng-if="producto.notifica == false" class="btn btn-sm btn-info" ng-click="activarNotificacion(producto, producto.minimo)">
                                     Activar notificación
+                                </a>
+                                <a ng-if="producto.notifica == true" class="btn btn-sm btn-warning" ng-click="desactivarNotificacion(producto, producto.minimo )">
+                                    Desactivar notificación
                                 </a>
                             </td>
                         </tr>

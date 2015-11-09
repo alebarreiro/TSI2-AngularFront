@@ -19,5 +19,6 @@ angular.module('sapoApp')
       agregarComentario       : { method: 'post', params: { resource: 'almacenes', op: 'comentarios'       },   isArray: false },
       borrarAlmacen           : { method: 'delete', params: { resource: 'almacenes' },                                         isArray: false },
       activarNotificacion     : { method: 'post',   params: { resource: 'almacenes', op: 'notificaciones', subop: 'stock' },   isArray: false },
+      getNotificacionesUser   : { method: 'get',    params: { resource: 'almacenes', op: 'notificaciones', subop: 'stock' },   isArray: true },
     })
   }]);

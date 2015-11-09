@@ -14,17 +14,27 @@ angular.module('sapoApp')
         $scope.productos = [];
       };
 
-
-      $scope.seleccionarAlmacen = function (almacen) {
-        console.log(almacen)
-      };
-
       $scope.$watch('almacenId', function() {
        if ($scope.almacenId) {
          almacenSeleccionada = $scope.almacenId.replace(/ /g,'');
          var AlmacenHdlr= new AlmacenHandler();
          AlmacenHdlr.getAlmacen(almacenSeleccionada).then(function(almacen){
-           $scope.productos = almacen.stockproductos;
+           var productosConNotif = almacen.stockproductos;;
+
+           notificacionesService.getNotificacionesUser(almacenSeleccionada).then(function (notificaciones) {
+             console.log(notificaciones);
+
+              angular.forEach(notificaciones, function(notif){
+                angular.forEach(productosConNotif, function(prod){
+                  if (prod.productoID == notif.productoID) {
+                    prod.notifica = notif.notifica;
+                    prod.minimo = notif.minimo;
+                  }
+                })
+              });
+              console.log(productosConNotif);
+              $scope.productos = productosConNotif;
+           });
          })
        }
       });
@@ -43,6 +53,23 @@ angular.module('sapoApp')
           .catch(function () {
             toastr.error('Hubo un error al activar la notificacion.')
           });
+      };
+
+      $scope.desactivarNotificacion = function (producto, stockMinimo) {
+        console.log(stockMinimo);
+        //var data = {
+        //  productoID: producto.productoID,
+        //  minimo: stockMinimo,
+        //  notifica: true
+        //};
+        //notificacionesService.activarNotificacionProducto(almacenSeleccionada, data)
+        //  .then(function(a) {
+        //    console.log(a);
+        //    toastr.success('Notificacion activada.');
+        //  })
+        //  .catch(function () {
+        //    toastr.error('Hubo un error al activar la notificacion.')
+        //  });
 
       };
 
