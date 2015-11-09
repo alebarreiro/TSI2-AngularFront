@@ -29,4 +29,16 @@ angular.module('sapoApp')
         });
       return deferred.promise;
     };
+
+    this.activarNotificacionProducto = function (idAlmacen, data) {
+      var deferred = $q.defer();
+      var user = authService.getLoggedUser();
+
+      Almacen.activarNotificacion({id: idAlmacen, userid: user.id}, data, function (result) {
+        deferred.resolve(result);
+      }, function (error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
   }]);

@@ -3,8 +3,8 @@
  */
 
 angular.module('sapoApp')
-  .controller('NotificacionesCtrl', ['$scope', 'almacenService', 'usuarioService', 'toastr', 'almacenes', 'AlmacenHandler',
-    function ($scope, almacenService, usuarioService, toastr, almacenes, AlmacenHandler) {
+  .controller('NotificacionesCtrl', ['$scope', 'notificacionesService', 'usuarioService', 'toastr', 'almacenes', 'AlmacenHandler',
+    function ($scope, notificacionesService, usuarioService, toastr, almacenes, AlmacenHandler) {
 
       $scope.usuarios = {};
       var almacenSeleccionada;
@@ -35,7 +35,7 @@ angular.module('sapoApp')
           minimo: stockMinimo,
           notifica: true
         };
-        almacenService.activarNotificacionProducto(almacenSeleccionada, data)
+        notificacionesService.activarNotificacionProducto(almacenSeleccionada, data)
           .then(function(a) {
             console.log(a);
             toastr.success('Notificacion activada.');
