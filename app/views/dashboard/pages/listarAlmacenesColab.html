@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Tus almacenes!</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Listado de Almacenes
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>URL</th>
+                                <th>Plan</th>
+                                <th>Accion</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="almacen in almacenes">
+                                <td> {{ almacen.nombre }}</td>
+                                <td> {{ almacen.descripcion }} </td>
+                                <td> {{ almacen.id }}</td>
+                                <td ng-if="almacen.privado == true"> Privado </td>
+                                <td ng-if="almacen.privado == false"> Público </td>
+                                <td >
+                                    <a class="btn btn-sm btn-success" ui-sref="almacen.home({url: almacen.id})"> Entrar </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+    </div>
+    <!-- /.row -->
+</div>

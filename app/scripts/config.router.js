@@ -174,6 +174,20 @@ angular.module('sapoApp')
           }]
         }
       })
+      .state('dashboard.almacenescolabora', {
+        templateUrl: '../views/dashboard/pages/listarAlmacenesColab.html',
+        url: '/almacenesColabora',
+        controller: 'ListarAlmacenesCtrl',
+        controllerAs: 'listarAlmacenesCtrl',
+        resolve: {
+          almacenes: ['almacenService', function (almacenService) {
+            return almacenService.getAlmacenesColabora().then(function (listaAlmacenes) {
+              return listaAlmacenes;
+            });
+          }]
+        }
+      })
+
       .state('dashboard.chart', {
         templateUrl: 'views/chart.html',
         url: '/chart',

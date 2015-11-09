@@ -185,4 +185,18 @@ angular.module('sapoApp')
         });
       return deferred.promise;
     };
+
+    this.getAlmacenesColabora = function () {
+      var user = authService.getLoggedUser();
+      var deferred = $q.defer();
+
+      Usuario.getAlmacenesColabora({userid: user.id}, {}, function (almacenes) {
+        console.log(almacenes);
+        deferred.resolve(almacenes);
+      }, function (error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
+
   }]);
