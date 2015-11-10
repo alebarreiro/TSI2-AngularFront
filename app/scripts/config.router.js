@@ -93,25 +93,6 @@ angular.module('sapoApp')
               ]
             })
           },
-          notifLimitesCuenta: ['notificacionesService',
-            function (notificacionesService) {
-              return notificacionesService.getNotificacionesLimiteCuenta().then(function (notificaciones) {
-                console.log(notificaciones);
-                return notificaciones;
-              });
-            }],
-          notifStock: ['notificacionesService',
-            function (notificacionesService) {
-              return notificacionesService.getAllNotificacionesStock().then(function (notificaciones) {
-                console.log(notificaciones);
-                return notificaciones;
-              });
-            }],
-          reporteDashboard: ['usuarioService', function (usuarioService) {
-            return usuarioService.obtenerReporteDashboard().then(function (reporte) {
-              return reporte;
-            });
-          }]
         }
       })
       .state('dashboard.agregarColaborador', {

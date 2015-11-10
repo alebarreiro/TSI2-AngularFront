@@ -53,11 +53,17 @@
                     </div>
                     <div class="panel-body">
                         <div class="list-group">
-                            <a href="#" class="list-group-item" ng-repeat="notificacion in notificaciones">
+                            <a href="#" class="list-group-item" ng-repeat="notificacion in notificacionesStock">
                                 <i class="fa fa-warning fa-fw"></i> {{notificacion.mensaje}}
                                 <!--<span class="pull-right text-muted small"><em>10:57 AM</em></span>-->
                             </a>
 
+                        </div>
+
+                        <div ng-if="!notificacionesStock.length" class="divider">
+                            <span class="text-center" href="#">
+                                <strong>No tienes notificaciones</strong>
+                            </span>
                         </div>
                     </div>
                 </div>
