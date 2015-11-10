@@ -44,8 +44,6 @@ angular.module('sapoApp')
     this.crearNuevaAlmacen = function (almacen) {
       //Esta logica se va a ir cuando se haga lo del token
       var user = authService.getLoggedUser();
-      console.log(user);
-
 
       var deferred = $q.defer();
       Usuario.agregarAlmacen({userid: user.id}, almacen, function (almacenResult) {
@@ -188,5 +186,16 @@ angular.module('sapoApp')
       });
       return deferred.promise;
     };
+
+    this.getColaboradoresAlmacen = function (idAlmacen) {
+      deferred = $q.defer();
+
+      Almacen.getColaboradores({id: idAlmacen}, {}, function (result) {
+          deferred.resolve(result);
+        }, function (error) {
+          deferred.reject(error);
+        });
+      return deferred.promise;
+    }
 
   }]);

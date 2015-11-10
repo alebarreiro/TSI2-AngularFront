@@ -3,11 +3,19 @@
         <div class="col-lg-12">
             <h1 class="page-header">Colaboradores</h1>
         </div>
+        <div class="form-group">
+            <label>Seleccione un almacen</label>
+            <select class="form-control" ng-model="almacenId" placeholder="Seleccione un almacen" required>
+                <option ng-repeat="almacen in almacenes"> {{almacen.id}} </option>
+            </select>
+            <p class="help-block">Seleccione un almacen para listar todos sus colaboradores</p>
+        </div>
+
         <!-- /.col-lg-12 -->
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Todos tus colaboradores
+                    Colaboradores
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">

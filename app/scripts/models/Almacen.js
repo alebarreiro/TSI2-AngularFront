@@ -21,5 +21,7 @@ angular.module('sapoApp')
       activarNotificacion     : { method: 'post',   params: { resource: 'almacenes', op: 'notificaciones', subop: 'stock' },   isArray: false },
       getNotificacionesUser   : { method: 'get',    params: { resource: 'almacenes', op: 'notificaciones', subop: 'stock' },   isArray: true },
       eliminarNotificacion    : { method: 'delete', params: { resource: 'almacenes', op: 'notificaciones', subop: 'stock' },   isArray: false },
+      getColaboradores        : { method: 'get',    params: { resource: 'almacenes', op: 'colaboradores' },                    isArray: true  },
+
     })
   }]);

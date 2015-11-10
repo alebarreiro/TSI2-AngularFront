@@ -71,6 +71,18 @@ angular.module('sapoApp')
       return deferred.promise;
     };
 
+    this.obtenerReporteDashboard = function () {
+      var user = authService.getLoggedUser();
+      var deferred = $q.defer();
+      Reporte.getReporteDashboard({userid: user.id}, function (reporte) {
+        console.log(reporte);
+        deferred.resolve(reporte);
+      }, function (error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
+
     this.parseReporte = function (reporte) {
         var indices = [],
           indicesRandom = [],

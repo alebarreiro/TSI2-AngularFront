@@ -107,6 +107,11 @@ angular.module('sapoApp')
                 return notificaciones;
               });
             }],
+          reporteDashboard: ['usuarioService', function (usuarioService) {
+            return usuarioService.obtenerReporteDashboard().then(function (reporte) {
+              return reporte;
+            });
+          }]
         }
       })
       .state('dashboard.agregarColaborador', {
@@ -194,6 +199,21 @@ angular.module('sapoApp')
           }]
         }
       })
+      .state('dashboard.listarColaboradores', {
+        templateUrl: '../views/dashboard/pages/almacen/listarColaboradores.html',
+        url: '/colaboradores',
+        controller: 'ListarColaboradoresCtrl',
+        controllerAs: 'listarColaboradoresCtrl',
+        resolve: {
+          almacenes: ['AlmacenHandler', function (AlmacenHandler) {
+            var almacenHandler = new AlmacenHandler();
+            return almacenHandler.getAlmacenes().then(function (listaAlmacenes) {
+              return listaAlmacenes;
+            });
+          }],
+        }
+      })
+
 
       .state('dashboard.chart', {
         templateUrl: 'views/chart.html',
