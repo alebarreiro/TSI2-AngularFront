@@ -63,7 +63,16 @@ angular.module('sapoApp')
         deferred.reject(error);
       });
       return deferred.promise;
+    }
 
+    this.addTags = function(idProducto, tags) {
+      var deferred = $q.defer();
+      Producto.addTags({id: idProducto}, tags, function (tag) {
+        deferred.resolve(tag);
+      }, function (error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
     }
 
   }]);

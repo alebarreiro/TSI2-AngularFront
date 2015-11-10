@@ -17,8 +17,6 @@ angular.module('sapoApp')
             // *** FUNCIONES DE PRODUCTOS *** //
 
             this.aumentarStockProducto = function (idProducto) {
-
-
                 var index = lodash.findIndex($scope.productos, function(prod) {
                     return prod.id == idProducto;
                 });
@@ -48,7 +46,7 @@ angular.module('sapoApp')
             }
 
             //Crea un producto específico.
-            this.crearProducto = function (nombreProducto, descProducto) {
+            this.crearProducto = function (nombreProducto, descProducto, tags) {
                 var that = this;
                 //Invoca al service para hacer el POST de la categoria.
                 this.categoria = categoriaService.createProducto(nombreProducto, descProducto, $scope.idCategoria)
@@ -57,7 +55,7 @@ angular.module('sapoApp')
                         a.cantidad = 0;
                         $scope.productos.push(a);
                         var param = [{"productoID": a.id, "cantidad": a.cantidad}];
-                        that.cargarProducto(param);
+                        that.cargarProducto(param, tags);
                     })
                     .catch(function () {
                         toastr.error('Hubo un error al dar de alta el producto.')
@@ -65,9 +63,12 @@ angular.module('sapoApp')
             };
 
             //Carga una lista de productos en el almacén.
-            this.cargarProducto = function(productos) {
+            this.cargarProducto = function(productos, tags) {
+                var that = this;
                 almacenService.cargarProductosAlmacen($scope.almacen.id, productos)
                     .then(function(a) {
+                        console.log(a.id);
+                        that.cargarTags(tags, a.id);
                     })
                     .catch(function () {
                         toastr.error('Hubo un error al cargar el producto.');
@@ -78,14 +79,22 @@ angular.module('sapoApp')
                 $scope.idCategoria = idCategoria;
                 categoriaService.getProductosCatAlmacen($scope.almacen.id,idCategoria)
                     .then(function (productos) {
-                    $scope.productos = [];
-                    var productosConStock = $scope.productos;
-                    productos.forEach(function (p) {
-                        p.producto.cantidad = p.cantidad;
-                        productosConStock.push(p.producto);
-                    });
+                        $scope.productos = [];
+                        var productosConStock = $scope.productos;
+                        productos.forEach(function (p) {
+                            p.producto.cantidad = p.cantidad;
+                            productosConStock.push(p.producto);
+                        });
                 });
-
             }
 
+            this.cargarTags = function(tags, idProducto) {
+                categoriaService.addTags(idProducto, tags)
+                    .then(function(tag) {
+                        console.log(tag);
+                    })
+                    .catch(function(){
+                        toastr.error('Hubo un error al cargar los tags.')
+                    });
+            }
         }]);

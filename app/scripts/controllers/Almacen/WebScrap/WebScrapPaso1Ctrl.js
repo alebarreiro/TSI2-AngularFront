@@ -10,8 +10,6 @@ angular.module('sapoApp')
                 console.log(almacen);
                 $scope.almacen = almacen;
                 $scope.mercadolibre = [];
-
-
                 $scope.categorias = almacen.categorias;
             };
 
