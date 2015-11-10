@@ -33,6 +33,7 @@ angular.module('sapoApp')
           } else {
             // the user isn't logged in to Facebook.
             console.log("Loggeando a facebook");
+
             FB.login(function (response) {
               if (response.authResponse) {
                 that.getPerfilFB(function(user){
@@ -51,17 +52,20 @@ angular.module('sapoApp')
       this.getPerfilFB = function (callback) {
         FB.api('/me', {fields: ['first_name', 'last_name', 'email', 'picture']}, function (response) {
           var accessToken = FB.getAuthResponse().accessToken;
-          console.log(response);
-          var currentUser = {
-            id: response.email,
-            nombre: response.first_name,
-            apellido: response.last_name,
-            email: response.email,
-            picture: response.picture.data.url,
-            facebook: true,
-            token: accessToken
-          };
-          callback && callback(currentUser);
+          if (!response.email) {
+            toastr.error('Error: Permisos de facebook insuficientes.');
+          } else {
+            var currentUser = {
+              id: response.email ? response.email : response.first_name,
+              nombre: response.first_name,
+              apellido: response.last_name,
+              email: response.email,
+              picture: response.picture.data.url,
+              facebook: true,
+              token: accessToken
+            };
+            callback && callback(currentUser);
+          }
         });
       };
 

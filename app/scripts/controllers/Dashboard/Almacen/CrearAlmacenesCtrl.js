@@ -21,6 +21,7 @@ angular.module('sapoApp')
       var almacen = $scope.almacen;
 
       if (almacenService.validarAlmacen(almacen)) {
+        almacen.privado = false;
         almacenService.crearNuevaAlmacen(almacen)
           .then(function (a) {
             console.log(a);

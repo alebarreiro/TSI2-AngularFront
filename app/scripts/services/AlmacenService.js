@@ -44,8 +44,6 @@ angular.module('sapoApp')
     this.crearNuevaAlmacen = function (almacen) {
       //Esta logica se va a ir cuando se haga lo del token
       var user = authService.getLoggedUser();
-      console.log(user);
-
 
       var deferred = $q.defer();
       Usuario.agregarAlmacen({userid: user.id}, almacen, function (almacenResult) {
