@@ -30,8 +30,9 @@
                                 <td ng-if="almacen.privado == true"> Privado </td>
                                 <td ng-if="almacen.privado == false"> Público </td>
                                 <td >
-                                    <a ng-if="almacen.privado == false" class="btn btn-sm btn-primary" ng-click="hacerPrivadaAlmacen(almacen)"> Hacer privada </a>
-                                    <a ng-if="almacen.privado == true" class="btn btn-sm btn-warning" ng-click="hacerPublicaAlmacen(almacen)"> Hacer pública </a>
+                                    <a ng-if="upgrade == true" class="btn btn-sm btn-primary" ui-sref="dashboard.perfil" data-toggle="tooltip" data-placement="top" title="Debes cambiar de plan para tener un almacen privada"> Upgrade de plan </a>
+                                    <a ng-if="almacen.privado == false" ng-disabled="upgrade == true" class="btn btn-sm btn-primary" ng-click="hacerPrivadaAlmacen(almacen)"> Hacer privada </a>
+                                    <a ng-if="almacen.privado == true" ng-disabled="upgrade == true" class="btn btn-sm btn-warning" ng-click="hacerPublicaAlmacen(almacen)"> Hacer pública </a>
                                     <a class="btn btn-sm btn-danger" ng-click="eliminarAlmacen(almacen)"> Eliminar </a>
                                     <a class="btn btn-sm btn-success" ui-sref="almacen.home({url: almacen.id})"> Entrar </a>
                                 </td>

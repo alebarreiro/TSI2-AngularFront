@@ -57,4 +57,17 @@ angular.module('sapoApp')
       return deferred.promise;
     };
 
+
+    this.getCuentaUsuario = function () {
+
+      var deferred = $q.defer(),
+        user = authService.getLoggedUser();
+      Cuenta.getCuentaUsuario({userid: user.id}, {}, function (cuenta) {
+        deferred.resolve(cuenta);
+      }, function (error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
+
   }]);
