@@ -459,5 +459,25 @@ angular.module('sapoApp')
         }
       })
 
+        .state('almacen.movimientos', {
+          templateUrl: '../views/almacen/pages/movimientos.html',
+          url: '/:url/movimientos',
+          controller: 'MovimientosAlmacenCtrl',
+          controllerAs: 'movimientosAlmacenCtrl',
+          resolve: {
+            almacen: ['almacenService', '$stateParams', '$rootScope', 'AUTH_EVENTS', 'authService',
+              function (almacenService, $stateParams, $rootScope, AUTH_EVENTS, authService) {
+                return almacenService.getAlmacen($stateParams.url)
+                    .then(function (almacen) {
+                      if (authService.isAuthorizedInState(almacen)) {
+                        return almacen;
+                      } else {
+                        $rootScope.$emit(AUTH_EVENTS.notAuthorized);
+                      }
+                    });
+              }]
+          }
+        })
+
 
   }]);

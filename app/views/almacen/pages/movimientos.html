@@ -1,0 +1,25 @@
+<h2>Movimientos del almacen</h2>
+<div class="panel-body">
+    <div class="dataTable_wrapper">
+        <table class="table table-striped table-bordered table-hover" id="dataTable-carrito">
+            <thead>
+            <tr>
+                <th>Nombre </th>
+                <th>Diferencia </th>
+                <th>Stock </th>
+                <th>Fecha </th>
+                <th>Hora </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="m in movimientos">
+                <td> {{ m.producto_nombre }}</td>
+                <td> {{ m.diferencia }}</td>
+                <td> {{ m.stock }}</td>
+                <td> {{ m.fecha | date:'dd-MM-yyyy '}}</td>
+                <td> {{ m.fecha | date:'HH:mm '}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

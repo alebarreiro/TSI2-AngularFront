@@ -62,7 +62,6 @@ angular.module('sapoApp').controller('CarritoVerCtrl',
             this.actualizarCarrito = function(index) {
                 carritoService.agregarCarrito($scope.almacen.id, $scope.carrito[index].producto.id, $scope.carrito[index].cantidad_compras, $scope.carrito[index].total)
                     .then(function(carrito) {
-                        console.log(carrito)
                     })
                     .catch(function(){
 
@@ -78,7 +77,6 @@ angular.module('sapoApp').controller('CarritoVerCtrl',
 
                 carritoService.borrarCarrito($scope.almacen.id, idProducto)
                     .then(function(carrito){
-                        console.log(carrito);
 
                     })
                     .catch(function() {
