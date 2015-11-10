@@ -25,6 +25,13 @@
                 <a class="btn btn-sm btn-success" ng-click="productosAlmacenCtrl.crearProducto(producto.nombre, producto.descripcion, producto.tags)">Agregar</a>
             </td>
             </tbody>
+<!--
+            <div>
+                <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this)" id="photo-upload"/>
+                <br>
+                <button ng-click="productosAlmacenCtrl.add()">Add</button>
+            </div>
+-->
         </div>
     </div>
 
@@ -48,6 +55,7 @@
                         <th>Producto</th>
                         <th>Acciones</th>
                         <th>Stock</th>
+                        <th>Imágenes</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -65,15 +73,14 @@
                             </a>
                         </td>
                         <td> {{ producto.cantidad }}</td>
+                        <td><a href="{{producto.imagenes}}" target="_blank">
+                            <img ng-src="{{producto.imagenes}}" style="width:50px; height:50px" />
+                        </a>
+                             </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-
     </div>
-
-
 </div>
-
-

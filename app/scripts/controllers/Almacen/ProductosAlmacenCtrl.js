@@ -3,8 +3,8 @@
  */
 
 angular.module('sapoApp')
-    .controller('ProductosAlmacenCtrl', ['almacen', '$scope', 'almacenService', 'toastr', 'lodash', 'ProductoHandler', 'CategoriaHandler', 'categoriaService', 'webscrapService', 'usuarioService', 'authService',
-        function (almacen, $scope, almacenService, toastr, lodash, ProductoHandler, CategoriaHandler, categoriaService, webscrapService, usuarioService, authService) {
+    .controller('ProductosAlmacenCtrl', ['almacen', '$scope', 'almacenService', 'toastr', 'lodash', 'ProductoHandler', 'CategoriaHandler', 'categoriaService', 'webscrapService', 'usuarioService', 'authService', 'cloudinaryService',
+        function (almacen, $scope, almacenService, toastr, lodash, ProductoHandler, CategoriaHandler, categoriaService, webscrapService, usuarioService, authService, cloudinaryService) {
 
             this.init = function () {
                 $scope.almacen = almacen;
@@ -81,8 +81,10 @@ angular.module('sapoApp')
                     .then(function (productos) {
                         $scope.productos = [];
                         var productosConStock = $scope.productos;
+
                         productos.forEach(function (p) {
                             p.producto.cantidad = p.cantidad;
+                            p.producto.imagenes = "http://res.cloudinary.com/sapo/image/upload/v1447175695/10422024_821459174596473_3998766916779207534_n_yga1sw.jpg";
                             productosConStock.push(p.producto);
                         });
                 });
@@ -97,4 +99,73 @@ angular.module('sapoApp')
                         toastr.error('Hubo un error al cargar los tags.')
                     });
             }
+
+            //PRUEBA UPLOAD COULDINARY
+            this.add = function(){
+                var that = this;
+                var f = document.getElementById('file').files[0],
+                    r = new FileReader();
+                r.onloadend = function(e){
+                    console.log(e);
+                    $scope.data = e.target.result;
+                    that.upload($scope.data);
+                }
+                r.readAsBinaryString(f);
+            }
+
+            //PRUEBA UPLOAD COULDINARY
+
+            this.upload = function(data) {
+                cloudinaryService.upload(data)
+                    .then(function(result) {
+                        console.log(result)
+                    })
+                    .catch(function() {
+
+                    })
+            }
+
+            $scope.uploadFile = function (input) {
+
+                console.log(input);
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    var that = $scope;
+                    reader.onload = function (e) {
+
+                        //Sets the Old Image to new New Image
+                        $('#photo-id').attr('src', e.target.result);
+
+                        //Create a canvas and draw image on Client Side to get the byte[] equivalent
+                        var canvas = document.createElement("canvas");
+                        var imageElement = document.createElement("img");
+
+                        imageElement.setAttribute('src', e.target.result);
+                        canvas.width = imageElement.width;
+                        canvas.height = imageElement.height;
+                        var context = canvas.getContext("2d");
+                        context.drawImage(imageElement, 0, 0);
+                        var base64Image = canvas.toDataURL("image/jpeg");
+
+                        //Removes the Data Type Prefix
+                        //And set the view model to the new value
+                        $scope.data = base64Image.replace(/data:image\/jpeg;base64,/g, '');
+                        $scope.upload($scope.data);
+                    }
+
+                    //Renders Image on Page
+                    reader.readAsDataURL(input.files[0]);
+                }
+            };
+
+            $scope.upload = function(data) {
+                cloudinaryService.upload(data.files[0])
+                    .then(function(result) {
+                        console.log(result)
+                    })
+                    .catch(function() {
+
+                    })
+            }
+
         }]);
