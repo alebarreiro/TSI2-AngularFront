@@ -9,6 +9,7 @@
                 <th>Descripcion </th>
                 <th>A comprar </th>
                 <th>Comprados </th>
+                <th>Acciones </th>
             </tr>
             </thead>
             <tbody>
@@ -32,6 +33,11 @@
                 <a class="btn btn-sm btn-danger" ng-click="carritoVerCtrl.reducirTotal(c.producto.id)">
                     <p class="fa fa-minus" />
                 </a>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-danger" ng-click="carritoVerCtrl.borrarProducto(c.producto.id)">
+                        Borrar
+                    </a>
                 </td>
             </tr>
             </tbody>

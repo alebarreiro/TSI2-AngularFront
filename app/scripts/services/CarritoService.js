@@ -33,9 +33,9 @@ angular.module('sapoApp')
             return deferred.promise;
         };
 
-        this.borrarCarrito = function(idCarrito) {
+        this.borrarCarrito = function(idCarrito, idProducto) {
             var deferred = $q.defer();
-            Carrito.borrarCarrito({ id: idCarrito }, {}, function (carrito) {
+            Carrito.borrarCarrito({ id: idCarrito, prod: idProducto }, {}, function (carrito) {
                 deferred.resolve(carrito);
             }, function(error) {
                 deferred.reject(error);

@@ -60,12 +60,28 @@ angular.module('sapoApp').controller('CarritoVerCtrl',
             }
 
             this.actualizarCarrito = function(index) {
-                console.log($scope.carrito[index]);
                 carritoService.agregarCarrito($scope.almacen.id, $scope.carrito[index].producto.id, $scope.carrito[index].cantidad_compras, $scope.carrito[index].total)
                     .then(function(carrito) {
                         console.log(carrito)
                     })
                     .catch(function(){
+
+                    });
+            }
+
+            this.borrarProducto = function(idProducto) {
+
+                var index = lodash.findIndex($scope.carrito, function(prod) {
+                    return prod.producto.id == idProducto;
+                });
+                $scope.carrito.splice(index,1);
+
+                carritoService.borrarCarrito($scope.almacen.id, idProducto)
+                    .then(function(carrito){
+                        console.log(carrito);
+
+                    })
+                    .catch(function() {
 
                     });
             }

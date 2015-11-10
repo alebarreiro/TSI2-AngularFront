@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<div class="panel-body">
+    <div class="col-md-4">
+        <ul class="nav nav-pills nav-stacked">
+            <li ng-repeat="categoria in categorias">
+                <a ng-click="carritoAgregarCtrl.listarProductos(categoria.id)">
+                    <h5>{{ categoria.nombre }}</h5>
+                </a>
+            </li>
+        </ul>
+    </div>
 
-</body>
-</html>
+    <div class="col-md-8">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="producto in productos">
+                    <td> {{ producto.nombre }}</td>
+                    <td> {{ producto.descripcion }}</td>
+                    <td> <a class="btn btn-sm btn-success" ng-click="carritoAgregarCtrl.agregarProductoCarrito(producto.id)">Agregar</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
