@@ -1,6 +1,6 @@
 angular.module('sapoApp')
-  .controller('ListarColaboradoresCtrl', ['$scope', 'usuarioService', 'toastr', 'almacenes', 'AlmacenHandler',
-    function ($scope,  usuarioService, toastr, almacenes, AlmacenHandler) {
+  .controller('ListarColaboradoresCtrl', ['$scope', 'usuarioService', 'toastr', 'almacenes', 'almacenService',
+    function ($scope,  usuarioService, toastr, almacenes, almacenService) {
 
       $scope.usuarios = {};
       var almacenSeleccionada;
@@ -14,6 +14,11 @@ angular.module('sapoApp')
         if ($scope.almacenId) {
           almacenSeleccionada = $scope.almacenId.replace(/ /g,'');
           console.log(almacenSeleccionada);
+          if (almacenSeleccionada) {
+            almacenService.getColaboradoresAlmacen(almacenSeleccionada).then(function(colaboradores){
+              $scope.colaboradores = colaboradores;
+            })
+          }
         }
       });
 

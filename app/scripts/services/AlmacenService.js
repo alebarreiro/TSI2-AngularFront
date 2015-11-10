@@ -187,4 +187,15 @@ angular.module('sapoApp')
       return deferred.promise;
     };
 
+    this.getColaboradoresAlmacen = function (idAlmacen) {
+      deferred = $q.defer();
+
+      Almacen.getColaboradores({id: idAlmacen}, {}, function (result) {
+          deferred.resolve(result);
+        }, function (error) {
+          deferred.reject(error);
+        });
+      return deferred.promise;
+    }
+
   }]);
