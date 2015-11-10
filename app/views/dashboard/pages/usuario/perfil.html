@@ -37,6 +37,7 @@
                                     <th>Descrición</th>
                                     <th>Precio</th>
                                     <th>Accion</th>
+                                    <th>Carrito</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -50,6 +51,9 @@
                                             Comprar!
                                         </a>
                                     </td>
+                                    <td>
+                                        <ngcart-addtocart id="{{ cuenta.cuentaID }}" name="{{ cuenta.nombre }}" price="{{ cuenta.precio }}" quantity="1" quantity-max="1" data="cuenta"></ngcart-addtocart>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -58,6 +62,16 @@
                     </div>
                     <!-- /.panel-body -->
                 </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ngcart-cart></ngcart-cart>
+                <ngcart-checkout service="paypal"
+                                 settings="{ url:'/checkout', item_number:'1', currency_code: 'USD'}">
+
+                </ngcart-checkout>
             </div>
         </div>
     </div>
