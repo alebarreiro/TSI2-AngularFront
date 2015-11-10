@@ -8,5 +8,6 @@ angular.module('sapoApp')
     return $resource(API_REST_URL + ':resource/:subresource/:userid/:submodule/:op', { userid: '@userid' }, {
       getReporteValorizacion     : { method: 'get',  params: { resource: 'reportes', submodule: 'valorizaciones' },           isArray: false },
       getReporteMovimientos      : { method: 'get',  params: { resource: 'reportes', subresource: 'movimientos' },     isArray: false  },
+      getReporteDashboard        : { method: 'get',  params: { resource: 'reportes', subresource: 'usuario' },     isArray: false  },
     })
   }]);

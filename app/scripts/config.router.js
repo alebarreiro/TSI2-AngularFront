@@ -107,6 +107,11 @@ angular.module('sapoApp')
                 return notificaciones;
               });
             }],
+          reporteDashboard: ['usuarioService', function (usuarioService) {
+            return usuarioService.obtenerReporteDashboard().then(function (reporte) {
+              return reporte;
+            });
+          }]
         }
       })
       .state('dashboard.agregarColaborador', {

@@ -7,13 +7,13 @@
  * Controller of the sapoApp
  */
 angular.module('sapoApp')
-  .controller('MainCtrl', [ '$scope', 'notifLimitesCuenta', 'notifStock',
-    function($scope, notifLimitesCuenta, notifStock) {
+  .controller('MainCtrl', [ '$scope', 'notifLimitesCuenta', 'notifStock', 'reporteDashboard',
+    function($scope, notifLimitesCuenta, notifStock, reporteDashboard) {
 
       this.init = function () {
         $scope.notifLimitesCuenta = notifLimitesCuenta;
-        console.log('notif stock');
-        console.log(notifStock);
+        console.log('rep dash');
+        console.log(reporteDashboard);
         var notificacionesStock = [];
         angular.forEach(notifStock, function(notificaciones){
           angular.forEach(notificaciones, function(notificacion){
@@ -21,6 +21,7 @@ angular.module('sapoApp')
           });
         });
         $scope.notificaciones = notificacionesStock;
+        $scope.dashboard = reporteDashboard;
       };
 
       this.init();
