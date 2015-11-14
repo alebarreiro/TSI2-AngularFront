@@ -12,5 +12,6 @@ angular.module('sapoApp')
       crearCuenta             : { method: 'post', params: { resource: 'cuentas', subresource: 'create' },    sArray: false  },
       actualizarCuenta        : { method: 'put',  params: { resource: 'cuentas', subresource: 'update' },    isArray: false },
       actualizarCuentaUsuario : { method: 'put',  params: { resource: 'cuentas', subresource: 'update' },    isArray: false },
+      getCuentaUsuario        : { method: 'get',  params: { resource: 'cuentas'},                            isArray: false },
     })
   }]);
