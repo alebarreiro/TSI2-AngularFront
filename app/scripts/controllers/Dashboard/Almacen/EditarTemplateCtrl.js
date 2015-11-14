@@ -3,8 +3,8 @@
  */
 angular.module('sapoApp')
   .controller('EditarTemplateCtrl', ['templateId', '$scope', 'TemplateHandler', 'toastr', '$location', 'categorias',
-    'almacenService', 'CategoriaHandler', 'categoriaService',
-    function (templateId, $scope, TemplateHandler, toastr, $location, categorias, almacenService, CategoriaHandler, categoriaService) {
+    'almacenService', 'CategoriaHandler',
+    function (templateId, $scope, TemplateHandler, toastr, $location, categorias, almacenService, CategoriaHandler) {
 
 
       this.init = function () {

@@ -3,8 +3,8 @@
  */
 
 angular.module('sapoApp')
-    .controller('ProductosAlmacenCtrl', ['almacen', '$scope', 'almacenService', 'toastr', 'lodash', 'ProductoHandler', 'CategoriaHandler', 'categoriaService', 'webscrapService', 'usuarioService', 'authService', 'cloudinaryService',
-        function (almacen, $scope, almacenService, toastr, lodash, ProductoHandler, CategoriaHandler, categoriaService, webscrapService, usuarioService, authService, cloudinaryService) {
+    .controller('ProductosAlmacenCtrl', ['almacen', '$scope', 'almacenService', 'toastr', 'lodash', 'ProductoHandler', 'categoriaService', 'webscrapService', 'usuarioService', 'authService', 'cloudinaryService',
+        function (almacen, $scope, almacenService, toastr, lodash, ProductoHandler, categoriaService, webscrapService, usuarioService, authService, cloudinaryService) {
 
             this.init = function () {
                 $scope.almacen = almacen;
