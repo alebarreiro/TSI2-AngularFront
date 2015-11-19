@@ -11,12 +11,38 @@ angular.module('sapoApp')
         console.log(almacen.css);
 
        // $css.add()
+      var styles = "";
+      if (almacen.css && almacen.css.length) {
+        styles = almacen.css;
+      } else {
+        styles = "body { " +
+          "background-color: #f8f8f8 " +
+          "} " +
+          "#wrapper { " +
+          "width: 100%; " +
+          "} " +
+          "#page-wrapper { " +
+          "padding: 0 15px; " +
+          "min-height: 568px; " +
+          "background-color: #fff;" +
+          "}" +
+          ".h1 { " +
+          "font-size: 36px; " +
+          "} " +
+          ".page-header {" +
+          "padding-bottom: " +
+          "9px;margin: 40px 0 20px;" +
+          "border-bottom: 1px solid black;" +
+          "}" +
+          ".h2 { " +
+          "font-size: 30px;" +
+          " }";
+      }
 
       var css = document.createElement("style");
       css.type = "text/css";
       css.innerHTML = almacen.css;
-      document.body.appendChild(css);
-      console.log(css);
+      document.body.appendChild(styles);
 
         console.log(almacen);
         $scope.almacenId = almacen.id;
