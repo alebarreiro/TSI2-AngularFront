@@ -11,7 +11,7 @@
         <stats string="" comments="¡Crear nuevo almacén!" colour="primary" type="star" goto="dashboard.crearAlmacen.datos"></stats>
         <stats number="{{dashboard.cantidad_almacenes}}" comments="Almacenes!" colour="primary" type="shopping-cart" goto="dashboard.almacenes"></stats>
         <stats number="{{dashboard.cantidad_colaboradores}}" comments="Colaboradores!" colour="primary" type="user" goto="dashboard.listarColaboradores"></stats>
-        <stats number="{{dashboard.cantidad_notificaciones}}" comments="Notificaciones!" colour="red" type="support" goto="dashboard.notificaciones"></stats>
+        <stats number="{{dashboard.cantidad_notificaciones}}" comments="Notificaciones!" colour="{{dashboard.cantidad_notificaciones > 0 ? 'yellow' : 'primary'}}" type="support" goto="dashboard.notificaciones"></stats>
 
     </div>
     
