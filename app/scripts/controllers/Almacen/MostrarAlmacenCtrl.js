@@ -32,17 +32,18 @@ angular.module('sapoApp')
           ".page-header {" +
           "padding-bottom: " +
           "9px;margin: 40px 0 20px;" +
-          "border-bottom: 1px solid black;" +
+          "border-bottom: 1px solid #ddd;" +
           "}" +
           ".h2 { " +
           "font-size: 30px;" +
           " }";
+
       }
 
       var css = document.createElement("style");
       css.type = "text/css";
-      css.innerHTML = almacen.css;
-      document.body.appendChild(styles);
+      css.innerHTML = styles;
+      document.body.appendChild(css);
 
         console.log(almacen);
         $scope.almacenId = almacen.id;
@@ -51,31 +52,33 @@ angular.module('sapoApp')
 
         //SE OBTIENE LOS COMENTARIOS.
         //SE INICIALIZA ACÁ PORQUE NO SE COMO INVOCAR UNA FUNCIÓN DESDE THIS.INIT
-        almacenService.obtenerComentarios($scope.almacenId)
-            .then(function (result) {
-                console.log(result);
+      almacenService.obtenerComentarios($scope.almacenId)
+        .then(function (result) {
+          console.log(result);
 
-              var actual = "",
-                anterior = result[0].usuario,
-                par = true,
-                comentarios = [];
-              angular.forEach(result, function(r){
-                actual = r.usuario;
-                if (actual == anterior) {
-                  r.par = par;
-                } else {
-                  par = !par;
-                  r.par = par;
-                  anterior = actual;
-                }
-                comentarios.push(r);
-              });
-              console.log(comentarios);
-                $scope.comentarios = comentarios;
-            })
-            .catch(function () {
-                toastr.error('Hubo un error al dar de alta el colaborador.')
-            })
+          var comentarios = [];
+          if (result && result.length) {
+            var actual = "",
+              anterior = result[0].usuario,
+              par = true;
+            angular.forEach(result, function (r) {
+              actual = r.usuario;
+              if (actual == anterior) {
+                r.par = par;
+              } else {
+                par = !par;
+                r.par = par;
+                anterior = actual;
+              }
+              comentarios.push(r);
+            });
+          }
+
+          $scope.comentarios = comentarios;
+        })
+        .catch(function () {
+          toastr.error('Hubo un error al dar de alta el colaborador.')
+        })
     };
 
     this.init();
