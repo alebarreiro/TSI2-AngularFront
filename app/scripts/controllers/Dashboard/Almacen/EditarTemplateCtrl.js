@@ -21,7 +21,19 @@ angular.module('sapoApp')
           error = true;
         }
 
-        if (error) $location.path('/dashboard/crearAlmacen/templates')
+        if (error) $location.path('/dashboard/crearAlmacen/templates');
+
+        $scope.$parent.almacen.personalizacion = "body { " +
+          "background-color: #f8f8f8 " +
+          "} " +
+          "#wrapper { " +
+          "width: 100%; " +
+          "} " +
+          "#page-wrapper { " +
+          "padding: 0 15px; " +
+          "min-height: 568px; " +
+          "background-color: #fff;" +
+          "}";
 
         this.allCategorias = categorias;
 
@@ -84,6 +96,11 @@ angular.module('sapoApp')
         ;
       };
 
+      this.guardarPersonalizacion = function () {
+
+
+      };
+
       this.updateTablaCategoriasSeleccionadas = function (idCategoria, esNueva) {
         var cats = this.template.categorias;
         var allCats = this.allCategorias;
@@ -122,7 +139,7 @@ angular.module('sapoApp')
               toastr.error('Hubo un error al dar de alta las categorias.')
             });
         }
-      }
+      };
 
 
     }]);

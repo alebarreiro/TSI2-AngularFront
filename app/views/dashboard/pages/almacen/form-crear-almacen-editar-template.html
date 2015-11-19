@@ -1,10 +1,20 @@
 <div class="col-lg-12">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Información del template
+            Edita tu template
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading"> Personaliza el aspecto de tu almacen </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>CSS</label>
+                        <textarea class="form-control" rows="7" ng-model="almacen.personalizacion"> </textarea> </div>
+                        <button class="btn btn-sm btn-success" ng-click="editarTemplateCtrl.guardarPersonalizacion()">Guardar</button>
+                </div>
+            </div>
 
             <div class="panel panel-primary">
                 <div class="panel-heading"> Categorías de tu almacen </div>
@@ -19,6 +29,7 @@
                                 <th>Acciones</th>
                             </tr>
                             </thead>
+
                             <tbody>
                             <tr ng-repeat="categoria in editarTemplateCtrl.template.categorias">
                                 <td> {{ categoria.nombre }}</td>

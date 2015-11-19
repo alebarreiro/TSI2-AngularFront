@@ -198,4 +198,15 @@ angular.module('sapoApp')
       return deferred.promise;
     }
 
+    this.agregarPersonalizacion = function (idAlmacen) {
+      deferred = $q.defer();
+
+      Almacen.agregarPersonalizacion({id: idAlmacen}, {}, function (result) {
+        deferred.resolve(result);
+      }, function (error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    }
+
   }]);
