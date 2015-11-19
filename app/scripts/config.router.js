@@ -225,7 +225,7 @@ angular.module('sapoApp')
       })
       .state('dashboard.perfil', {
         templateUrl: '../views/dashboard/pages/usuario/perfil.html',
-        url: '/perfil',
+        url: '/perfil/:ok',
         controller: 'PerfilCtrl',
         controllerAs: 'perfilCtrl',
         resolve: {

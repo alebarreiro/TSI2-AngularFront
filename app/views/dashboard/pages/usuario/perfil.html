@@ -23,74 +23,58 @@
 
             <div>
                 <span style="    margin-bottom: 16px; display: block;">Tu plan actual es: <label class="label label-success"> {{usuario.cuenta.nombre}} </label> </span>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Planes disponibles
-                    </div>
 
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
+                    <h4 class="panel-heading">
+                        Planes disponibles
+                    </h4>
+
+                <div class="row">
+                    <div class="col-lg-10">
+
+                        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                            <input type="hidden" name="cmd" value="_xclick">
+                            <input type="hidden" name="business" value="36XH9PADYXQDA">
+                            <input type="hidden" name="lc" value="US">
+                            <input type="hidden" name="item_name" value="Sapo account">
+                            <input type="hidden" name="button_subtype" value="services">
+                            <input type="hidden" name="no_note" value="0">
+                            <input type="hidden" name="cn" value="Add special instructions to the seller">
+                            <input type="hidden" name="no_shipping" value="1">
+                            <input type="hidden" name="rm" value="1">
+                            <input name="custom" value="{{usuario.id}}" type="hidden">
+                            <input type="hidden" name="return" value="{{urlRetornoOK}}">
+                            <input type="hidden" name="cancel_return" value= "{{urlRetornoMAL}} ">
+                            <input type="hidden" name="currency_code" value="USD">
+                            <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+                            <input type="hidden" name="notify_url" value="http://nodejs4tsi2-backendrs.rhcloud.com/paypal">
+                            <table>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Nombre</th>
-                                    <th>Descrición</th>
-                                    <th>Precio</th>
-                                    <th>Accion</th>
+                                    <td><input type="hidden" name="on0" value="Cuentas">Cuentas</td>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-repeat="cuenta in cuentas">
-                                    <td>{{cuenta.cuentaID}}</td>
-                                    <td>{{cuenta.nombre}}</td>
-                                    <td>{{cuenta.descripcion}}</td>
-                                    <td>{{cuenta.precio}}</td>
+                                <tr>
                                     <td>
-                                        <a class="btn btn-sm btn-primary" ng-click="seleccionarCuenta(cuenta.cuentaID)">
-                                            Comprar!
-                                        </a>
+                                        <select name="os0">
+                                            <option ng-repeat="cuenta in cuentas" value="{{cuenta.cuentaID}}">{{cuenta.nombre}} - ${{cuenta.precio}} USD</option></option>
+                                        </select>
                                     </td>
-                                    <!--<td>-->
-                                        <!--<ngcart-addtocart id="{{ cuenta.cuentaID }}" name="{{ cuenta.nombre }}" price="{{ cuenta.precio }}" quantity="1" quantity-max="1" data="cuenta"></ngcart-addtocart>-->
-                                    <!--</td>-->
                                 </tr>
-                                </tbody>
                             </table>
-                        </div>
-                        <!-- /.table-responsive -->
+                            <input type="hidden" ng-repeat="cuenta in cuentas" name="option_select{{cuenta.cuentaID}}" value="{{cuenta.cuentaID}}">
+                            <input type="hidden" ng-repeat="cuenta in cuentas" name="option_amount{{cuenta.cuentaID}}" value="{{cuenta.precio}}">
+                            <input type="hidden" name="currency_code" value="USD">
+                            <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0"
+                                   name="submit" alt="PayPal - The safer, easier way to pay online!">
+                            <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1"
+                                 height="1">
+                        </form>
+
                     </div>
-                    <!-- /.panel-body -->
                 </div>
 
+
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
 
-                <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                    <input type="hidden" name="cmd" value="_s-xclick">
-                    <input type="hidden" name="hosted_button_id" value="TREANTETL5Y4N">
-                    <input name="custom" value="{{usuario.id}}" type="hidden">
-                    <table>
-                        <tr><td><input type="hidden" name="on0" value="Cuentas">Cuentas</td></tr><tr><td><select name="os0">
-                        <option value="small">small $1.00 USD</option>
-                        <option value="gold">gold $5.00 USD</option>
-                        <option value="cosmic">cosmic $50.00 USD</option>
-                    </select> </td></tr>
-                    </table>
-                    <input type="hidden" name="currency_code" value="USD">
-                    <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                    <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                </form>
-                <!--<ngcart-cart></ngcart-cart>-->
-                <!--<ngcart-checkout service="paypal"-->
-                                 <!--settings="{ url:'/checkout', item_number:'1', currency_code: 'USD'}">-->
-
-                <!--</ngcart-checkout>-->
-            </div>
-        </div>
     </div>
     <!-- /.row -->
 </div>
