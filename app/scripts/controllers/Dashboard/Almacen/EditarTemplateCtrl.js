@@ -97,8 +97,21 @@ angular.module('sapoApp')
       };
 
       this.guardarPersonalizacion = function () {
+        var idAlmacen = $scope.$parent.almacen.id,
+          css = $scope.$parent.almacen.personalizacion;
 
-
+        if (!idAlmacen) {
+          toastr.warning('Por favor, antes confirme los datos del almacen en el paso 1.');
+        } else {
+          almacenService.agregarPersonalizacion(idAlmacen, css)
+            .then(function(a) {
+              console.log(a);
+              toastr.success('Personalizacion guardada.');
+            })
+            .catch(function () {
+              toastr.error('Hubo un error al guardar la personalización.')
+            });
+        }
       };
 
       this.updateTablaCategoriasSeleccionadas = function (idCategoria, esNueva) {

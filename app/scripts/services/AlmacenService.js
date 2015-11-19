@@ -198,10 +198,10 @@ angular.module('sapoApp')
       return deferred.promise;
     }
 
-    this.agregarPersonalizacion = function (idAlmacen) {
+    this.agregarPersonalizacion = function (idAlmacen,css) {
       deferred = $q.defer();
 
-      Almacen.agregarPersonalizacion({id: idAlmacen}, {}, function (result) {
+      Almacen.agregarPersonalizacion({id: idAlmacen}, {css: css}, function (result) {
         deferred.resolve(result);
       }, function (error) {
         deferred.reject(error);
