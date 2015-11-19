@@ -33,7 +33,18 @@ angular.module('sapoApp')
           "padding: 0 15px; " +
           "min-height: 568px; " +
           "background-color: #fff;" +
-          "}";
+          "}" +
+          ".h1 { " +
+          "font-size: 36px; " +
+          "} " +
+          ".page-header {" +
+          "padding-bottom: " +
+          "9px;margin: 40px 0 20px;" +
+          "border-bottom: 1px solid yellow;" +
+          "}" +
+          ".h2 { " +
+          "font-size: 30px;" +
+          " }";
 
         this.allCategorias = categorias;
 
