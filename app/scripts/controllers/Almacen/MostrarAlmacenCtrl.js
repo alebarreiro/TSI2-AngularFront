@@ -28,7 +28,24 @@ angular.module('sapoApp')
         almacenService.obtenerComentarios($scope.almacenId)
             .then(function (result) {
                 console.log(result);
-                $scope.comentarios = result;
+
+              var actual = "",
+                anterior = result[0].usuario,
+                par = true,
+                comentarios = [];
+              angular.forEach(result, function(r){
+                actual = r.usuario;
+                if (actual == anterior) {
+                  r.par = par;
+                } else {
+                  par = !par;
+                  r.par = par;
+                  anterior = actual;
+                }
+                comentarios.push(r);
+              });
+              console.log(comentarios);
+                $scope.comentarios = comentarios;
             })
             .catch(function () {
                 toastr.error('Hubo un error al dar de alta el colaborador.')

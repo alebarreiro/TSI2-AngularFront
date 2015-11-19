@@ -62,8 +62,8 @@
                     </div>
                     <div class="panel-body" style="max-height: 400px;  overflow-y: scroll;">
                         <ul class="timeline">
-                            <li ng-class-odd="'timeline-inverted'" ng-class-even="'timeline'"
-                                ng-repeat="comentario in comentarios.slice().reverse()">
+                            <li ng-repeat="comentario in comentarios.slice().reverse()"
+                                ng-class="{ 'timeline-inverted' : comentario.par == true, 'timeline-inverted' : comentario.par == false}">
                                 <div class="timeline-badge success"><i class="fa fa-envelope-o"></i>
                                 </div>
                                 <div class="timeline-panel">
