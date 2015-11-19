@@ -3,6 +3,21 @@ angular.module('sapoApp')
     function (almacen, notificaciones, $scope, almacenService, toastr, lodash, authService) {
 
     this.init = function () {
+
+        //$css.bind({
+        //  href: '../../../styles/sb-admin-2.css'
+        //}, $scope);
+
+        console.log(almacen.css);
+
+       // $css.add()
+
+      var css = document.createElement("style");
+      css.type = "text/css";
+      css.innerHTML = almacen.css;
+      document.body.appendChild(css);
+      console.log(css);
+
         console.log(almacen);
         $scope.almacenId = almacen.id;
         $scope.almacen = almacen;

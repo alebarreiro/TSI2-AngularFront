@@ -21,7 +21,7 @@ angular
         'ngSanitize',
         'ngTouch',
         'ngLodash',
-        'ngCart'
+        'ngCart',
 
   ]);
 
