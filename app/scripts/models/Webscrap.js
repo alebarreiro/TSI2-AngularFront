@@ -7,7 +7,7 @@ angular.module('sapoApp')
     .factory('Webscrap', ['$http', '$resource', 'REST_API', function($http, $resource, REST_API) {
         var API_REST_URL = REST_API.WEBSCRAP_URL;
 
-        return $resource(API_REST_URL + ':resource/:module/:id/:op/', { }, {
+        return $resource(API_REST_URL + ':resource/:module/:id/:op/', { id: '@id' }, {
             //Obtiene las categorías base de mercado libre.
             getCategorias           : { method: 'get',  params: { resource: 'mercadolibre', module: 'categorias' },   isArray: true },
             //Dada una categoría realiza una búsqueda de productos.
