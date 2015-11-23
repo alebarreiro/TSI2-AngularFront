@@ -14,6 +14,13 @@ angular.module('sapoApp')
         $scope.urlRetornoOK = window.location.origin + '/#/dashboard/perfil/true';
         $scope.urlRetornoMAL = window.location.origin + '/#/dashboard/perfil/false';
 
+
+        angular.forEach(cuentas, function (c) {
+          if (c.precio == 0) {
+            $scope.cuentaFree = c;
+          }
+        });
+
         if ($stateParams.ok) {
           if ($stateParams.ok == 'true') {
             toastr.success("Cuenta actualizada con éxito!");
@@ -23,10 +30,12 @@ angular.module('sapoApp')
         }
       };
 
-      $scope.seleccionarCuenta = function (idCuenta) {
+      $scope.seleccionarCuenta = function (cuenta) {
 
-        cuentaService.actualizarCuentaUsuario(idCuenta)
+        cuentaService.actualizarCuentaUsuario(cuenta.cuentaID)
           .then(function(){
+            $scope.usuario.cuenta = cuenta;
+            authService.setLoggedInUser($scope.usuario);
             toastr.success("Cuenta actualizada con éxito!");
           })
           .catch(function(){

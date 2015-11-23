@@ -9,7 +9,7 @@ angular.module('sapoApp')
       $scope.almacenes = almacenes;
       var user = authService.getLoggedUser();
 
-      $scope.upgrade = !user.cuenta || user.cuenta.nombre == "FREE" ? true : false;
+      $scope.upgrade = !user.cuenta || user.cuenta.precio == 0 ? true : false;
 
     };
 
