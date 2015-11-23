@@ -10,6 +10,7 @@ angular.module('sapoApp')
                 $scope.almacen = almacen;
                 $scope.categorias = almacen.categorias;
                 $scope.productos = [];
+                $scope.prodActual = "";
             };
 
             this.init();
@@ -45,7 +46,7 @@ angular.module('sapoApp')
                     });
             }
 
-            //Crea un producto específico.
+            //Crea un producto específico, lo asocia al almacén y le sube una imágen.
             this.crearProducto = function (nombreProducto, descProducto, tags) {
                 var that = this;
                 //Invoca al service para hacer el POST de la categoria.
@@ -53,9 +54,12 @@ angular.module('sapoApp')
                     .then(function(a) {
                         toastr.success('Producto ' + nombreProducto + ' creado.');
                         a.cantidad = 0;
+                        $scope.prodActual = a.id;
                         $scope.productos.push(a);
                         var param = [{"productoID": a.id, "cantidad": a.cantidad}];
                         that.cargarProducto(param, tags);
+                        that.uploadFile(a.id);
+
                     })
                     .catch(function () {
                         toastr.error('Hubo un error al dar de alta el producto.')
@@ -67,8 +71,7 @@ angular.module('sapoApp')
                 var that = this;
                 almacenService.cargarProductosAlmacen($scope.almacen.id, productos)
                     .then(function(a) {
-                        console.log(a.id);
-                        that.cargarTags(tags, a.id);
+                        //that.uploadFile(a.id);
                     })
                     .catch(function () {
                         toastr.error('Hubo un error al cargar el producto.');
@@ -84,7 +87,9 @@ angular.module('sapoApp')
 
                         productos.forEach(function (p) {
                             p.producto.cantidad = p.cantidad;
-                            p.producto.imagenes = "http://res.cloudinary.com/sapo/image/upload/v1447175695/10422024_821459174596473_3998766916779207534_n_yga1sw.jpg";
+                            if (p.producto.imagenes != null && p.producto.imagenes.length > 0)
+                                var img = p.producto.imagenes[0];
+                            p.producto.imagenes = img;
                             productosConStock.push(p.producto);
                         });
                 });
@@ -100,66 +105,25 @@ angular.module('sapoApp')
                     });
             }
 
-            //PRUEBA UPLOAD COULDINARY
-            this.add = function(){
-                var that = this;
+            this.uploadFile = function (idProd) {
+
                 var f = document.getElementById('file').files[0],
-                    r = new FileReader();
-                r.onloadend = function(e){
-                    console.log(e);
-                    $scope.data = e.target.result;
-                    that.upload($scope.data);
-                }
-                r.readAsBinaryString(f);
-            }
-
-            //PRUEBA UPLOAD COULDINARY
-
-            this.upload = function(data) {
-                cloudinaryService.upload(data)
-                    .then(function(result) {
-                        console.log(result)
-                    })
-                    .catch(function() {
-
-                    })
-            }
-
-            $scope.uploadFile = function (input) {
-
-                console.log(input);
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    var that = $scope;
-                    reader.onload = function (e) {
-
-                        //Sets the Old Image to new New Image
-                        $('#photo-id').attr('src', e.target.result);
-
-                        //Create a canvas and draw image on Client Side to get the byte[] equivalent
-                        var canvas = document.createElement("canvas");
-                        var imageElement = document.createElement("img");
-
-                        imageElement.setAttribute('src', e.target.result);
-                        canvas.width = imageElement.width;
-                        canvas.height = imageElement.height;
-                        var context = canvas.getContext("2d");
-                        context.drawImage(imageElement, 0, 0);
-                        var base64Image = canvas.toDataURL("image/jpeg");
-
-                        //Removes the Data Type Prefix
-                        //And set the view model to the new value
-                        $scope.data = base64Image.replace(/data:image\/jpeg;base64,/g, '');
-                        $scope.upload($scope.data);
+                    r = new FileReader(),
+                    that = this;
+                if (f != null) {
+                    r.onloadend = function(e){
+                        var data = e.target.result;
+                        //send you binary data via $http or $resource or do anything else with it
+                        //data.slice(23);
+                        that.upload(data, idProd);
                     }
-
-                    //Renders Image on Page
-                    reader.readAsDataURL(input.files[0]);
+                    r.readAsDataURL(f);
                 }
             };
 
-            $scope.upload = function(data) {
-                cloudinaryService.upload(data.files[0])
+            this.upload = function(data, idProd) {
+
+                cloudinaryService.upload(data, idProd)
                     .then(function(result) {
                         console.log(result)
                     })

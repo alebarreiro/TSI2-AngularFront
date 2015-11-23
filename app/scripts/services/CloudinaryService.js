@@ -3,21 +3,17 @@
  */
 
 angular.module('sapoApp')
-    .service('cloudinaryService', ['$q',  'Cloudinary', 'authService', 'REST_API', function ($q, Cloudinary, authService, REST_API) {
+    .service('cloudinaryService', ['$q',  'Producto', 'authService', 'REST_API', function ($q, Producto, authService, REST_API) {
 
         this.init = function () {};
 
-        this.upload = function(data) {
+        this.upload = function(data, idProd) {
             var deferred = $q.defer();
-            console.log("data")
-            console.log(data)
-
-            Cloudinary.upload({},
+            data = data.slice(23);
+            console.log(idProd);
+            Producto.addImg({"id": idProd},
                 {
-                    file: data,
-                    api_key: REST_API.CLOUDINARY_API_KEY,
-                    timestamp: new Date(),
-                    upload_preset: 'sapotsi2'
+                    imagen: data
                 }, function (cuentas) {
                 deferred.resolve(cuentas);
             }, function (error) {
@@ -25,7 +21,4 @@ angular.module('sapoApp')
             });
             return deferred.promise;
         }
-
-
-
     }]);
