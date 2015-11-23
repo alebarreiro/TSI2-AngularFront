@@ -233,7 +233,12 @@ angular.module('sapoApp')
             return cuentaService.getCuentas().then(function (listaCuentas){
               return listaCuentas;
             })
-          }]
+          }],
+          cuentaUsuario: ['cuentaService', function (cuentaService) {
+            return cuentaService.getCuentaUsuario().then(function (cuentaUsuario){
+              return cuentaUsuario;
+            })
+          }],
         }
       })
       .state('dashboard.notificaciones', {

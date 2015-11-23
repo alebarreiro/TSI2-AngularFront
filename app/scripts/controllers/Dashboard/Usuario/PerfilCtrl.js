@@ -2,13 +2,15 @@
  * Created by alejandrobarreiro on 26/10/15.
  */
 angular.module('sapoApp')
-  .controller('PerfilCtrl', ['authService', '$scope', 'cuentas', 'cuentaService', 'toastr', '$stateParams',
-    function (authService, $scope, cuentas, cuentaService, toastr,$stateParams) {
+  .controller('PerfilCtrl', ['authService', '$scope', 'cuentas', 'cuentaService', 'toastr', '$stateParams', 'cuentaUsuario',
+    function (authService, $scope, cuentas, cuentaService, toastr,$stateParams, cuentaUsuario) {
       this.init = function () {
 
         var user = authService.getLoggedUser();
         $scope.cuentas = cuentas;
+        user.cuenta = cuentaUsuario;
         $scope.usuario = user;
+        authService.setLoggedInUser(user);
         $scope.urlRetornoOK = window.location.origin + '/#/dashboard/perfil/true';
         $scope.urlRetornoMAL = window.location.origin + '/#/dashboard/perfil/false';
 
