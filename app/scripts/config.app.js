@@ -16,8 +16,8 @@ angular.module('sapoApp')
     return {
       request: function (config) {
         if (config.url != 'https://api.cloudinary.com/v1_1/sapo/image/upload')
-          config.headers['Ocp-Apim-Subscription-Key'] = REST_API.OCP_KEY;
-        config.headers['Content-Type'] = 'application/json';
+          //config.headers['Ocp-Apim-Subscription-Key'] = REST_API.OCP_KEY;
+          config.headers['Content-Type'] = 'application/json';
         return config;
       },
     };

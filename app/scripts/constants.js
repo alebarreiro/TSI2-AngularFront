@@ -3,8 +3,8 @@
  */
 angular.module('sapoApp')
   .constant('REST_API', {
-    BASE_URL: 'https://sapo.azure-api.net/sapo/',
-    WEBSCRAP_URL: 'https://sapo.azure-api.net/nodejs/',
+    BASE_URL: 'http://sapo-backendrs.rhcloud.com/openshiftproject/rest/',
+    WEBSCRAP_URL: 'http://nodejs4tsi2-backendrs.rhcloud.com/',
     OCP_KEY: '9f86432ae415401db0383f63ce64c4fe',
     CLOUDINARY_URL: 'https://api.cloudinary.com/v1_1/sapo/image/upload',
     CLOUDINARY_API_KEY: '112152826636563'
