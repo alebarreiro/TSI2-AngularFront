@@ -33,11 +33,11 @@ angular.module('sapoApp')
             return deferred.promise;
         };
 
-        this.addProductosML = function(idProducto, idCategoria) {
+        this.addProductosML = function(idProducto, idCategoria, idAlmacen) {
             var deferred = $q.defer();
             console.log('Agregando el producto ' + idProducto + ' de mercadolibre a la categoria ' + idCategoria    );
             var prod = [{"id": idProducto, "generico": false, "categoria": idCategoria }];
-            Webscrap.addProductos({}, prod, function (result) {
+            Webscrap.addProductos({id: idAlmacen}, prod, function (result) {
                 deferred.resolve(result);
             }, function (error) {
                 deferred.reject(error);

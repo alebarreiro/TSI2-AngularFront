@@ -12,7 +12,7 @@ angular.module('sapoApp')
             this.init();
 
             this.importarProducto = function(idProducto) {
-                webscrapService.addProductosML(idProducto, this.WebScrapHandler.getCategoria())
+                webscrapService.addProductosML(idProducto, this.WebScrapHandler.getCategoria(), $scope.almacen.id)
                     .then(function(a) {
                         console.log(a);
                     })
