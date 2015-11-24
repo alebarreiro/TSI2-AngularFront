@@ -2,51 +2,33 @@
  * Created by alejandrobarreiro on 24/10/15.
  */
 angular.module('sapoApp')
-  .controller('ChatCtrl', [ '$scope', 'toastr', 'authService',
-    function ($scope, toastr, authService) {
+  .controller('ChatCtrl', [ '$scope', 'toastr', 'authService', '$stateParams',
+    function ($scope, toastr, authService, $stateParams) {
 
       var loggedUser = authService.getLoggedUser();
-      console.log(loggedUser);
 
-      wsUrl = 'ws:sapo-backendrs.rhcloud.com:8000/openshiftproject/chat/' + loggedUser.id;
+      var host='http://nodejs4tsi2-backendrs.rhcloud.com:8000';
+      var almacen = $stateParams.url ? $stateParams.url : 'default';
+      var socket = io.connect(host+'/sapochat');
 
-      console.log('WebSockets Url : ' + wsUrl);
-      ws = new WebSocket(wsUrl);
+      socket.on('connect', function(){
+        //conexión: paso el usuario y el nombre del almacen por parámetro
+        //adduser es mi función server side.
+        socket.emit('adduser', loggedUser.id, almacen);
+      });
 
-      ws.onopen = function(event){
-        console.log('WebSocket connection started');
-      };
+      //función para recibir mensajes
+      socket.on('receivechat', function (username, data) {
 
-      ws.onclose = function(event){
-        console.log("Remote host closed or refused WebSocket connection");
-        console.log(event);
-      };
-
-      ws.onmessage = function(event){
-
-        if (event.data) {
-          var parseMsg = parseChatMessage(event.data);
-
-            $scope.chatCtrl.messages.push({
-              username: parseMsg.nick,
-              text: parseMsg.text,
-              date: Date()
-            });
-
-        }
+          $scope.chatCtrl.messages.push({
+            username: username,
+            text: data,
+            date: Date()
+          });
 
         $scope.$apply();
-      };
 
-      parseChatMessage = function (msg) {
-        var index = msg.indexOf(":"),
-          user = msg.substr(0, index),
-          text = msg.substr(index+1, msg.length);
-        return {
-          nick : user,
-          text : text
-        }
-      };
+      });
 
       this.init = function () {
         this.messages = [];
@@ -59,6 +41,6 @@ angular.module('sapoApp')
 
         var text = $scope.chatCtrl.writingMessage;
         $scope.chatCtrl.writingMessage = '';
-        ws.send(loggedUser.id + ":" +text);
+        socket.emit('sendchat', text);
       }
     }]);
